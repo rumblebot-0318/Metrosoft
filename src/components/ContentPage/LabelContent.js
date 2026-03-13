@@ -1,45 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
+import './labelContent.scss';
 
-class LabelContent extends Component {
-
-    constructor(props){
-        super(props);
-        this.state = {
-            title : this.props.onTitle,
-            color : this.props.onColor,
-            line : this.props.onAddLine
-        }
-        this.loadAddLine = this.loadAddLine.bind(this);
-        this.loadLabel = this.loadLabel.bind(this);
-    }
-
-    loadAddLine(){
-        return this.state.line ?
-          <div style={{ marginTop: "30px" }}>
-              <div style={{ width:"100%" ,height: "2px", background: this.state.color }} />
-          </div> : null;
-    }
-
-     loadLabel(){
-        return <div className="ui label">
-            &#9830;&nbsp;&nbsp;&nbsp;
-            {this.state.title}
-          </div>;
-     }
-    render() {
-        return (
-            <div>
-                {this.loadLabel()}
-                {this.loadAddLine()}
-            </div>
-        );
-    }
-}
-
-LabelContent.defaultProps = {
-    onTitle : "",
-    onColor : "#000",
-    onAddLine : false
-};
+const LabelContent = ({ onTitle = '', onColor = '#169b9b', onAddLine = false }) => (
+  <div className="label-content">
+    <span className="label-content__pill">♦ {onTitle}</span>
+    {onAddLine && <span className="label-content__divider" style={{ background: onColor }} />}
+  </div>
+);
 
 export default LabelContent;

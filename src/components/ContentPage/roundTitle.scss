@@ -1,0 +1,23 @@
+@use '../../styles/tokens' as tokens;
+
+.round-title {
+  display: flex;
+  align-items: center;
+  margin: 2rem 0;
+  gap: 1rem;
+}
+
+.round-title__pill {
+  padding: 0.5rem 1.5rem;
+  border-radius: 999px;
+  background: tokens.$color-highlight;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.round-title__rail {
+  flex: 1;
+  height: 2px;
+  background: tokens.$color-border;
+}

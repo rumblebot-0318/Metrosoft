@@ -1,5 +1,8 @@
 ## Metrosoft React Modernization Status
 
+![CI](https://github.com/rumblebot-0318/Metrosoft/actions/workflows/ci.yml/badge.svg)
+
+
 - **Stage 1–3 ✅:** all key components now render via React 18 + Router 6, and Dart Sass replaced node-sass so the bundle builds without Python 2.
 - **Stage 4 (this branch):** document the commands, add a lint script, and wire up CI (see `.github/workflows/ci.yml`).
 - **Next steps:** Stage 5 will clean up vulnerabilities, add CI badges, and tighten ESLint/test coverage.
@@ -2242,3 +2245,11 @@ In the future, we might start automatically compiling incompatible third-party m
 ## Something Missing?
 
 If you have ideas for more “How To” recipes that should be on this page, [let us know](https://github.com/facebookincubator/create-react-app/issues) or [contribute some!](https://github.com/facebookincubator/create-react-app/edit/master/packages/react-scripts/template/README.md)
+
+## Known issues
+- `npm audit` reports 231 vulnerabilities (mostly transitive through legacy CRA/Webpack packages such as `webpack-dev-server`, `yargs-parser`).
+- Fixing them requires a major migration to Webpack 4/5 and newer ecosystem versions; track this in future Stage 5+ work.
+- See `VULNERABILITY.md` for the full audit summary and migration notes.
+
+## Design system notes
+- A small `DESIGN_SYSTEM.md` notes the token/layout/component catalog we plan to build, keeping colors/spacing/carousel wrappers consistent across sections.

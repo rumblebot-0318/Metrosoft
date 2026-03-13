@@ -1,0 +1,23 @@
+@use '../../styles/tokens' as tokens;
+
+.label-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.label-content__pill {
+  padding: 0.35rem 1rem;
+  border-radius: 999px;
+  border: 1px solid tokens.$color-border;
+  background: tokens.$color-background;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  font-size: 0.85rem;
+}
+
+.label-content__divider {
+  flex: 1;
+  height: 2px;
+  background: tokens.$color-highlight;
+}

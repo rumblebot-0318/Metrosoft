@@ -48,3 +48,13 @@
 - Added a custom README intro with the Stage 4 summary plus quick-start commands (lint/test/build) so contributors know how to validate the modern stack.
 - Introduced a `lint` npm script that targets `eslint src` and added a GitHub Actions workflow (`.github/workflows/ci.yml`) that runs `lint`, `test`, and `build` under Node 18.
 - Local testing for Stage 4: `npm run lint`, `CI=true npm run test -- --runInBand --watchAll=false` (Jest reports "No tests found"), `npm run build` (passes with Dart Sass deprecation warnings).
+
+## 10. Vulnerability summary
+- `npm audit --json` reports 231 issues (11 low, 84 moderate, 71 high, 65 critical). The worst offenders come from CRA 3's dependency tree (e.g., `yargs-parser` via `webpack-dev-server` and `jest`), so fixing them requires a full bundler modernization.
+- Documented the findings in `VULNERABILITY.md` and note that they remain until a Webpack/react-scripts rewrite happens.
+- Future work: replace the legacy tooling (webpack 3 + `babel-minify`) with Webpack 5/CRAv5 or Vite so modern packages can be installed without conflicts.
+
+## 11. Design system & components plan
+- Current UI relies on Semantic UI classes, multiple carousel libraries, and shared SCSS helpers like `include-media` and `open-color`.
+- Next steps: create SCSS partials (`_tokens`, `_layout`, `_components`) centralizing colors, spacing, and typography, and convert repeated sections (TitleList, PointDiv, Carousel, FeatureCard) into prop-driven React components.
+- Add documentation (README + `DESIGN_SYSTEM.md` once created) explaining which libraries remain and why, so future contributors can swap in design tokens without touching multiple files.

@@ -1,34 +1,30 @@
-@import "../../app";
+@use '../../styles/tokens' as tokens;
+@use '../../styles/layout' as layout;
 
 .content-page {
-  padding: 32px 16px 56px;
+  padding: tokens.$spacing-unit 0 3.5rem;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: tokens.$spacing-unit * 2;
 }
 
 .page-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
-  width: 100%;
+  @include layout.content-grid;
 }
 
 .directions {
-  background: #fafafa;
-  border-radius: 14px;
-  padding: 28px;
-  line-height: 1.7;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  @include layout.surface-card;
+  background: tokens.$color-surface;
+  padding: 2rem;
+  line-height: 1.75;
 }
 
-@media (max-width: 768px) {
+@media (max-width: tokens.breakpoint(sm)) {
   .content-page {
-    padding: 24px 12px 48px;
+    padding: 1.25rem 0 3rem;
   }
 
   .directions {
-    font-size: 0.95rem;
-    padding: 20px;
+    padding: 1.5rem;
   }
 }

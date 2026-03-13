@@ -1,0 +1,27 @@
+@use './tokens' as tokens;
+
+%title-pill-base {
+  display: inline-flex;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 1px solid tokens.$color-border;
+  color: tokens.$color-highlight;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.title-pill {
+  @extend %title-pill-base;
+  &:hover {
+    color: tokens.$color-base;
+    border-color: tokens.$color-highlight;
+  }
+}
+
+.card-heading {
+  font-size: 1.2rem;
+  color: tokens.$color-base;
+  margin-bottom: 0.5rem;
+}

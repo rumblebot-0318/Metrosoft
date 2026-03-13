@@ -38,3 +38,8 @@
 ## 7. Sass migration and build status
 - Removed the old `node-sass` dependency in favor of Dart Sass (`sass`) and upgraded `sass-loader` so this repo no longer needs Python 2 for SCSS compilation.
 - Build still fails inside `UglifyJsPlugin` because React Router v6 ships modern syntax that the legacy optimizer cannot parse; switching to a Terser-based minifier or disabling Uglify is the next step.
+
+## 8. Build modernization and status
+- Swapped the old `UglifyJsPlugin` for `babel-minify-webpack-plugin` so the production build can handle React Router v6 without hitting the `Failed to minify` error.
+- `npm run build` now succeeds in this sandbox, although ESLint still flags `dir` inside `Customer` as unused and Dart Sass logs lots of deprecation warnings from legacy `@import` rules (which we plan to migrate to `@use`).
+- The build artifacts are ready under `build/`, and the script now finishes with the usual `serve -s build` reminder.

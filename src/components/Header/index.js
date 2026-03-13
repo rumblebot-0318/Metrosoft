@@ -1,55 +1,57 @@
 import React, { Component } from 'react';
-import styles from "./header.scss";
-import logo from "../../Image/metrologo.jpg";
-
+import styles from './header.scss';
+import logo from '../../Image/metrologo.jpg';
+import { Link } from 'react-router-dom';
 
 class Header extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.loadtitles = this.loadtitles.bind(this);
   }
 
-  loadtitles(){
-   // console.log("!!");
+  loadtitles() {
+    // placeholder for hover logic
   }
 
-    render() {
-        return <div>
-            <div className={styles.header}>
-              <div className={styles.container}>
-                <div className={styles.branding}>
-                  <a href="/">
-                    <img className={styles.boxImg} src={logo} alt="logo" />
-                  </a>
-                </div>
-                <nav>
-                  <ul className={styles.ul}>
-                    <li className={styles.highlight}>
-                      <a className={styles.context} href={`${process.env.PUBLIC_URL}/introduce`} onMouseOver={this.loadtitles}>
-                        회사소개
-                      </a>
-                    </li>
-                    <li className={styles.highlight}>
-                      <a className={styles.context} href={`${process.env.PUBLIC_URL}/business`}>
-                        사업영역
-                      </a>
-                    </li>
-                    <li className={styles.highlight}>
-                      <a className={styles.context} href={`${process.env.PUBLIC_URL}/product`}>
-                        제품소개
-                      </a>
-                    </li>
-                    <li className={styles.highlight}>
-                      <a className={styles.context} href={`${process.env.PUBLIC_URL}/customer`}>
-                        고객센터
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
+  render() {
+    return (
+      <div>
+        <div className={styles.header}>
+          <div className={styles.container}>
+            <div className={styles.branding}>
+              <Link to="/">
+                <img className={styles.boxImg} src={logo} alt="logo" />
+              </Link>
             </div>
-          </div>;
-    }
+            <nav>
+              <ul className={styles.ul}>
+                <li className={styles.highlight}>
+                  <Link className={styles.context} to="/introduce" onMouseOver={this.loadtitles}>
+                    회사소개
+                  </Link>
+                </li>
+                <li className={styles.highlight}>
+                  <Link className={styles.context} to="/business">
+                    사업영역
+                  </Link>
+                </li>
+                <li className={styles.highlight}>
+                  <Link className={styles.context} to="/product">
+                    제품소개
+                  </Link>
+                </li>
+                <li className={styles.highlight}>
+                  <Link className={styles.context} to="/customer">
+                    고객센터
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default Header;

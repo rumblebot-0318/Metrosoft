@@ -2,27 +2,33 @@
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css);
 
 /* #f7f7f7; */
- $background_color : #fff;
- $font_color : #d0d0d0;
- $navfont_color : #999;
- $footer_background : #363636;
- $selected_item: #169b9b;
+$background_color : #fff;
+$font_color : #d0d0d0;
+$navfont_color : #999;
+$footer_background : #363636;
+$selected_item: #169b9b;
 
-
-body{
-    font-family: 15px/1.5 'Spoqa Han Sans',"Roboto","Apple SD Gothic Neo","Malgun Gothic","Arial,sans-serif,serif";
-    padding:0;
+body {
+    font-family: 15px/1.5 'Spoqa Han Sans', 'Roboto', 'Apple SD Gothic Neo', 'Malgun Gothic', 'Arial', sans-serif;
+    padding: 0;
     margin: 0;
     background-color: $background_color;
 }
 
- .container{
-    width:80%;
-    margin:auto;
+.container {
+    width: min(1200px, 94%);
+    margin: 0 auto;
     overflow: hidden;
+    padding: 0 16px;
 }
 
-.ul{
-    margin:0;
-    padding:0;
+.ul {
+    margin: 0;
+    padding: 0;
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
 }

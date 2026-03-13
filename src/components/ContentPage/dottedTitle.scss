@@ -1,0 +1,36 @@
+@use '../../styles/tokens' as tokens;
+
+.dotted-title {
+  margin-top: 2rem;
+  padding: 0;
+}
+
+.dotted-title__wrap {
+  margin-top: 2rem;
+  padding: 2rem 0;
+}
+
+.dotted-title__title {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: tokens.$color-base;
+  margin-bottom: 0.5rem;
+}
+
+.dotted-title__subtitle {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: tokens.$color-muted;
+  margin-bottom: 1rem;
+}
+
+.dotted-title__border {
+  border-top: 2px dotted tokens.$color-border;
+  padding-top: 1rem;
+}
+
+.dotted-title__paragraph {
+  margin-bottom: 0.75rem;
+  line-height: 1.7;
+  color: tokens.$color-muted;
+}

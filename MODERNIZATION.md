@@ -34,3 +34,7 @@
 - Converted Home, Business, Product, Introduce, Customer, and TitleList to modern functional components with React hooks where needed.
 - Added reusable content page layout SCSS plus responsive title list, directions, and customer page styles so sections wrap gracefully on tablets and phones.
 - Documented responsive grid populations (page-grid, content-page) and updated Heading layout to flex earlier.
+
+## 7. Sass migration and build status
+- Removed the old `node-sass` dependency in favor of Dart Sass (`sass`) and upgraded `sass-loader` so this repo no longer needs Python 2 for SCSS compilation.
+- Build still fails inside `UglifyJsPlugin` because React Router v6 ships modern syntax that the legacy optimizer cannot parse; switching to a Terser-based minifier or disabling Uglify is the next step.

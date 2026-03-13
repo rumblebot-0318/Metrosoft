@@ -1,4 +1,4 @@
-import './contentPage.scss';
+import '../contentPage.scss';
 import React from 'react';
 import EMR from './EMR';
 import IEMR from './iEMR';

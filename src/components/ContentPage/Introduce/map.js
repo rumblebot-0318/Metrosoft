@@ -1,7 +1,7 @@
 import React from "react"
 import { compose, withProps, withState, withHandlers } from "recompose";
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "react-google-maps";
-import TiCompass from "react-icons/lib/ti/compass";
+import { TiCompass } from 'react-icons/ti';
 
 //AIzaSyAMhTdeFBfOGiQCyQ2K_BfMvXC08NXWRT4
 //AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg

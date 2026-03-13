@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Table } from "semantic-ui-react";
 import TableCell from 'semantic-ui-react/dist/commonjs/collections/Table/TableCell';
-import FaPhoneSquare from "react-icons/lib/fa/phone-square";
+import { FaPhoneSquare } from 'react-icons/fa';
 
 const color = "teal";
 

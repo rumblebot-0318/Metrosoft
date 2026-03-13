@@ -8,7 +8,7 @@ import HealthCare from './HealthCare';
 import MetroSMS from './MetroSMS';
 import Alarm from './Alarm';
 import url from '../../server.json';
-import './contentPage.scss';
+import '../contentPage.scss';
 
 const Lists = [
   '의료정보사업',

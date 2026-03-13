@@ -1,28 +1,27 @@
 import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ScrollToTop from 'react-scroll-up';
+import Sticky from 'react-sticky-el';
+import { FaCaretUp } from 'react-icons/fa';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import styles from './app.scss';
+import Sitemap from './components/Sitemap';
 import Home from './components/Home';
 import Introduce from './components/ContentPage/Introduce';
 import Business from './components/ContentPage/Business';
 import Product from './components/ContentPage/Product';
 import Customer from './components/ContentPage/Customer';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import ScrollToTop from 'react-scroll-up';
-import { FaCaretUp } from 'react-icons/fa';
-import Sticky from 'react-sticky-el';
-import Sitemap from './components/Sitemap';
+import './app.scss';
 
 const basename = process.env.PUBLIC_URL || '/';
 
 const App = () => (
   <BrowserRouter basename={basename}>
-    <div className={styles}>
+    <div className="app-shell">
       <Sticky>
         <Header />
       </Sticky>
-
-      <div>
+      <main className="app-content">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/introduce" element={<Introduce />} />
@@ -31,13 +30,12 @@ const App = () => (
           <Route path="/customer" element={<Customer />} />
           <Route path="*" element={<Home />} />
         </Routes>
-        <ScrollToTop showUnder={200} style={{ bottom: '80px' }}>
-          <div style={{ color: '#169b9b' }}>
-            <FaCaretUp size={40} />
-          </div>
-        </ScrollToTop>
-      </div>
-
+      </main>
+      <ScrollToTop showUnder={200} style={{ bottom: '80px' }}>
+        <div style={{ color: '#169b9b' }}>
+          <FaCaretUp size={40} />
+        </div>
+      </ScrollToTop>
       <Sitemap />
       <Footer />
     </div>

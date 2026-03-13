@@ -58,3 +58,8 @@
 - Current UI relies on Semantic UI classes, multiple carousel libraries, and shared SCSS helpers like `include-media` and `open-color`.
 - Next steps: create SCSS partials (`_tokens`, `_layout`, `_components`) centralizing colors, spacing, and typography, and convert repeated sections (TitleList, PointDiv, Carousel, FeatureCard) into prop-driven React components.
 - Add documentation (README + `DESIGN_SYSTEM.md` once created) explaining which libraries remain and why, so future contributors can swap in design tokens without touching multiple files.
+
+## 12. Multi-language & Lunit-inspired layout
+- Added `src/i18n` + `LocaleProvider`/`LocaleSwitcher` so Korean and English copy can be toggled in the header without reloading the page.
+- Each page (Home/Business/Product/Introduce/Customer) now fetches its content from translation keys instead of hard-coded strings, and `TitleList`, `PointDiv`, `DottedTitle`, `SectionCard` all consume these keys.
+- The hero + section grid styling imitates the single-scroll Lunit look (gradient hero, card grids, generous whitespace) for a professional feel on desktop/tablet.

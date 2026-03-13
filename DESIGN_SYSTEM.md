@@ -14,3 +14,8 @@
 1. Create `src/styles/_tokens.scss`, `_layout.scss`, `_components.scss`, then switch `app.scss` to `@use`. Replace `@import` statements in component SCSS files.  
 2. Replace inline Semantic UI class usage with small wrapper components (e.g., `<Button variant="primary">`).  
 3. Document all remaining third-party UI libs in this file and highlight which ones can be removed once Layout refactor is complete.
+
+## Hero & Layout
+- The hero banner now uses a dark gradient, large fluid headline, and a CTA button, echoing https://www.lunit.io/ko/.
+- SectionCard components beneath the hero apply subtle gradients/ghost borders so content feels elevated within the single-scroll layout.
+- The LocaleSwitcher ensures language toggles are always accessible in the header as part of the design system.

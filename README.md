@@ -5,7 +5,9 @@
 
 - **Stage 1–3 ✅:** all key components now render via React 18 + Router 6, and Dart Sass replaced node-sass so the bundle builds without Python 2.
 - **Stage 4 (this branch):** document the commands, add a lint script, and wire up CI (see `.github/workflows/ci.yml`).
-- **Next steps:** Stage 5 will clean up vulnerabilities, add CI badges, and tighten ESLint/test coverage.
+- **Next steps:** Stage 5 will clean up vulnerabilities, add CI badges, start Lunit-inspired layout updates (hero, gradients, responsive cards), and tighten ESLint/test coverage.
+
+- This Stage 5 branch also introduces a `LocaleSwitcher` in the header and the `src/i18n` translations so English/Korean copy can toggle while the hero and sections stay in a single, Lunit-inspired scroll layout.
 
 ## Project-specific quick start
 

@@ -1,18 +1,21 @@
 @use '../../styles/tokens' as tokens;
-@use '../../styles/layout' as layout;
 
 .header {
-  background: tokens.$color-background;
-  padding: 0.75rem 0;
-  box-shadow: rgba(15, 23, 42, 0.1) 0 1px 4px;
+  background: transparent;
+  padding: 1rem 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.08);
 }
 
 .headerInner {
-  @include layout.section-wrapper;
+  width: min(1200px, 96%);
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .branding {
@@ -22,46 +25,43 @@
 
 .boxImg {
   width: 140px;
-}
-
-nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 16px;
+  height: auto;
 }
 
 .navList {
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+  gap: 1rem;
   list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
 .context {
-  color: tokens.$color-muted;
-  text-transform: uppercase;
+  color: tokens.$color-base;
   font-size: 0.85rem;
   letter-spacing: 0.08em;
+  text-transform: uppercase;
   text-decoration: none;
+  padding: 0.25rem 0.5rem;
   transition: color 0.2s ease;
 }
 
-li:hover .context {
+.context:hover {
   color: tokens.$color-highlight;
-  border-bottom: 3px solid tokens.$color-highlight;
+}
+
+.headerActions {
+  margin-left: auto;
 }
 
 @media (max-width: tokens.breakpoint(sm)) {
-  nav {
-    width: 100%;
-    justify-content: center;
-    margin-top: 8px;
+  .headerInner {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .context {
-    font-size: 0.75rem;
+  .navList {
+    justify-content: center;
+    width: 100%;
   }
 }

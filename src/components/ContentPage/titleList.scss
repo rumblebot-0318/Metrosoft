@@ -16,7 +16,12 @@
 }
 
 .title-list__item {
-  @extend comps.%title-pill-base;
+  @include comps.title-pill;
+}
+
+.title-list__item:hover,
+.title-list__item:focus {
+  @include comps.title-pill--hover;
 }
 
 @media (max-width: 768px) {

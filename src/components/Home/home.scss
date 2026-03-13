@@ -1,0 +1,13 @@
+@use '../../styles/tokens' as tokens;
+
+.home-page {
+  display: flex;
+  flex-direction: column;
+  gap: tokens.$spacing-unit * 2;
+}
+
+.home-page__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: tokens.$spacing-unit;
+}

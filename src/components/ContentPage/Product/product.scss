@@ -1,0 +1,13 @@
+@use '../../../styles/tokens' as tokens;
+
+.product-page__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: tokens.$spacing-unit;
+}
+
+@media (max-width: tokens.breakpoint(sm)) {
+  .product-page__grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -7,8 +7,6 @@ import axios from 'axios';
 import './customer.scss';
 
 const Lists = ['고객지원', '원격지원'];
-const dir = '04';
-
 const Customer = () => {
   const [addresses, setAddresses] = useState(null);
 

@@ -1,3 +1,18 @@
+## Metrosoft React Modernization Status
+
+- **Stage 1–3 ✅:** all key components now render via React 18 + Router 6, and Dart Sass replaced node-sass so the bundle builds without Python 2.
+- **Stage 4 (this branch):** document the commands, add a lint script, and wire up CI (see `.github/workflows/ci.yml`).
+- **Next steps:** Stage 5 will clean up vulnerabilities, add CI badges, and tighten ESLint/test coverage.
+
+## Project-specific quick start
+
+1. Install dependencies once with `npm install --legacy-peer-deps`.  
+2. Run `npm run lint` to catch ESLint warnings.  
+3. Use `CI=true npm run test -- --runInBand --watchAll=false` to exit the Jest runner in CI-friendly mode.  
+4. Build for production with `npm run build` (already configured to use `babel-minify-webpack-plugin`).
+
+The new `.github/workflows/ci.yml` executes these commands on `push`/`pull_request` so your PRs keep passing.
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>

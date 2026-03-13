@@ -38,3 +38,13 @@
 ## 7. Sass migration and build status
 - Removed the old `node-sass` dependency in favor of Dart Sass (`sass`) and upgraded `sass-loader` so this repo no longer needs Python 2 for SCSS compilation.
 - Build still fails inside `UglifyJsPlugin` because React Router v6 ships modern syntax that the legacy optimizer cannot parse; switching to a Terser-based minifier or disabling Uglify is the next step.
+
+## 8. Build modernization and status
+- Swapped the old `UglifyJsPlugin` for `babel-minify-webpack-plugin` so the production build can handle React Router v6 without hitting the `Failed to minify` error.
+- `npm run build` now succeeds in this sandbox, although ESLint still flags `dir` inside `Customer` as unused and Dart Sass logs lots of deprecation warnings from legacy `@import` rules (which we plan to migrate to `@use`).
+- The build artifacts are ready under `build/`, and the script now finishes with the usual `serve -s build` reminder.
+
+## 9. Docs & CI
+- Added a custom README intro with the Stage 4 summary plus quick-start commands (lint/test/build) so contributors know how to validate the modern stack.
+- Introduced a `lint` npm script that targets `eslint src` and added a GitHub Actions workflow (`.github/workflows/ci.yml`) that runs `lint`, `test`, and `build` under Node 18.
+- Local testing for Stage 4: `npm run lint`, `CI=true npm run test -- --runInBand --watchAll=false` (Jest reports "No tests found"), `npm run build` (passes with Dart Sass deprecation warnings).

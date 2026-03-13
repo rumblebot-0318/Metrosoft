@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Metrosoft | Healthcare Story</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <strong>Metrosoft</strong>
+      </div>
+      <nav class="nav">
+        <a href="#home">Home</a>
+        <a href="#business">Business</a>
+        <a href="#product">Product</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="locale-switcher">
+        <button data-locale="ko">한국어</button>
+        <button data-locale="en">English</button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section class="hero" id="home">
+      <p class="hero__badge">Metrosoft</p>
+      <h1 class="hero__title" data-hero-title></h1>
+      <p class="hero__text" data-hero-description></p>
+      <button class="hero__cta" data-hero-cta></button>
+    </section>
+    <div class="container">
+      <section class="section">
+        <h2>Highlights</h2>
+        <div class="cards" data-highlights></div>
+      </section>
+      <section class="section" id="business">
+        <h2>Solutions & Services</h2>
+        <div class="cards" data-sections></div>
+      </section>
+      <section class="section" id="product">
+        <h2>More to Explore</h2>
+        <p>More modules and partnerships coming soon.</p>
+      </section>
+      <section class="section" id="contact">
+        <h2>Contact</h2>
+        <p>Reach out via contact@metrosoft.io.</p>
+      </section>
+    </div>
+  </main>
+  <script src="main.js"></script>
+</body>
+</html>

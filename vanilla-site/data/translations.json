@@ -1,0 +1,134 @@
+{
+  "ko": {
+    "hero": {
+      "title": "의료와 예술을 연결하는 메트로소프트",
+      "description": "디지털 헬스케어와 스토리텔링을 결합한 통합 솔루션을 제공합니다.",
+      "cta": "메트로소프트 소개"
+    },
+    "homeHighlights": [
+      {
+        "title": "글로벌 의료 솔루션",
+        "description": "EMR/OCS/ERP 등 병원 운영 전반을 커버합니다.",
+        "points": [
+          "EMR & OCS 통합",
+          "CRM 기반 환자관리",
+          "Cloud 기반 서비스"
+        ]
+      },
+      {
+        "title": "디지털 커뮤니케이션",
+        "description": "MetroSMS/VOIP/알림톡으로 소통을 자동화합니다.",
+        "points": [
+          "자동 알림 흐름",
+          "원격 화상 상담",
+          "비상 대응 채널"
+        ]
+      },
+      {
+        "title": "콘텐츠 스토리텔링",
+        "description": "동화책과 인터랙티브 콘텐츠로 브랜드 경험을 확장합니다.",
+        "points": [
+          "Story-driven UX",
+          "Community narration",
+          "Multimedia delivery"
+        ]
+      }
+    ],
+    "sections": [
+      {
+        "title": "MetroHIS 핵심 영역",
+        "description": "원무/진료/지원/경영까지 통합한 정보시스템입니다.",
+        "points": [
+          "수납/청구/보험심사 자동화",
+          "EMR·간호·재료 통합",
+          "EIS 기반 경영 보고"
+        ]
+      },
+      {
+        "title": "Cloud + VOIP",
+        "description": "클라우드 인프라와 VOIP이 조합된 통신 플랫폼.",
+        "points": [
+          "하이브리드 클라우드",
+          "통합 메시징 & 알림톡",
+          "SIP/VOIP 통신"
+        ]
+      },
+      {
+        "title": "헬스케어 & MetroSMS",
+        "description": "환자 앱과 SMS로 커뮤니케이션을 다각화합니다.",
+        "points": [
+          "모바일 헬스케어",
+          "알림톡/MetroSMS",
+          "원격 QR 지원"
+        ]
+      }
+    ],
+    "locale": "한국어"
+  },
+  "en": {
+    "hero": {
+      "title": "Connecting healthcare and storytelling",
+      "description": "Integrated solutions combining digital healthcare and narrative experiences.",
+      "cta": "Discover Metrosoft"
+    },
+    "homeHighlights": [
+      {
+        "title": "Global healthcare solutions",
+        "description": "Tools for modern hospital operations.",
+        "points": [
+          "EMR & OCS fusion",
+          "CRM-based patient care",
+          "Cloud-native services"
+        ]
+      },
+      {
+        "title": "Digital communication",
+        "description": "MetroSMS, VOIP, AlimTalk for proactive outreach.",
+        "points": [
+          "Automated notifications",
+          "Remote consultations",
+          "Emergency response"
+        ]
+      },
+      {
+        "title": "Story-driven content",
+        "description": "Fairy-tale inspired brand experience.",
+        "points": [
+          "Story-driven UX",
+          "Community narration",
+          "Multimedia delivery"
+        ]
+      }
+    ],
+    "sections": [
+      {
+        "title": "MetroHIS overview",
+        "description": "Hospital information system covering admissions, care, and admin.",
+        "points": [
+          "Billing & insurance automation",
+          "Integrated EMR & nursing",
+          "EIS KPIs"
+        ]
+      },
+      {
+        "title": "Cloud + VOIP",
+        "description": "Unified cloud infrastructure with VOIP communications.",
+        "points": [
+          "Hybrid cloud operations",
+          "Integrated alerting",
+          "SIP/VOIP routing"
+        ]
+      },
+      {
+        "title": "Healthcare & MetroSMS",
+        "description": "Patient apps and SMS automation strengthen engagement.",
+        "points": [
+          "Mobile health",
+          "AlimTalk + MetroSMS",
+          "Remote QR support"
+        ]
+      }
+    ],
+    "locale": "English"
+  }
+}

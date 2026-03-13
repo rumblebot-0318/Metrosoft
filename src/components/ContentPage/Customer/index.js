@@ -1,60 +1,45 @@
-import React, { Component } from 'react';
-import CustomerTable from "./CustomerTable";
-import PointDiv from "../pointDiv";
-import Remote from "./RemoteControl";
-import TitleList from "../TitleList";
-import url from "../../server.json";
-import Axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import CustomerTable from './CustomerTable';
+import PointDiv from '../pointDiv';
+import Remote from './RemoteControl';
+import TitleList from '../TitleList';
+import axios from 'axios';
+import './customer.scss';
 
-const Lists = ['고객지원','원격지원'];
+const Lists = ['고객지원', '원격지원'];
+const dir = '04';
 
-const dir = "04";
+const Customer = () => {
+  const [addresses, setAddresses] = useState(null);
 
-class Customer extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      object: false,
-      url : url.url,
-      dir : dir,
-      load: "customer"
-    };
-
-    this.upDated = this.upDated.bind(this);
-  }
-
-  upDated(response) {
-    this.setState({ object: response });
-  }
-
-  componentDidMount() {
-    Axios.get('/Customer/index.json')
-      .then(res => {
-        const answer = res.data;
-        this.upDated(answer);
+  useEffect(() => {
+    axios
+      .get('/Customer/index.json')
+      .then((res) => {
+        setAddresses(res.data.address);
       })
-      .catch(err => {
-        console.log(err);
+      .catch((err) => {
+        console.error('Customer data load failed', err);
       });
+  }, []);
+
+  if (!addresses) {
+    return <div className="customer-loading">Loading customer resources…</div>;
   }
 
-  render() {
-    if(!this.state.object){
-      return "loading...";
-    }
-    else{
-      return (
-        <div style={{ marginTop: "30px" }}>
-          <TitleList object={Lists} />
-          <PointDiv onTitle={"고객지원"} />
-          <CustomerTable onContent={this.state.object.address} />
-          <PointDiv onTitle={"원격지원"} />
-          <Remote />
-        </div>
-      );
-    }
-  }
-}
+  return (
+    <div className="content-page customer-page">
+      <TitleList object={Lists} />
+      <div className="customer-page__section">
+        <PointDiv onTitle="고객지원" />
+        <CustomerTable onContent={addresses} />
+      </div>
+      <div className="customer-page__section">
+        <PointDiv onTitle="원격지원" />
+        <Remote />
+      </div>
+    </div>
+  );
+};
 
 export default Customer;

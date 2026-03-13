@@ -1,0 +1,45 @@
+@import "../../app";
+
+.title-list {
+  width: 100%;
+  text-align: center;
+  margin-top: 50px;
+  padding: 40px 16px;
+  border: 2px solid #dfdfdf;
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+.title-list__item {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: $selected_item;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 8px 12px;
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.title-list__item:hover,
+.title-list__item:focus {
+  color: darken($selected_item, 5%);
+  border-color: $selected_item;
+}
+
+@media (max-width: 768px) {
+  .title-list {
+    padding: 24px 12px;
+  }
+
+  .title-list__item {
+    font-size: 13px;
+  }
+}

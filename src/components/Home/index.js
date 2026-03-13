@@ -1,20 +1,16 @@
-import React, { Component } from 'react';
-import Hotline from "./hotLine";
-import ImageSlider from "./imageSlider";
+import React from 'react';
+import Hotline from './hotLine';
+import ImageSlider from './imageSlider';
 import ProductList from './productList';
-import Certified from "./Certified";
+import Certified from './Certified';
 
-
-class Home extends Component {
-
-    render() {
-        return <div>
-            <ImageSlider />
-            <ProductList />
-            <Certified />
-            <Hotline/>
-          </div>;
-    }
-}
+const Home = () => (
+  <div>
+    <ImageSlider />
+    <ProductList />
+    <Certified />
+    <Hotline />
+  </div>
+);
 
 export default Home;

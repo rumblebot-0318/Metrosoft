@@ -28,6 +28,14 @@ const titleTargets = {
   customer: $('[data-title="customer"]')
 };
 
+const subTargets = {
+  highlights: $('[data-sub="highlights"]'),
+  business: $('[data-sub="business"]'),
+  product: $('[data-sub="product"]'),
+  introduce: $('[data-sub="introduce"]'),
+  customer: $('[data-sub="customer"]')
+};
+
 const clearChildren = (el) => {
   while (el.firstChild) el.removeChild(el.firstChild);
 };
@@ -88,6 +96,7 @@ const render = () => {
 
   Object.keys(titleTargets).forEach((key) => {
     if (titleTargets[key]) titleTargets[key].textContent = t.titles[key] || key;
+    if (subTargets[key]) subTargets[key].textContent = (t.subs && t.subs[key]) || '';
   });
 
   renderCards(sectionTargets.highlights, t.highlights);

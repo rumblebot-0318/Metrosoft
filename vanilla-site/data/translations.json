@@ -19,6 +19,13 @@
       "introduce": "Introduce",
       "customer": "Customer"
     },
+    "subs": {
+      "highlights": "브랜드와 제품의 방향성을 한 눈에 보여주는 핵심 포인트",
+      "business": "병원 운영 전반을 커버하는 통합 솔루션",
+      "product": "의료 현장을 위한 제품 포트폴리오",
+      "introduce": "회사를 소개하는 조직/비전/메시지",
+      "customer": "지원 체계와 운영 파트너십 안내"
+    },
     "highlights": [
       {
         "title": "글로벌 의료 솔루션",
@@ -104,6 +111,13 @@
       "product": "Product",
       "introduce": "Introduce",
       "customer": "Customer"
+    },
+    "subs": {
+      "highlights": "Core value propositions across product, experience, and brand",
+      "business": "Integrated services for healthcare operations",
+      "product": "Product portfolio for medical field teams",
+      "introduce": "Organization and vision overview",
+      "customer": "Support channels and partner operations"
     },
     "highlights": [
       {

@@ -1,0 +1,174 @@
+{
+  "ko": {
+    "nav": [
+      { "label": "Highlights", "target": "highlights" },
+      { "label": "Business", "target": "business" },
+      { "label": "Product", "target": "product" },
+      { "label": "Introduce", "target": "introduce" },
+      { "label": "Customer", "target": "customer" }
+    ],
+    "hero": {
+      "title": "의료와 예술을 연결하는 메트로소프트",
+      "description": "디지털 헬스케어와 스토리텔링을 결합한 통합 솔루션을 제공합니다.",
+      "cta": "메트로소프트 소개"
+    },
+    "titles": {
+      "highlights": "Highlights",
+      "business": "Business",
+      "product": "Product",
+      "introduce": "Introduce",
+      "customer": "Customer"
+    },
+    "highlights": [
+      {
+        "title": "글로벌 의료 솔루션",
+        "description": "EMR/OCS/ERP 등 병원 운영 전반을 커버합니다.",
+        "points": ["EMR & OCS 통합", "CRM 기반 환자관리", "Cloud 기반 서비스"]
+      },
+      {
+        "title": "디지털 커뮤니케이션",
+        "description": "MetroSMS/VOIP/알림톡으로 소통을 자동화합니다.",
+        "points": ["자동 알림 흐름", "원격 화상 상담", "비상 대응 채널"]
+      },
+      {
+        "title": "콘텐츠 스토리텔링",
+        "description": "동화책과 인터랙티브 콘텐츠로 브랜드 경험을 확장합니다.",
+        "points": ["Story-driven UX", "Community narration", "Multimedia delivery"]
+      }
+    ],
+    "business": [
+      {
+        "title": "MetroHIS 핵심 영역",
+        "description": "원무/진료/지원/경영까지 통합한 정보시스템입니다.",
+        "points": ["수납/청구/보험심사 자동화", "EMR·간호·재료 통합", "EIS 기반 경영 보고"]
+      },
+      {
+        "title": "Cloud + VOIP",
+        "description": "클라우드 인프라와 VOIP이 조합된 통신 플랫폼.",
+        "points": ["하이브리드 클라우드", "통합 메시징 & 알림톡", "SIP/VOIP 통신"]
+      }
+    ],
+    "product": [
+      {
+        "title": "EMR / iEMR / OCS",
+        "description": "EMR 중심의 모바일·병원 업무 통합 솔루션.",
+        "points": ["차트 중심 UX", "모바일 지원", "장비 인터페이스"]
+      },
+      {
+        "title": "ERP & CRM",
+        "description": "경영정보와 환자 관계관리를 하나의 흐름으로 제공합니다.",
+        "points": ["EIS 경영지표", "CRM 기반 고객여정", "수익성 분석"]
+      }
+    ],
+    "introduce": [
+      {
+        "title": "CEO 인사말",
+        "description": "메트로소프트는 기술과 스토리의 접점을 만듭니다.",
+        "points": ["자연 + 기술", "휴먼 코어", "스토리 기반 상호작용"]
+      },
+      {
+        "title": "회사 소개",
+        "description": "디지털 콘텐츠와 의료 솔루션을 연결하는 팀입니다.",
+        "points": ["글로벌 프로젝트", "자체 IP", "운영/개발 협업"]
+      }
+    ],
+    "customer": [
+      {
+        "title": "고객지원 네트워크",
+        "description": "국내 병원 파트너와 상시 지원 체계를 운영합니다.",
+        "points": ["전담 컨설턴트", "정기 업데이트", "24/7 모니터링"]
+      },
+      {
+        "title": "원격 지원",
+        "description": "원격 접속 기반의 신속한 문제 해결.",
+        "points": ["알림톡 연동", "원격 + 현장 협업", "응급 대응 채널"]
+      }
+    ]
+  },
+  "en": {
+    "nav": [
+      { "label": "Highlights", "target": "highlights" },
+      { "label": "Business", "target": "business" },
+      { "label": "Product", "target": "product" },
+      { "label": "Introduce", "target": "introduce" },
+      { "label": "Customer", "target": "customer" }
+    ],
+    "hero": {
+      "title": "Connecting healthcare and storytelling",
+      "description": "Integrated solutions combining digital healthcare and narrative experiences.",
+      "cta": "Discover Metrosoft"
+    },
+    "titles": {
+      "highlights": "Highlights",
+      "business": "Business",
+      "product": "Product",
+      "introduce": "Introduce",
+      "customer": "Customer"
+    },
+    "highlights": [
+      {
+        "title": "Global healthcare solutions",
+        "description": "Tools for modern hospital operations.",
+        "points": ["EMR & OCS fusion", "CRM-based patient care", "Cloud-native services"]
+      },
+      {
+        "title": "Digital communication",
+        "description": "MetroSMS, VOIP, and AlimTalk for proactive outreach.",
+        "points": ["Automated notifications", "Remote consultations", "Emergency response"]
+      },
+      {
+        "title": "Story-driven content",
+        "description": "Fairy-tale inspired brand experience.",
+        "points": ["Story-driven UX", "Community narration", "Multimedia delivery"]
+      }
+    ],
+    "business": [
+      {
+        "title": "MetroHIS overview",
+        "description": "Hospital information system for admissions, care and operations.",
+        "points": ["Billing automation", "Integrated EMR workflows", "EIS reporting"]
+      },
+      {
+        "title": "Cloud + VOIP",
+        "description": "Unified cloud infrastructure and communication flows.",
+        "points": ["Hybrid cloud", "Integrated alerts", "SIP/VOIP channels"]
+      }
+    ],
+    "product": [
+      {
+        "title": "EMR / iEMR / OCS",
+        "description": "A combined suite for clinical and hospital operations.",
+        "points": ["Chart-centric UX", "Mobile support", "Equipment interfaces"]
+      },
+      {
+        "title": "ERP & CRM",
+        "description": "Management and patient-relationship platform in one place.",
+        "points": ["Executive insights", "CRM journeys", "Profitability analysis"]
+      }
+    ],
+    "introduce": [
+      {
+        "title": "CEO message",
+        "description": "Metrosoft creates intersections between technology and stories.",
+        "points": ["Nature + tech", "Human-centered core", "Story-led interactions"]
+      },
+      {
+        "title": "About us",
+        "description": "A team connecting digital content and healthcare products.",
+        "points": ["Global projects", "In-house IP", "Ops/Dev collaboration"]
+      }
+    ],
+    "customer": [
+      {
+        "title": "Support network",
+        "description": "Always-on support channels across healthcare partners.",
+        "points": ["Dedicated consultants", "Regular updates", "24/7 monitoring"]
+      },
+      {
+        "title": "Remote support",
+        "description": "Fast troubleshooting via remote access.",
+        "points": ["AlimTalk integration", "Remote + on-site collaboration", "Emergency response"]
+      }
+    ]
+  }
+}

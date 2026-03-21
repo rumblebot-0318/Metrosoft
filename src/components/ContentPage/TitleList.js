@@ -1,12 +1,10 @@
 import React from 'react';
 import './titleList.scss';
 
-const TitleList = ({ object = [] }) => (
+const TitleList = ({ items = [] }) => (
   <div className="title-list">
-    {object.map((obj, i) => (
-      <a className="title-list__item" key={i} href={`#${obj}`}>
-        {obj}
-      </a>
+    {items.map((item, index) => (
+      <span className="title-list__item" key={`${item}-${index}`}> {item} </span>
     ))}
   </div>
 );

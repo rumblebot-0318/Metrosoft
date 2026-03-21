@@ -1,34 +1,27 @@
-@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
-@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css);
+@use './styles/tokens' as tokens;
 
-/* #f7f7f7; */
-$background_color : #fff;
-$font_color : #d0d0d0;
-$navfont_color : #999;
-$footer_background : #363636;
-$selected_item: #169b9b;
+:root {
+  color: tokens.$color-base;
+  font-family: tokens.$font-palo;
+  background: tokens.$color-surface;
+}
 
 body {
-    font-family: 15px/1.5 'Spoqa Han Sans', 'Roboto', 'Apple SD Gothic Neo', 'Malgun Gothic', 'Arial', sans-serif;
-    padding: 0;
-    margin: 0;
-    background-color: $background_color;
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f9fbff 0%, #f0f6fc 50%, #edf1f7 100%);
 }
 
-.container {
-    width: min(1200px, 94%);
-    margin: 0 auto;
-    overflow: hidden;
-    padding: 0 16px;
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
 }
 
-.ul {
-    margin: 0;
-    padding: 0;
-}
-
-@media (max-width: 768px) {
-    body {
-        font-size: 14px;
-    }
+.app-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }

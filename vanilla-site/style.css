@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg: #f6f8fb;
+  --hero: linear-gradient(135deg, #05142a, #0c1d3d 60%, #0f243d);
+  --card-border: rgba(15, 23, 42, 0.15);
+  --card-shadow: 0 25px 60px rgba(5, 20, 42, 0.15);
+  --accent: #08d7c5;
+  --text: #0f172a;
+  --muted: #5e6475;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Manrope', 'Spoqa Han Sans', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  width: min(1200px, 96%);
+  margin: 0 auto;
+  padding: 0 0 5rem;
+}
+
+.hero {
+  background: var(--hero);
+  border-radius: 30px;
+  padding: 4rem;
+  color: white;
+  margin-top: 2rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 40px 90px rgba(5, 20, 42, 0.35);
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 20%, rgba(8, 215, 197, 0.4), transparent 45%);
+  pointer-events: none;
+}
+
+.hero__badge {
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+.hero__title {
+  font-size: clamp(2.8rem, 4vw, 3.6rem);
+  margin: 0.5rem 0;
+}
+
+.hero__text {
+  max-width: 520px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.hero__cta {
+  margin-top: 2rem;
+  border: none;
+  border-radius: 999px;
+  padding: 0.9rem 2.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  background: white;
+  color: #0f172a;
+  transition: transform 0.2s;
+}
+
+.hero__cta:hover {
+  transform: translateY(-3px);
+}
+
+.section {
+  margin-top: 3rem;
+}
+
+.section h2 {
+  font-size: clamp(1.8rem, 2vw, 2.4rem);
+  margin-bottom: 1rem;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 1.75rem;
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.card ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.header {
+  width: 100%;
+  background: transparent;
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.header-inner {
+  width: min(1200px, 96%);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav a {
+  text-decoration: none;
+  color: var(--text);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  margin-right: 1.25rem;
+}
+
+.locale-switcher button {
+  border: none;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 600;
+  margin-left: 0.35rem;
+}
+
+.locale-switcher button.active {
+  color: var(--accent);
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 3rem 1.5rem;
+  }
+
+  .nav a {
+    font-size: 0.7rem;
+  }
+}

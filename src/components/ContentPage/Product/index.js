@@ -1,25 +1,23 @@
-import '../contentPage.scss';
 import React from 'react';
-import EMR from './EMR';
-import IEMR from './iEMR';
-import OCS from './OCS';
-import ERP from './ERP';
-import CRM from './CRM';
-import TBiz from './T_Biz';
 import TitleList from '../TitleList';
+import SectionCard from '../../common/SectionCard';
+import { useTranslation } from '../../../i18n';
+import './product.scss';
 
-const List = ['EMR','iEMR','OCS','T-BIZ 모바일 EMR','ERP','CRM'];
+const Product = () => {
+  const { t } = useTranslation();
+  const product = t('pages.product');
 
-const Product = () => (
-  <div className="content-page">
-    <TitleList object={List} />
-    <EMR />
-    <IEMR />
-    <OCS />
-    <TBiz />
-    <ERP />
-    <CRM />
-  </div>
-);
+  return (
+    <div className="content-page">
+      <TitleList items={product.titleList} />
+      <section className="product-page__grid">
+        {(product.sections || []).map((section) => (
+          <SectionCard key={section.title} {...section} />
+        ))}
+      </section>
+    </div>
+  );
+};
 
 export default Product;

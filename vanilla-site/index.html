@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Metrosoft | Vanilla</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a class="logo" href="#home">Metrosoft</a>
+      <nav class="nav" data-nav></nav>
+      <div class="locale-switcher">
+        <button data-locale="ko">한국어</button>
+        <button data-locale="en">English</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero" id="home">
+      <p class="hero__badge">Metrosoft</p>
+      <h1 class="hero__title" data-hero-title></h1>
+      <p class="hero__text" data-hero-description></p>
+      <button class="hero__cta" data-hero-cta></button>
+    </section>
+
+    <section class="section" id="highlights">
+      <h2 data-title="highlights"></h2>
+      <div class="cards" data-highlights></div>
+    </section>
+
+    <section class="section" id="business">
+      <h2 data-title="business"></h2>
+      <div class="cards" data-business></div>
+    </section>
+
+    <section class="section" id="product">
+      <h2 data-title="product"></h2>
+      <div class="cards" data-product></div>
+    </section>
+
+    <section class="section" id="introduce">
+      <h2 data-title="introduce"></h2>
+      <div class="cards" data-introduce></div>
+    </section>
+
+    <section class="section" id="customer">
+      <h2 data-title="customer"></h2>
+      <div class="cards" data-customer></div>
+    </section>
+  </main>
+
+  <script src="main.js" defer></script>
+</body>
+</html>

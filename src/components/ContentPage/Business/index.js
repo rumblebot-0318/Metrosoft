@@ -1,38 +1,30 @@
 import React from 'react';
-import Target from './Target';
-import MetroHIS from './MetroHIS';
-import VoIP from './VOIP';
-import Cloud from './Cloud';
 import TitleList from '../TitleList';
-import HealthCare from './HealthCare';
-import MetroSMS from './MetroSMS';
-import Alarm from './Alarm';
-import url from '../../server.json';
-import '../contentPage.scss';
+import PointDiv from '../pointDiv';
+import DottedTitle from '../DottedTitle';
+import SectionCard from '../../common/SectionCard';
+import { useTranslation } from '../../../i18n';
+import './business.scss';
 
-const Lists = [
-  '의료정보사업',
-  'Metro-cERP',
-  '헬스케어 서비스',
-  'VOIP 사업',
-  'MetroSMS',
-  '알림톡',
-  '주요 고객사'
-];
+const Business = () => {
+  const { t } = useTranslation();
+  const business = t('pages.business');
+  const titleList = business.titleList || [];
+  const firstTitle = titleList[0] || '의료정보사업';
+  const dotted = business.dottedTitle || {};
 
-const dir = '02';
-
-const Business = () => (
-  <div className="content-page">
-    <TitleList object={Lists} />
-    <MetroHIS />
-    <Cloud />
-    <HealthCare />
-    <VoIP />
-    <MetroSMS />
-    <Alarm />
-    <Target url={url.url} dir={dir} />
-  </div>
-);
+  return (
+    <div className="content-page business-page">
+      <TitleList items={titleList} />
+      <PointDiv onTitle={firstTitle} />
+      <section className="business-page__grid">
+        {(business.sections || []).map((section) => (
+          <SectionCard key={section.title} {...section} />
+        ))}
+      </section>
+      <DottedTitle onTitle={dotted} onCheck />
+    </div>
+  );
+};
 
 export default Business;

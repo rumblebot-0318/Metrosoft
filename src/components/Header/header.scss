@@ -1,79 +1,67 @@
-@import "../../app";
+@use '../../styles/tokens' as tokens;
 
 .header {
-    background: $background_color;
-    padding: 10px 0;
-    min-height: 70px;
-    box-shadow: rgba(0,0,0,.1) 0 1px 4px;
+  background: transparent;
+  padding: 1rem 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.08);
 }
 
 .headerInner {
-    max-width: min(1200px, 94%);
-    padding: 0 16px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+  width: min(1200px, 96%);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .branding {
-    display: flex;
-    align-items: center;
-    padding-left: 0;
+  display: flex;
+  align-items: center;
 }
 
 .boxImg {
-    width: 140px;
-    height: auto;
-}
-
-nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 16px;
+  width: 140px;
+  height: auto;
 }
 
 .navList {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .context {
-    color: $navfont_color;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 14px;
-    letter-spacing: 0.04em;
-    transition: color 0.2s ease;
+  color: tokens.$color-base;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
+  transition: color 0.2s ease;
 }
 
-li {
-    display: inline-flex;
+.context:hover {
+  color: tokens.$color-highlight;
 }
 
-.highlight:hover {
-    color: $selected_item;
-    border-bottom: $selected_item 3px solid;
+.headerActions {
+  margin-left: auto;
 }
 
-@media (max-width: 768px) {
-    .headerInner {
-        justify-content: space-between;
-    }
+@media (max-width: tokens.breakpoint(sm)) {
+  .headerInner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-    nav {
-        width: 100%;
-        justify-content: center;
-        padding-top: 10px;
-    }
-
-    .context {
-        font-size: 13px;
-    }
+  .navList {
+    justify-content: center;
+    width: 100%;
+  }
 }

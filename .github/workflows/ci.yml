@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - modernize-react
+      - modernize-react-build
+      - modernize-react-ci
+  pull_request:
+    branches:
+      - modernize-react
+      - modernize-react-build
+      - modernize-react-ci
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install --legacy-peer-deps
+      - run: npm run lint
+      - run: CI=true npm run test -- --runInBand --watchAll=false
+      - run: npm run build

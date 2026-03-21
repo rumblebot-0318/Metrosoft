@@ -1,0 +1,24 @@
+@use './tokens' as tokens;
+
+@mixin section-wrapper {
+  width: min(1200px, 95%);
+  margin: 0 auto;
+  padding: 0 tokens.$spacing-unit 3.5rem;
+}
+
+@mixin content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: tokens.$spacing-unit;
+}
+
+@mixin surface-card {
+  background: tokens.$color-background;
+  border-radius: tokens.$radius-lg;
+  border: 1px solid tokens.$color-border;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.04);
+}
+
+@mixin responsive-text($size) {
+  font-size: tokens.fluid-font($size * 0.9, $size);
+}

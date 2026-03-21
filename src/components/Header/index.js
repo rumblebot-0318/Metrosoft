@@ -1,55 +1,40 @@
-import React, { Component } from 'react';
-import styles from './header.scss';
-import logo from '../../Image/metrologo.jpg';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../../Image/metrologo.jpg';
+import LocaleSwitcher from '../LocaleSwitcher/LocaleSwitcher';
+import './header.scss';
 
-class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.loadtitles = this.loadtitles.bind(this);
-  }
+const navLinks = [
+  { to: '/introduce', label: '회사소개' },
+  { to: '/business', label: '사업영역' },
+  { to: '/product', label: '제품소개' },
+  { to: '/customer', label: '고객센터' }
+];
 
-  loadtitles() {
-    // placeholder for hover logic
-  }
-
-  render() {
-    return (
-      <div className={styles.header}>
-        <div className={styles.headerInner}>
-          <div className={styles.branding}>
-            <Link to="/">
-              <img className={styles.boxImg} src={logo} alt="logo" />
-            </Link>
-          </div>
-          <nav>
-            <ul className={styles.navList}>
-              <li className={styles.highlight}>
-                <Link className={styles.context} to="/introduce" onMouseOver={this.loadtitles}>
-                  회사소개
-                </Link>
-              </li>
-              <li className={styles.highlight}>
-                <Link className={styles.context} to="/business">
-                  사업영역
-                </Link>
-              </li>
-              <li className={styles.highlight}>
-                <Link className={styles.context} to="/product">
-                  제품소개
-                </Link>
-              </li>
-              <li className={styles.highlight}>
-                <Link className={styles.context} to="/customer">
-                  고객센터
-                </Link>
-              </li>
-            </ul>
-          </nav>
-        </div>
+const Header = () => (
+  <header className="header">
+    <div className="headerInner">
+      <div className="branding">
+        <Link to="/">
+          <img className="boxImg" src={logo} alt="logo" />
+        </Link>
       </div>
-    );
-  }
-}
+      <nav>
+        <ul className="navList">
+          {navLinks.map((link) => (
+            <li key={link.to}>
+              <Link className="context" to={link.to}>
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <div className="headerActions">
+        <LocaleSwitcher />
+      </div>
+    </div>
+  </header>
+);
 
 export default Header;

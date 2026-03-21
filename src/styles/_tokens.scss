@@ -1,0 +1,27 @@
+@use 'sass:map';
+@use 'sass:math';
+
+$font-palo: 'Spoqa Han Sans', 'Roboto', 'Apple SD Gothic Neo', 'Malgun Gothic', 'Arial', sans-serif;
+$color-background: #fff;
+$color-surface: #f6f8fb;
+$color-muted: #6b7280;
+$color-base: #0f172a;
+$color-highlight: #169b9b;
+$color-border: rgba(15, 23, 42, 0.1);
+$spacing-unit: 16px;
+$radius-lg: 16px;
+$breakpoints: (
+  xs: 480px,
+  sm: 768px,
+  md: 1024px,
+  lg: 1280px
+);
+
+@function breakpoint($key) {
+  @return map.get($breakpoints, $key);
+}
+
+@function fluid-font($min, $max) {
+  $calc-value: calc(#{$min} + (#{$max} - #{$min}) * ((100vw - 320px) / 880));
+  @return clamp(#{$min}, $calc-value, #{$max});
+}

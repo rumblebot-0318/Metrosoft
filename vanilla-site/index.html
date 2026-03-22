@@ -27,8 +27,12 @@
           <p class="hero__text" data-hero-description></p>
           <button class="hero__cta" data-hero-cta></button>
         </div>
-        <div class="hero__media">
-          <img src="assets/connect.png" alt="Digital healthcare" />
+        <div class="hero__media" aria-hidden="true">
+          <div class="hero-panel">
+            <span>EMR · OCS · ERP</span>
+            <strong>Integrated Healthcare Platform</strong>
+          </div>
+          <div class="hero-pill">Cloud + VOIP + CRM</div>
         </div>
       </div>
     </section>
@@ -41,9 +45,8 @@
         <h2 data-spotlight-title></h2>
         <p data-spotlight-description></p>
         <div class="menu-strip" data-menu="business"></div>
-        <ul data-spotlight-points></ul>
+        <div class="spotlight__cards" data-spotlight-cards></div>
       </div>
-      <div class="spotlight__visual"><img src="assets/businessContent.png" alt="Business content" /></div>
     </section>
 
     <section class="section" id="highlights">
@@ -66,10 +69,11 @@
         <table class="legacy-table" data-product-table></table>
       </div>
       <div class="carousel-wrap">
-        <button class="carousel-btn" data-carousel-prev="product">‹</button>
+        <button class="carousel-btn" data-carousel-prev="product" aria-label="Previous product images">‹</button>
         <div class="image-grid" data-product-images></div>
-        <button class="carousel-btn" data-carousel-next="product">›</button>
+        <button class="carousel-btn" data-carousel-next="product" aria-label="Next product images">›</button>
       </div>
+      <div class="carousel-dots" data-carousel-dots="product" aria-label="Product image pages"></div>
       <div class="tree-wrap" data-product-tree></div>
     </section>
 
@@ -94,18 +98,17 @@
       <h2 data-hospital-title>주요 고객사 병원</h2>
       <p class="section-sub" data-hospital-sub>기존 컴포넌트에서 사용하던 병원 아이콘을 그대로 표시합니다.</p>
       <div class="carousel-wrap">
-        <button class="carousel-btn" data-carousel-prev="hospital">‹</button>
+        <button class="carousel-btn" data-carousel-prev="hospital" aria-label="Previous hospitals">‹</button>
         <div class="hospital-grid" data-hospital-grid></div>
-        <button class="carousel-btn" data-carousel-next="hospital">›</button>
+        <button class="carousel-btn" data-carousel-next="hospital" aria-label="Next hospitals">›</button>
       </div>
+      <div class="carousel-dots" data-carousel-dots="hospital" aria-label="Hospital pages"></div>
     </section>
 
     <section class="section" id="news">
       <h2 data-news-title>Metrosoft News</h2>
       <p class="section-sub" data-news-sub>Google RSS에서 메트로소프트 관련 제목만 추려서 표시합니다.</p>
-      <div class="news-grid" data-news-list>
-        <article class="news-card loading">뉴스를 불러오는 중...</article>
-      </div>
+      <div class="news-grid" data-news-list></div>
     </section>
 
     <section class="cta-band">

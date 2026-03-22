@@ -2,7 +2,8 @@ const state = {
   locale: localStorage.getItem('metrosoft-locale') || 'ko',
   translations: null,
   legacy: {},
-  metroNews: []
+  metroNews: [],
+  newsLoading: false
 };
 
 const $ = (selector) => document.querySelector(selector);
@@ -18,7 +19,7 @@ const metricsTarget = $('[data-metrics]');
 const spotlightEyebrow = $('[data-spotlight-eyebrow]');
 const spotlightTitle = $('[data-spotlight-title]');
 const spotlightDescription = $('[data-spotlight-description]');
-const spotlightPoints = $('[data-spotlight-points]');
+const spotlightCards = $('[data-spotlight-cards]');
 
 const ctaTitle = $('[data-cta-title]');
 const ctaDescription = $('[data-cta-description]');
@@ -42,6 +43,8 @@ const productPrevBtn = $('[data-carousel-prev="product"]');
 const productNextBtn = $('[data-carousel-next="product"]');
 const hospitalPrevBtn = $('[data-carousel-prev="hospital"]');
 const hospitalNextBtn = $('[data-carousel-next="hospital"]');
+const productDots = $('[data-carousel-dots="product"]');
+const hospitalDots = $('[data-carousel-dots="hospital"]');
 
 const sectionTargets = {
   highlights: $('[data-highlights]'),
@@ -179,31 +182,59 @@ const renderMenuStrips = (menus = {}) => {
   });
 };
 
-const bindCarousel = (container, prevBtn, nextBtn, step = 320) => {
+const bindCarousel = (container, prevBtn, nextBtn, dotsTarget, step = 320) => {
   if (!container) return;
 
-  const updateButtons = () => {
+  const getPageCount = () => Math.max(1, Math.ceil(container.scrollWidth / Math.max(container.clientWidth, 1)));
+  const getPageIndex = () => {
+    const width = Math.max(container.clientWidth, 1);
+    return Math.round(container.scrollLeft / width);
+  };
+
+  const renderDots = () => {
+    if (!dotsTarget) return;
+    clearChildren(dotsTarget);
+    const pages = getPageCount();
+    const active = getPageIndex();
+    for (let i = 0; i < pages; i += 1) {
+      const dot = document.createElement('button');
+      dot.className = `carousel-dot ${i === active ? 'active' : ''}`;
+      dot.type = 'button';
+      dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+      dot.onclick = () => {
+        container.scrollTo({ left: i * container.clientWidth, behavior: 'smooth' });
+      };
+      dotsTarget.appendChild(dot);
+    }
+  };
+
+  const updateUI = () => {
     const maxScroll = container.scrollWidth - container.clientWidth - 2;
     if (prevBtn) prevBtn.disabled = container.scrollLeft <= 2;
     if (nextBtn) nextBtn.disabled = container.scrollLeft >= maxScroll;
+    renderDots();
   };
 
   if (prevBtn) {
     prevBtn.onclick = () => {
       container.scrollBy({ left: -step, behavior: 'smooth' });
-      setTimeout(updateButtons, 220);
+      setTimeout(updateUI, 240);
     };
   }
 
   if (nextBtn) {
     nextBtn.onclick = () => {
       container.scrollBy({ left: step, behavior: 'smooth' });
-      setTimeout(updateButtons, 220);
+      setTimeout(updateUI, 240);
     };
   }
 
-  container.addEventListener('scroll', updateButtons, { passive: true });
-  setTimeout(updateButtons, 80);
+  container.onscroll = updateUI;
+  if (!container.dataset.resizeBound) {
+    window.addEventListener('resize', updateUI, { passive: true });
+    container.dataset.resizeBound = '1';
+  }
+  setTimeout(updateUI, 100);
 };
 
 const renderMetrics = (metrics = []) => {
@@ -220,11 +251,17 @@ const renderSpotlight = (spotlight = {}) => {
   spotlightEyebrow.textContent = spotlight.eyebrow || '';
   spotlightTitle.textContent = spotlight.title || '';
   spotlightDescription.textContent = spotlight.description || '';
-  clearChildren(spotlightPoints);
-  (spotlight.points || []).forEach((point) => {
-    const li = document.createElement('li');
-    li.textContent = point;
-    spotlightPoints.appendChild(li);
+  clearChildren(spotlightCards);
+
+  const icons = ['assets/ui_icons/business.svg', 'assets/ui_icons/security.svg', 'assets/ui_icons/cloud.svg'];
+  (spotlight.points || []).slice(0, 3).forEach((point, idx) => {
+    const item = document.createElement('article');
+    item.className = 'spotlight-card';
+    item.innerHTML = `
+      <img src="${icons[idx % icons.length]}" alt="spotlight icon" class="spotlight-card__icon" />
+      <p>${point}</p>
+    `;
+    spotlightCards.appendChild(item);
   });
 };
 
@@ -418,13 +455,34 @@ const renderHospitalGrid = () => {
   });
 };
 
+const renderNewsSkeleton = (count = 4) => {
+  if (!newsList) return;
+  clearChildren(newsList);
+  for (let i = 0; i < count; i += 1) {
+    const card = document.createElement('article');
+    card.className = 'news-card skeleton';
+    card.innerHTML = `
+      <div class="skeleton-line w-90"></div>
+      <div class="skeleton-line w-70"></div>
+      <div class="skeleton-line w-40"></div>
+    `;
+    newsList.appendChild(card);
+  }
+};
+
 const renderNews = () => {
   if (!newsList) return;
+
+  if (state.newsLoading && !state.metroNews.length) {
+    renderNewsSkeleton();
+    return;
+  }
+
   clearChildren(newsList);
   if (!state.metroNews.length) {
     const fallback = document.createElement('article');
     fallback.className = 'news-card loading';
-    fallback.textContent = state.locale === 'ko' ? '관련 뉴스를 찾지 못했습니다.' : 'No Metrosoft-related news found.';
+    fallback.innerHTML = `<span class="loading-spinner" aria-hidden="true"></span>${state.locale === 'ko' ? '관련 뉴스를 찾지 못했습니다.' : 'No Metrosoft-related news found.'}`;
     newsList.appendChild(fallback);
     return;
   }
@@ -474,6 +532,10 @@ const fetchMetroNews = async () => {
   const cached = readNewsCache();
   if (cached?.items?.length) {
     state.metroNews = cached.items;
+    state.newsLoading = false;
+    renderNews();
+  } else {
+    state.newsLoading = true;
     renderNews();
   }
 
@@ -500,11 +562,13 @@ const fetchMetroNews = async () => {
       .slice(0, 8);
 
     writeNewsCache(state.metroNews);
+    state.newsLoading = false;
   } catch (error) {
     console.error('Failed to fetch Metrosoft news:', error);
     if (!cached?.items?.length) {
       state.metroNews = [];
     }
+    state.newsLoading = false;
   }
 
   renderNews();
@@ -688,8 +752,8 @@ const render = () => {
   renderCustomerTable();
   renderHospitalGrid();
 
-  bindCarousel(productImages, productPrevBtn, productNextBtn, 380);
-  bindCarousel(hospitalGrid, hospitalPrevBtn, hospitalNextBtn, 420);
+  bindCarousel(productImages, productPrevBtn, productNextBtn, productDots, 380);
+  bindCarousel(hospitalGrid, hospitalPrevBtn, hospitalNextBtn, hospitalDots, 420);
 
   if (hospitalTitle) hospitalTitle.textContent = state.locale === 'ko' ? '주요 고객사 병원' : 'Major Partner Hospitals';
   if (hospitalSub) hospitalSub.textContent = state.locale === 'ko' ? '기존 프로젝트 아이콘 자산을 그대로 사용합니다.' : 'Using the original hospital icon assets from the legacy project.';

@@ -52,11 +52,11 @@ const sectionTargets = {
 };
 
 const cardImages = {
-  highlights: ['assets/connect.png', 'assets/work.png', 'assets/cloud.png'],
-  business: ['assets/product_icons/EMR.svg', 'assets/product_icons/ERP.svg', 'assets/product_icons/OCS.svg'],
-  product: ['assets/product_icons/EMR.svg', 'assets/product_icons/iEMR.svg', 'assets/product_icons/OCS.svg', 'assets/product_icons/ERP.svg', 'assets/product_icons/CRM.svg', 'assets/product_icons/mPOC.svg'],
-  introduce: ['assets/businessContent.png', 'assets/metrologo.png'],
-  customer: ['assets/product_icons/CRM.svg', 'assets/product_icons/OCS.svg']
+  highlights: ['assets/ui_icons/core.svg', 'assets/ui_icons/cloud.svg', 'assets/ui_icons/business.svg'],
+  business: ['assets/ui_icons/business.svg', 'assets/ui_icons/cloud.svg', 'assets/ui_icons/support.svg'],
+  product: ['assets/ui_icons/emr.svg', 'assets/ui_icons/product.svg', 'assets/ui_icons/security.svg', 'assets/ui_icons/crm.svg', 'assets/ui_icons/support.svg', 'assets/ui_icons/cloud.svg'],
+  introduce: ['assets/ui_icons/core.svg', 'assets/ui_icons/business.svg'],
+  customer: ['assets/ui_icons/support.svg', 'assets/ui_icons/crm.svg']
 };
 
 const titleTargets = {
@@ -264,14 +264,14 @@ const renderProductImageGrid = () => {
   clearChildren(productImages);
 
   const items = [
-    'assets/product_icons/EMR.svg',
-    'assets/product_icons/iEMR.svg',
-    'assets/product_icons/OCS.svg',
-    'assets/product_icons/ERP.svg',
-    'assets/product_icons/CRM.svg',
-    'assets/product_icons/mPOC.svg',
-    'assets/connect.png',
-    'assets/work.png'
+    'assets/ui_icons/emr.svg',
+    'assets/ui_icons/product.svg',
+    'assets/ui_icons/security.svg',
+    'assets/ui_icons/crm.svg',
+    'assets/ui_icons/support.svg',
+    'assets/ui_icons/cloud.svg',
+    'assets/ui_icons/business.svg',
+    'assets/ui_icons/core.svg'
   ];
 
   const ocs = state.legacy.ocs;

@@ -50,10 +50,7 @@ const newsList = $('[data-news-list]');
 
 const productPrevBtn = $('[data-carousel-prev="product"]');
 const productNextBtn = $('[data-carousel-next="product"]');
-const hospitalPrevBtn = $('[data-carousel-prev="hospital"]');
-const hospitalNextBtn = $('[data-carousel-next="hospital"]');
 const productDots = $('[data-carousel-dots="product"]');
-const hospitalDots = $('[data-carousel-dots="hospital"]');
 
 const sectionTargets = {
   highlights: $('[data-highlights]'),
@@ -556,29 +553,36 @@ const renderHospitalGrid = () => {
   clearChildren(hospitalGrid);
   if (!hospitals || !Array.isArray(hospitals.content)) return;
 
-  hospitals.content.forEach((h) => {
-    if (!h || !h.title) return;
+  const logos = hospitals.content
+    .filter((h) => h && h.img)
+    .map((h) => ({
+      title: h.title || 'hospital',
+      url: h.url || '#',
+      src: `assets/Hospital_icon/${(h.img || '').replace(/^\//, '')}`
+    }));
+
+  if (!logos.length) return;
+
+  hospitalGrid.style.setProperty('--ticker-duration', `${Math.max(26, logos.length * 4)}s`);
+
+  const rendered = [...logos, ...logos];
+  rendered.forEach((h) => {
     const a = document.createElement('a');
     a.className = 'hospital-logo';
-    a.href = h.url || '#';
+    a.href = h.url;
     a.target = '_blank';
     a.rel = 'noreferrer noopener';
-    a.title = h.title || 'hospital';
+    a.title = h.title;
 
     const img = document.createElement('img');
-    img.src = `assets/Hospital_icon/${(h.img || '').replace(/^\//, '')}`;
-    img.alt = h.title || 'hospital icon';
-
-    const label = document.createElement('span');
-    label.className = 'hospital-name';
-    label.textContent = h.title;
+    img.src = h.src;
+    img.alt = h.title;
 
     img.onerror = () => {
-      img.remove();
+      a.remove();
     };
 
     a.appendChild(img);
-    a.appendChild(label);
     hospitalGrid.appendChild(a);
   });
 };
@@ -887,10 +891,9 @@ const render = () => {
   renderHospitalGrid();
 
   bindCarousel(productImages, productPrevBtn, productNextBtn, productDots, 380);
-  bindCarousel(hospitalGrid, hospitalPrevBtn, hospitalNextBtn, hospitalDots, 420);
 
   if (hospitalTitle) hospitalTitle.textContent = state.locale === 'ko' ? '주요 고객사 병원' : 'Major Partner Hospitals';
-  if (hospitalSub) hospitalSub.textContent = state.locale === 'ko' ? '주요 파트너 병원의 로고와 정보를 확인하실 수 있습니다.' : 'Browse logos and information for our major partner hospitals.';
+  if (hospitalSub) hospitalSub.textContent = state.locale === 'ko' ? '대표 병원 로고를 자동 롤링 방식으로 소개합니다.' : 'Featured hospital logos in an automatic rolling ticker.';
 
   if (newsTitle) newsTitle.textContent = state.locale === 'ko' ? 'Metrosoft News' : 'Metrosoft News';
   if (newsSub) newsSub.textContent = state.locale === 'ko' ? 'Google RSS에서 메트로소프트가 제목에 포함된 기사만 표시합니다.' : 'Showing only Google RSS headlines containing Metrosoft.';

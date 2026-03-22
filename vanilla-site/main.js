@@ -391,26 +391,42 @@ const renderCertifiedTimeline = () => {
     return;
   }
 
-  entries.forEach((entry) => {
-    const item = document.createElement('article');
-    item.className = 'timeline-item';
+  const feed = document.createElement('div');
+  feed.className = 'timeline-feed';
 
-    const year = document.createElement('strong');
-    year.className = 'timeline-year';
-    year.textContent = entry.year;
+  entries.forEach((entry, entryIdx) => {
+    entry.hits.slice(0, 2).forEach((text, hitIdx) => {
+      const row = document.createElement('article');
+      row.className = 'timeline-feed-item';
+      const isLast = entryIdx === entries.length - 1 && hitIdx === Math.min(1, entry.hits.length - 1);
 
-    const list = document.createElement('ul');
-    list.className = 'timeline-list';
-    entry.hits.slice(0, 2).forEach((text) => {
-      const li = document.createElement('li');
-      li.textContent = text;
-      list.appendChild(li);
+      row.innerHTML = `
+        <div class="timeline-rail">
+          <span class="timeline-dot"></span>
+          <span class="timeline-line ${isLast ? 'is-end' : ''}"></span>
+        </div>
+        <div class="timeline-body">
+          <div class="timeline-meta">${entry.year}</div>
+          <p>${text}</p>
+        </div>
+        <span class="timeline-thumb"><i data-lucide="${activeCategory.icon}"></i></span>
+      `;
+      feed.appendChild(row);
     });
-
-    item.appendChild(year);
-    item.appendChild(list);
-    certifiedTimeline.appendChild(item);
   });
+
+  const tags = document.createElement('div');
+  tags.className = 'timeline-tags';
+  const tagItems = [activeCategory.label, isKo ? '연혁' : 'Timeline', isKo ? '파트너십' : 'Partnership'];
+  tagItems.forEach((label) => {
+    const chip = document.createElement('span');
+    chip.className = 'timeline-tag';
+    chip.textContent = `#${label}`;
+    tags.appendChild(chip);
+  });
+
+  certifiedTimeline.appendChild(feed);
+  certifiedTimeline.appendChild(tags);
 };
 
 const renderSpotlight = (spotlight = {}) => {

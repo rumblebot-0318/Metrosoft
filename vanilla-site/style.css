@@ -358,23 +358,17 @@ p {
 
 .certified-timeline {
   margin-top: 0.2rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 0.6rem;
+  border: 1px solid #dbe4f2;
+  border-radius: 14px;
+  background: #fff;
+  padding: 0.7rem;
 }
 
 .timeline-item {
-  border: 1px solid #dbe4f2;
-  border-radius: 12px;
-  background: #fff;
-  padding: 0.7rem 0.8rem;
-}
-
-.timeline-year {
-  display: inline-block;
-  font-size: 0.78rem;
-  color: #1f3f6c;
-  margin-bottom: 0.35rem;
+  border: 1px solid #e4ebf6;
+  border-radius: 10px;
+  background: #fbfdff;
+  padding: 0.65rem 0.75rem;
 }
 
 .timeline-list {
@@ -383,6 +377,98 @@ p {
   color: #455a73;
   font-size: 0.78rem;
   line-height: 1.45;
+}
+
+.timeline-feed {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.timeline-feed-item {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr) 44px;
+  align-items: start;
+  gap: 0.55rem;
+  padding: 0.28rem 0;
+}
+
+.timeline-rail {
+  position: relative;
+  min-height: 62px;
+}
+
+.timeline-dot {
+  position: absolute;
+  top: 0.5rem;
+  left: 4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #374151;
+}
+
+.timeline-line {
+  position: absolute;
+  top: 1rem;
+  left: 7px;
+  width: 2px;
+  height: calc(100% - 0.6rem);
+  background: #d8dee8;
+}
+
+.timeline-line.is-end {
+  display: none;
+}
+
+.timeline-body {
+  border-bottom: 1px solid #edf1f7;
+  padding-bottom: 0.48rem;
+}
+
+.timeline-meta {
+  color: #6b7f95;
+  font-size: 0.82rem;
+  margin-bottom: 0.22rem;
+}
+
+.timeline-body p {
+  margin: 0;
+  color: #1f2937;
+  line-height: 1.45;
+  font-size: 0.9rem;
+}
+
+.timeline-thumb {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid #d8e3f1;
+  background: linear-gradient(180deg, #fbfdff, #f2f6fd);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #2b4f81;
+}
+
+.timeline-thumb svg {
+  width: 18px;
+  height: 18px;
+}
+
+.timeline-tags {
+  margin-top: 0.7rem;
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.timeline-tag {
+  border: 1px solid #e3eaf6;
+  border-radius: 999px;
+  padding: 0.24rem 0.58rem;
+  font-size: 0.74rem;
+  color: #64748b;
+  background: #fafcff;
 }
 
 .menu-strip { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 0.85rem; }

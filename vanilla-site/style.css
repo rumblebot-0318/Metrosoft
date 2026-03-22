@@ -529,6 +529,22 @@ button:focus-visible,
   background: #fafcff;
 }
 
+.timeline-more {
+  margin-top: 0.72rem;
+  width: 100%;
+  border: 1px solid #d1deee;
+  border-radius: 10px;
+  background: #f8fbff;
+  color: #234b80;
+  font-weight: 700;
+  padding: 0.5rem 0.65rem;
+  cursor: pointer;
+}
+
+.timeline-more:hover {
+  background: #f1f7ff;
+}
+
 .company-facts {
   margin-top: 0.75rem;
 }
@@ -1359,26 +1375,43 @@ button:focus-visible,
   font-size: 0.9rem;
 }
 
-.quick-inquiry {
+.quick-actions {
   position: fixed;
   right: 1rem;
   bottom: 1.1rem;
   z-index: 60;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.quick-inquiry,
+.quick-secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-width: 112px;
   height: 44px;
   border-radius: 999px;
-  background: linear-gradient(135deg, #0b3a82, #0f5cc0);
-  color: #fff;
   text-decoration: none;
   font-weight: 700;
   font-size: 0.84rem;
-  box-shadow: 0 12px 28px rgba(11, 58, 130, 0.35);
+  box-shadow: 0 12px 28px rgba(11, 58, 130, 0.22);
 }
 
-.quick-inquiry:hover {
+.quick-inquiry {
+  background: linear-gradient(135deg, #0b3a82, #0f5cc0);
+  color: #fff;
+}
+
+.quick-secondary {
+  background: #fff;
+  color: #0b3a82;
+  border: 1px solid rgba(11, 58, 130, 0.25);
+}
+
+.quick-inquiry:hover,
+.quick-secondary:hover {
   transform: translateY(-1px);
 }
 
@@ -1387,7 +1420,7 @@ button:focus-visible,
     grid-template-columns: 1fr;
   }
 
-  .quick-inquiry {
+  .quick-actions {
     right: 0.8rem;
     bottom: 0.8rem;
   }

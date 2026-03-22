@@ -6,7 +6,8 @@ const state = {
   newsLoading: false,
   activeProductTab: 'treatment',
   activeFeatureTab: 0,
-  activeTimelineCategory: 'all'
+  activeTimelineCategory: 'all',
+  timelineExpanded: false
 };
 
 const $ = (selector) => document.querySelector(selector);
@@ -43,6 +44,7 @@ const companyContactList = $('[data-company-contact-list]');
 const companyAccessTitle = $('[data-company-access-title]');
 const companyAccessList = $('[data-company-access-list]');
 const quickInquiryText = $('[data-quick-inquiry-text]');
+const quickRemoteText = $('[data-quick-remote-text]');
 
 const productTableTitle = $('[data-product-table-title]');
 const productTableSub = $('[data-product-table-sub]');
@@ -473,6 +475,7 @@ const renderCertifiedTimeline = () => {
     btn.innerHTML = `<i data-lucide="${category.icon}"></i><span>${category.label}</span>`;
     btn.onclick = () => {
       state.activeTimelineCategory = key;
+      state.timelineExpanded = false;
       renderCertifiedTimeline();
       refreshIcons();
     };
@@ -480,16 +483,13 @@ const renderCertifiedTimeline = () => {
   });
 
   const activeCategory = categories[state.activeTimelineCategory];
-  const entries = timeline.content
+  const flatEntries = timeline.content
     .filter((row) => row && row.year && Array.isArray(row.content))
-    .map((row) => ({
-      year: row.year,
-      hits: row.content.filter((text) => activeCategory.test.test(text))
-    }))
-    .filter((row) => row.hits.length)
-    .slice(-8);
+    .flatMap((row) => row.content
+      .filter((text) => activeCategory.test.test(text))
+      .map((text) => ({ year: row.year, text })));
 
-  if (!entries.length) {
+  if (!flatEntries.length) {
     const empty = document.createElement('article');
     empty.className = 'timeline-item';
     empty.innerHTML = `<ul class="timeline-list"><li>${isKo ? '해당 분류의 연혁 데이터가 없습니다.' : 'No timeline entries for this category.'}</li></ul>`;
@@ -497,28 +497,29 @@ const renderCertifiedTimeline = () => {
     return;
   }
 
+  const collapsedLimit = state.activeTimelineCategory === 'all' ? 8 : 10;
+  const visibleEntries = state.timelineExpanded ? flatEntries : flatEntries.slice(-collapsedLimit);
+
   const feed = document.createElement('div');
   feed.className = 'timeline-feed';
 
-  entries.forEach((entry, entryIdx) => {
-    entry.hits.slice(0, 2).forEach((text, hitIdx) => {
-      const row = document.createElement('article');
-      row.className = 'timeline-feed-item';
-      const isLast = entryIdx === entries.length - 1 && hitIdx === Math.min(1, entry.hits.length - 1);
+  visibleEntries.forEach((entry, idx) => {
+    const row = document.createElement('article');
+    row.className = 'timeline-feed-item';
+    const isLast = idx === visibleEntries.length - 1;
 
-      row.innerHTML = `
-        <div class="timeline-rail">
-          <span class="timeline-dot"></span>
-          <span class="timeline-line ${isLast ? 'is-end' : ''}"></span>
-        </div>
-        <div class="timeline-body">
-          <div class="timeline-meta">${entry.year}</div>
-          <p>${text}</p>
-        </div>
-        <span class="timeline-thumb"><i data-lucide="${activeCategory.icon}"></i></span>
-      `;
-      feed.appendChild(row);
-    });
+    row.innerHTML = `
+      <div class="timeline-rail">
+        <span class="timeline-dot"></span>
+        <span class="timeline-line ${isLast ? 'is-end' : ''}"></span>
+      </div>
+      <div class="timeline-body">
+        <div class="timeline-meta">${entry.year}</div>
+        <p>${entry.text}</p>
+      </div>
+      <span class="timeline-thumb"><i data-lucide="${activeCategory.icon}"></i></span>
+    `;
+    feed.appendChild(row);
   });
 
   const tags = document.createElement('div');
@@ -533,6 +534,21 @@ const renderCertifiedTimeline = () => {
 
   certifiedTimeline.appendChild(feed);
   certifiedTimeline.appendChild(tags);
+
+  if (flatEntries.length > collapsedLimit) {
+    const moreBtn = document.createElement('button');
+    moreBtn.type = 'button';
+    moreBtn.className = 'timeline-more';
+    moreBtn.textContent = state.timelineExpanded
+      ? (isKo ? '접기' : 'Collapse')
+      : (isKo ? `전체 연혁 보기 (${flatEntries.length}건)` : `View all milestones (${flatEntries.length})`);
+    moreBtn.onclick = () => {
+      state.timelineExpanded = !state.timelineExpanded;
+      renderCertifiedTimeline();
+      refreshIcons();
+    };
+    certifiedTimeline.appendChild(moreBtn);
+  }
 };
 
 const renderCompanyFacts = () => {
@@ -1422,6 +1438,7 @@ const render = () => {
   renderSimpleList(companyAccessList, companyInfo.access);
   renderCompanyMap();
   if (quickInquiryText) quickInquiryText.textContent = companyInfo.quickLabel;
+  if (quickRemoteText) quickRemoteText.textContent = state.locale === 'ko' ? '원격지원' : 'Remote Support';
 
   refreshIcons();
 

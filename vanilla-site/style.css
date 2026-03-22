@@ -233,15 +233,39 @@ body {
   letter-spacing: 0.08em;
 }
 
-.image-grid {
+.carousel-wrap {
   margin-top: 1rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.carousel-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: #334155;
+  font-size: 1.15rem;
+  line-height: 1;
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+.image-grid {
+  margin-top: 0;
+  display: flex;
   gap: 0.7rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  padding-bottom: 0.25rem;
 }
 
 .image-grid img {
-  width: 100%;
+  width: 180px;
+  min-width: 180px;
   height: 120px;
   object-fit: contain;
   border: 1px solid var(--border);
@@ -251,10 +275,13 @@ body {
 }
 
 .hospital-grid {
-  margin-top: 0.8rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  margin-top: 0;
+  display: flex;
   gap: 0.7rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  padding-bottom: 0.25rem;
 }
 
 .hospital-logo {
@@ -266,6 +293,8 @@ body {
   border-radius: 10px;
   padding: 0.5rem;
   min-height: 88px;
+  width: 140px;
+  min-width: 140px;
 }
 
 .hospital-logo img {

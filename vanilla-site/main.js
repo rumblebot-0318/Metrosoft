@@ -33,6 +33,11 @@ const hospitalTitle = $('[data-hospital-title]');
 const hospitalSub = $('[data-hospital-sub]');
 const hospitalGrid = $('[data-hospital-grid]');
 
+const productPrevBtn = $('[data-carousel-prev="product"]');
+const productNextBtn = $('[data-carousel-next="product"]');
+const hospitalPrevBtn = $('[data-carousel-prev="hospital"]');
+const hospitalNextBtn = $('[data-carousel-next="hospital"]');
+
 const sectionTargets = {
   highlights: $('[data-highlights]'),
   business: $('[data-business]'),
@@ -167,6 +172,20 @@ const renderMenuStrips = (menus = {}) => {
       target.appendChild(chip);
     });
   });
+};
+
+const bindCarousel = (container, prevBtn, nextBtn, step = 320) => {
+  if (!container) return;
+  if (prevBtn) {
+    prevBtn.onclick = () => {
+      container.scrollBy({ left: -step, behavior: 'smooth' });
+    };
+  }
+  if (nextBtn) {
+    nextBtn.onclick = () => {
+      container.scrollBy({ left: step, behavior: 'smooth' });
+    };
+  }
 };
 
 const renderMetrics = (metrics = []) => {
@@ -551,6 +570,9 @@ const render = () => {
   renderProductTree();
   renderCustomerTable();
   renderHospitalGrid();
+
+  bindCarousel(productImages, productPrevBtn, productNextBtn, 380);
+  bindCarousel(hospitalGrid, hospitalPrevBtn, hospitalNextBtn, 420);
 
   if (hospitalTitle) hospitalTitle.textContent = state.locale === 'ko' ? '주요 고객사 병원' : 'Major Partner Hospitals';
   if (hospitalSub) hospitalSub.textContent = state.locale === 'ko' ? '기존 프로젝트 아이콘 자산을 그대로 사용합니다.' : 'Using the original hospital icon assets from the legacy project.';

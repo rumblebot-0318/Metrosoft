@@ -309,6 +309,35 @@ body {
   font-weight: 700;
 }
 
+.certified-timeline {
+  margin-top: 0.9rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.6rem;
+}
+
+.timeline-item {
+  border: 1px solid #dbe4f2;
+  border-radius: 12px;
+  background: #fff;
+  padding: 0.7rem 0.8rem;
+}
+
+.timeline-year {
+  display: inline-block;
+  font-size: 0.78rem;
+  color: #1f3f6c;
+  margin-bottom: 0.35rem;
+}
+
+.timeline-list {
+  margin: 0;
+  padding-left: 0.95rem;
+  color: #455a73;
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
 .menu-strip { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 0.85rem; }
 .menu-chip {
   border: 1px solid rgba(11,58,130,0.2);

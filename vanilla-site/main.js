@@ -19,6 +19,7 @@ const metricsTarget = $('[data-metrics]');
 const certifiedTitle = $('[data-certified-title]');
 const certifiedSub = $('[data-certified-sub]');
 const certifiedGrid = $('[data-certified-grid]');
+const certifiedTimeline = $('[data-certified-timeline]');
 
 const spotlightEyebrow = $('[data-spotlight-eyebrow]');
 const spotlightTitle = $('[data-spotlight-title]');
@@ -316,6 +317,46 @@ const renderCertified = () => {
       <p>${item.label}</p>
     `;
     certifiedGrid.appendChild(card);
+  });
+};
+
+const renderCertifiedTimeline = () => {
+  if (!certifiedTimeline) return;
+  clearChildren(certifiedTimeline);
+
+  const timeline = state.legacy.timeline;
+  if (!timeline || !Array.isArray(timeline.content)) return;
+
+  const keywords = /인증|파트너|partnership|partner|isv|inno-biz|msp/i;
+
+  const entries = timeline.content
+    .filter((row) => row && row.year && Array.isArray(row.content))
+    .map((row) => ({
+      year: row.year,
+      hits: row.content.filter((c) => keywords.test(c))
+    }))
+    .filter((row) => row.hits.length)
+    .slice(-8);
+
+  entries.forEach((entry) => {
+    const item = document.createElement('article');
+    item.className = 'timeline-item';
+
+    const year = document.createElement('strong');
+    year.className = 'timeline-year';
+    year.textContent = entry.year;
+
+    const list = document.createElement('ul');
+    list.className = 'timeline-list';
+    entry.hits.slice(0, 2).forEach((text) => {
+      const li = document.createElement('li');
+      li.textContent = text;
+      list.appendChild(li);
+    });
+
+    item.appendChild(year);
+    item.appendChild(list);
+    certifiedTimeline.appendChild(item);
   });
 };
 
@@ -883,6 +924,7 @@ const render = () => {
     ? '기존 프로젝트의 파트너 인증 자산을 기반으로 구성했습니다.'
     : 'Built with legacy partner certification assets from the original project.';
   renderCertified();
+  renderCertifiedTimeline();
   renderSpotlight(t.spotlight || {});
   if (productTableTitle) productTableTitle.textContent = state.locale === 'ko' ? 'Product 상세 구성표 (기존 OCS 구성)' : 'Product Detailed Composition (Legacy OCS Matrix)';
   if (productTableSub) productTableSub.textContent = state.locale === 'ko' ? '기존 컴포넌트에서 사용하던 표 형식 내용을 그대로 재구성했습니다.' : 'Reconstructed from the original table-based component structure.';
@@ -940,7 +982,8 @@ Promise.all([
   fetchJson('data/legacy/Product/mPOC.json'),
   fetchJson('data/legacy/Introduce/CeoIntroduce.json'),
   fetchJson('data/legacy/Customer/index.json'),
-  fetchJson('data/legacy/Business/Hospital.json')
+  fetchJson('data/legacy/Business/Hospital.json'),
+  fetchJson('data/legacy/Introduce/Timeline.json')
 ]).then(([
   translations,
   metroHis,
@@ -952,10 +995,11 @@ Promise.all([
   mpoc,
   ceo,
   customer,
-  hospitals
+  hospitals,
+  timeline
 ]) => {
   state.translations = translations;
-  state.legacy = { metroHis, emr, iemr, ocs, erp, crm, mpoc, ceo, customer, hospitals };
+  state.legacy = { metroHis, emr, iemr, ocs, erp, crm, mpoc, ceo, customer, hospitals, timeline };
   render();
   fetchMetroNews();
 }).catch((err) => {

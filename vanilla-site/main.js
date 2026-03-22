@@ -121,6 +121,13 @@ const clearChildren = (el) => {
   while (el.firstChild) el.removeChild(el.firstChild);
 };
 
+const cardSymbolMap = {
+  highlights: ['monitor_heart', 'hub', 'stacks'],
+  business: ['apartment', 'cloud_sync', 'support_agent'],
+  introduce: ['domain', 'groups'],
+  customer: ['support_agent', 'contact_phone']
+};
+
 const renderCards = (target, cards = [], key = '') => {
   if (!target) return;
   clearChildren(target);
@@ -129,14 +136,24 @@ const renderCards = (target, cards = [], key = '') => {
     const article = document.createElement('article');
     article.className = `card card--${key}`;
 
-    const imagePool = cardImages[key] || [];
-    const imageSrc = imagePool[idx % imagePool.length];
-    if (imageSrc) {
-      const img = document.createElement('img');
-      img.src = imageSrc;
-      img.alt = card.title || 'card image';
-      img.className = 'card__image';
-      article.appendChild(img);
+    const iconNames = cardSymbolMap[key] || [];
+    const symbolName = iconNames[idx % iconNames.length];
+
+    if (symbolName) {
+      const badge = document.createElement('div');
+      badge.className = 'card__icon-badge';
+      badge.innerHTML = `<span class="material-symbols-rounded">${symbolName}</span>`;
+      article.appendChild(badge);
+    } else {
+      const imagePool = cardImages[key] || [];
+      const imageSrc = imagePool[idx % imagePool.length];
+      if (imageSrc) {
+        const img = document.createElement('img');
+        img.src = imageSrc;
+        img.alt = card.title || 'card image';
+        img.className = 'card__image';
+        article.appendChild(img);
+      }
     }
 
     const title = document.createElement('h3');
@@ -253,12 +270,12 @@ const renderSpotlight = (spotlight = {}) => {
   spotlightDescription.textContent = spotlight.description || '';
   clearChildren(spotlightCards);
 
-  const icons = ['assets/ui_icons/business.svg', 'assets/ui_icons/security.svg', 'assets/ui_icons/cloud.svg'];
+  const symbols = ['monitor_heart', 'business_center', 'cloud_sync'];
   (spotlight.points || []).slice(0, 3).forEach((point, idx) => {
     const item = document.createElement('article');
     item.className = 'spotlight-card';
     item.innerHTML = `
-      <img src="${icons[idx % icons.length]}" alt="spotlight icon" class="spotlight-card__icon" />
+      <span class="material-symbols-rounded spotlight-card__icon">${symbols[idx % symbols.length]}</span>
       <p>${point}</p>
     `;
     spotlightCards.appendChild(item);

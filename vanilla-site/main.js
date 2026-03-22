@@ -71,6 +71,7 @@ const resourceCenter = $('[data-resource-center]');
 const supportContacts = $('[data-support-contacts]');
 const legacySitemap = $('[data-legacy-sitemap]');
 const productKpi = $('[data-product-kpi]');
+const productLegacyLinks = $('[data-product-legacy-links]');
 const companyMap = $('[data-company-map]');
 const hospitalTitle = $('[data-hospital-title]');
 const hospitalSub = $('[data-hospital-sub]');
@@ -1097,6 +1098,41 @@ const renderResourceCenter = () => {
   `;
 };
 
+const renderProductLegacyLinks = () => {
+  if (!productLegacyLinks) return;
+  const isKo = state.locale === 'ko';
+
+  const links = isKo
+    ? [
+      { label: 'EMR', href: 'http://www.metrosoft.co.kr/sub03/sub_01.asp' },
+      { label: 'iEMR', href: 'http://www.metrosoft.co.kr/sub03/sub_02.asp' },
+      { label: 'OCS', href: 'http://www.metrosoft.co.kr/sub03/sub_03.asp' },
+      { label: 'T-BIZ 모바일 EMR', href: 'http://www.metrosoft.co.kr/sub03/sub_04.asp' },
+      { label: 'ERP', href: 'http://www.metrosoft.co.kr/sub03/sub_05.asp' },
+      { label: 'CRM', href: 'http://www.metrosoft.co.kr/sub03/sub_06.asp' },
+      { label: 'mPOC', href: 'http://www.metrosoft.co.kr/sub03/sub_07.asp' }
+    ]
+    : [
+      { label: 'EMR', href: 'http://www.metrosoft.co.kr/sub03/sub_01.asp' },
+      { label: 'iEMR', href: 'http://www.metrosoft.co.kr/sub03/sub_02.asp' },
+      { label: 'OCS', href: 'http://www.metrosoft.co.kr/sub03/sub_03.asp' },
+      { label: 'T-BIZ Mobile EMR', href: 'http://www.metrosoft.co.kr/sub03/sub_04.asp' },
+      { label: 'ERP', href: 'http://www.metrosoft.co.kr/sub03/sub_05.asp' },
+      { label: 'CRM', href: 'http://www.metrosoft.co.kr/sub03/sub_06.asp' },
+      { label: 'mPOC', href: 'http://www.metrosoft.co.kr/sub03/sub_07.asp' }
+    ];
+
+  productLegacyLinks.innerHTML = `
+    <article class="product-legacy-links-card">
+      <h3>${isKo ? '레거시 제품 상세 바로가기' : 'Legacy Product Detail Shortcuts'}</h3>
+      <p>${isKo ? '기존 metrosoft.co.kr 제품 상세 페이지를 섹션 내에서 바로 열 수 있게 보강했습니다.' : 'Direct links to the original metrosoft.co.kr product detail pages are now surfaced in-context.'}</p>
+      <div class="product-legacy-links-grid">
+        ${links.map((item) => `<a href="${item.href}" target="_blank" rel="noreferrer noopener">${item.label}</a>`).join('')}
+      </div>
+    </article>
+  `;
+};
+
 const renderLegacySitemap = () => {
   if (!legacySitemap) return;
   const isKo = state.locale === 'ko';
@@ -1350,6 +1386,8 @@ const renderHospitalGrid = () => {
     const img = document.createElement('img');
     img.src = h.src;
     img.alt = h.title;
+    img.loading = 'lazy';
+    img.decoding = 'async';
 
     img.onerror = () => {
       a.remove();
@@ -1751,6 +1789,7 @@ const render = () => {
   renderSupportContacts();
   renderFeatureStack();
   renderProductKpi();
+  renderProductLegacyLinks();
   renderProductImageGrid();
   renderProductTree();
   renderCustomerTable();

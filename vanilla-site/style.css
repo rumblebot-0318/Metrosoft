@@ -1829,6 +1829,7 @@ button:focus-visible,
 
 .legacy-sitemap-card,
 .product-kpi-card,
+.product-legacy-links-card,
 .resource-center-card {
   margin-top: 1rem;
   border: 1px solid #d7e4f7;
@@ -1838,6 +1839,7 @@ button:focus-visible,
 }
 
 .legacy-sitemap-card > p,
+.product-legacy-links-card > p,
 .resource-center-card > p {
   margin-top: 0.35rem;
   color: #557095;
@@ -1925,6 +1927,23 @@ button:focus-visible,
   font-weight: 700;
 }
 
+.product-legacy-links-grid {
+  margin-top: 0.72rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.product-legacy-links-grid a {
+  text-decoration: none;
+  border: 1px solid #cfe0f9;
+  border-radius: 999px;
+  background: #f8fbff;
+  color: #1f4b82;
+  font-size: 0.82rem;
+  padding: 0.35rem 0.72rem;
+}
+
 .product-kpi-item span {
   color: #516f94;
   font-size: 0.82rem;
@@ -1936,5 +1955,10 @@ button:focus-visible,
   .product-kpi-grid,
   .resource-center-grid {
     grid-template-columns: 1fr;
+  }
+
+  .product-legacy-links-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

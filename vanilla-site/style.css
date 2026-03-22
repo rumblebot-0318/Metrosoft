@@ -1749,3 +1749,57 @@ button:focus-visible,
     grid-template-columns: 1fr;
   }
 }
+
+.header-utility {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.45rem 1.2rem 0.7rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.42rem;
+  color: #6b7280;
+  font-size: 0.78rem;
+}
+
+.header-utility a {
+  color: #64748b;
+  text-decoration: none;
+}
+
+.header-utility a:hover {
+  color: var(--primary);
+}
+
+.customer-quick-menu {
+  margin-top: 0.65rem;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.52rem;
+}
+
+.customer-quick-item {
+  text-decoration: none;
+  border: 1px solid #dbe6f6;
+  border-radius: 10px;
+  padding: 0.6rem 0.72rem;
+  text-align: center;
+  font-size: 0.81rem;
+  color: #1f3f6c;
+  background: #fff;
+}
+
+.customer-quick-item:hover {
+  border-color: #9ec0eb;
+  background: #f7fbff;
+}
+
+@media (max-width: 900px) {
+  .customer-quick-menu {
+    grid-template-columns: 1fr;
+  }
+
+  .header-utility {
+    font-size: 0.74rem;
+    padding-top: 0.2rem;
+  }
+}

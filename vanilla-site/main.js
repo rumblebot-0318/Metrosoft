@@ -47,6 +47,8 @@ const companyAccessTitle = $('[data-company-access-title]');
 const companyAccessList = $('[data-company-access-list]');
 const quickInquiryText = $('[data-quick-inquiry-text]');
 const quickRemoteText = $('[data-quick-remote-text]');
+const headerUtility = $('[data-header-utility]');
+const customerQuickMenu = $('[data-customer-quick-menu]');
 
 const productTableTitle = $('[data-product-table-title]');
 const productTableSub = $('[data-product-table-sub]');
@@ -955,6 +957,33 @@ const renderHeroQuickLinks = () => {
   `).join('');
 };
 
+const renderHeaderUtility = () => {
+  if (!headerUtility) return;
+  const isKo = state.locale === 'ko';
+
+  const links = isKo
+    ? [
+      { label: '홈', href: '#home' },
+      { label: '원격지원', href: 'http://www.metrosoft.co.kr/Remote/TeamViewerQS-idc3g4qy58.exe', external: true },
+      { label: '고객지원', href: '#customer' },
+      { label: '오시는 길', href: '#company-info' },
+      { label: '사이트맵', href: 'http://www.metrosoft.co.kr/sub05/sub_01.asp', external: true },
+      { label: '직원용', href: 'http://webmail.metrosoft.co.kr', external: true }
+    ]
+    : [
+      { label: 'Home', href: '#home' },
+      { label: 'Remote Support', href: 'http://www.metrosoft.co.kr/Remote/TeamViewerQS-idc3g4qy58.exe', external: true },
+      { label: 'Customer Support', href: '#customer' },
+      { label: 'Directions', href: '#company-info' },
+      { label: 'Sitemap', href: 'http://www.metrosoft.co.kr/sub05/sub_01.asp', external: true },
+      { label: 'Staff', href: 'http://webmail.metrosoft.co.kr', external: true }
+    ];
+
+  headerUtility.innerHTML = links.map((item) => (
+    `<a href="${item.href}" ${item.external ? 'target="_blank" rel="noreferrer noopener"' : ''}>${item.label}</a>`
+  )).join('<span aria-hidden="true">|</span>');
+};
+
 const renderSupportLinks = () => {
   if (!supportLinks) return;
   const isKo = state.locale === 'ko';
@@ -983,6 +1012,29 @@ const renderSupportLinks = () => {
       <strong>${item.title}</strong>
       <span>${item.desc}</span>
     </a>
+  `).join('');
+};
+
+const renderCustomerQuickMenu = () => {
+  if (!customerQuickMenu) return;
+  const isKo = state.locale === 'ko';
+
+  const menus = isKo
+    ? [
+      { title: '수리 및 A/S 요청', href: 'mailto:customer@metrosoft.co.kr?subject=' + encodeURIComponent('수리 및 A/S 요청') },
+      { title: '견적요청', href: 'mailto:customer@metrosoft.co.kr?subject=' + encodeURIComponent('메트로소프트 견적요청') },
+      { title: '연락처 / 문의', href: '#customer' },
+      { title: '원격지원', href: 'http://www.metrosoft.co.kr/Remote/TeamViewerQS-idc3g4qy58.exe', external: true }
+    ]
+    : [
+      { title: 'Repair / A/S', href: 'mailto:customer@metrosoft.co.kr?subject=' + encodeURIComponent('Repair and A/S Request') },
+      { title: 'Request Quotation', href: 'mailto:customer@metrosoft.co.kr?subject=' + encodeURIComponent('Metrosoft Quotation Request') },
+      { title: 'Contact / Inquiry', href: '#customer' },
+      { title: 'Remote Support', href: 'http://www.metrosoft.co.kr/Remote/TeamViewerQS-idc3g4qy58.exe', external: true }
+    ];
+
+  customerQuickMenu.innerHTML = menus.map((item) => `
+    <a class="customer-quick-item" href="${item.href}" ${item.external ? 'target="_blank" rel="noreferrer noopener"' : ''}>${item.title}</a>
   `).join('');
 };
 
@@ -1424,6 +1476,7 @@ const render = () => {
     if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
   renderHeroQuickLinks();
+  renderHeaderUtility();
 
   renderNav(menuConfig.nav || t.nav || []);
   bindMobileNav();
@@ -1469,6 +1522,7 @@ const render = () => {
   renderCeoMessage();
   renderRemoteSupport();
   renderSupportLinks();
+  renderCustomerQuickMenu();
   renderSupportContacts();
   renderFeatureStack();
   renderProductImageGrid();

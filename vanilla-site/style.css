@@ -289,6 +289,81 @@ body {
   font-weight: 700;
 }
 
+.product-focus {
+  margin-bottom: 1rem;
+  border: 1px solid #dbe4f2;
+  border-radius: 14px;
+  padding: 0.95rem;
+  background: linear-gradient(180deg, #fbfdff, #f3f7fe);
+  display: grid;
+  grid-template-columns: 1.05fr 1.15fr;
+  gap: 0.9rem;
+}
+
+.product-focus__kicker {
+  margin: 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #5a718f;
+  font-weight: 700;
+}
+
+.product-focus__intro h3 {
+  margin: 0.4rem 0;
+  font-size: 1.2rem;
+}
+
+.product-focus__intro p {
+  margin: 0;
+  color: #53657b;
+  line-height: 1.6;
+}
+
+.product-tabs {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.65rem;
+}
+
+.product-tab {
+  border: 1px solid #cfe0f4;
+  border-radius: 999px;
+  background: #fff;
+  color: #355178;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.36rem 0.78rem;
+  cursor: pointer;
+}
+
+.product-tab.active {
+  border-color: rgba(11,58,130,0.4);
+  background: rgba(11,58,130,0.08);
+  color: var(--primary);
+}
+
+.product-tab-content {
+  border: 1px solid #dde8f6;
+  border-radius: 12px;
+  background: #fff;
+  padding: 0.75rem 0.85rem;
+}
+
+.product-tab-content h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #1f3f6c;
+}
+
+.product-tab-content ul {
+  margin: 0.55rem 0 0;
+  padding-left: 1rem;
+  color: #3f536a;
+  line-height: 1.5;
+}
+
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -368,6 +443,25 @@ body {
 .card h3 { margin: 0.72rem 0 0.45rem; font-size: 1.05rem; }
 .card p { margin: 0 0 0.45rem; color: var(--muted); line-height: 1.6; }
 .card ul { margin: 0; padding-left: 1rem; color: #475569; line-height: 1.5; }
+
+.card--product p {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card__more {
+  display: inline-flex;
+  margin-top: 0.65rem;
+  padding: 0.36rem 0.72rem;
+  border-radius: 999px;
+  border: 1px solid rgba(11,58,130,0.22);
+  text-decoration: none;
+  color: var(--primary);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
 
 .table-wrap {
   margin-top: 1rem;
@@ -607,6 +701,7 @@ body {
   .hero__layout { grid-template-columns: 1fr; }
   .hero__media { padding: 0 1rem 1.1rem; }
   .hero-panel { width: 100%; }
+  .product-focus { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 768px) {

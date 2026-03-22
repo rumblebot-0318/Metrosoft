@@ -3,7 +3,8 @@ const state = {
   translations: null,
   legacy: {},
   metroNews: [],
-  newsLoading: false
+  newsLoading: false,
+  activeProductTab: 'treatment'
 };
 
 const $ = (selector) => document.querySelector(selector);
@@ -30,6 +31,11 @@ const productTableSub = $('[data-product-table-sub]');
 const productTable = $('[data-product-table]');
 const productImages = $('[data-product-images]');
 const productTree = $('[data-product-tree]');
+const productFocusKicker = $('[data-product-focus-kicker]');
+const productFocusTitle = $('[data-product-focus-title]');
+const productFocusDesc = $('[data-product-focus-desc]');
+const productTabs = $('[data-product-tabs]');
+const productTabContent = $('[data-product-tab-content]');
 const customerTable = $('[data-customer-table]');
 const hospitalTitle = $('[data-hospital-title]');
 const hospitalSub = $('[data-hospital-sub]');
@@ -181,7 +187,8 @@ const renderCards = (target, cards = [], key = '') => {
     desc.textContent = card.description;
 
     const list = document.createElement('ul');
-    (card.points || []).forEach((point) => {
+    const limitedPoints = key === 'product' ? (card.points || []).slice(0, 3) : (card.points || []);
+    limitedPoints.forEach((point) => {
       const li = document.createElement('li');
       li.textContent = point;
       list.appendChild(li);
@@ -190,6 +197,15 @@ const renderCards = (target, cards = [], key = '') => {
     article.appendChild(title);
     article.appendChild(desc);
     article.appendChild(list);
+
+    if (key === 'product') {
+      const detailBtn = document.createElement('a');
+      detailBtn.href = '#product-detail';
+      detailBtn.className = 'card__more';
+      detailBtn.textContent = state.locale === 'ko' ? '자세히 보기' : 'View details';
+      article.appendChild(detailBtn);
+    }
+
     target.appendChild(article);
   });
 };
@@ -298,6 +314,59 @@ const renderSpotlight = (spotlight = {}) => {
     `;
     spotlightCards.appendChild(item);
   });
+};
+
+const renderProductFocus = () => {
+  if (!productTabs || !productTabContent || !productFocusTitle || !productFocusDesc || !productFocusKicker) return;
+
+  const isKo = state.locale === 'ko';
+  const emr = state.legacy.emr || {};
+  const tabMap = {
+    treatment: {
+      label: isKo ? '진료 EMR' : 'Clinical EMR',
+      title: isKo ? '종이 없는 스마트 진료 환경 구축' : 'Paperless clinical workflow',
+      points: (emr.treatment || []).slice(0, 3)
+    },
+    nurse: {
+      label: isKo ? '간호 EMR' : 'Nursing EMR',
+      title: isKo ? '간호 프로세스 표준화와 기록 자동화' : 'Standardized nursing operations',
+      points: (emr.nurse || []).slice(0, 3)
+    },
+    security: {
+      label: isKo ? '보안/인증' : 'Security',
+      title: isKo ? '의료정보 보호를 위한 인증 체계' : 'Protection-focused authentication',
+      points: ((emr.security && emr.security[1] && emr.security[1].content) || []).slice(0, 3)
+    }
+  };
+
+  const defaultTab = tabMap[state.activeProductTab] ? state.activeProductTab : 'treatment';
+  state.activeProductTab = defaultTab;
+
+  productFocusKicker.textContent = isKo ? 'Metro-EMR Value' : 'Metro-EMR Value';
+  productFocusTitle.textContent = isKo ? '병원 도입 후 바로 체감하는 운영 효율' : 'Immediate operational value for hospitals';
+  productFocusDesc.textContent = isKo
+    ? '기능 목록이 아닌 실제 업무 개선 포인트 중심으로 핵심만 요약했습니다.'
+    : 'We summarize practical workflow benefits rather than listing every technical feature.';
+
+  clearChildren(productTabs);
+  Object.entries(tabMap).forEach(([key, tab]) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = `product-tab ${key === state.activeProductTab ? 'active' : ''}`;
+    btn.textContent = tab.label;
+    btn.onclick = () => {
+      state.activeProductTab = key;
+      renderProductFocus();
+      refreshIcons();
+    };
+    productTabs.appendChild(btn);
+  });
+
+  const current = tabMap[state.activeProductTab];
+  productTabContent.innerHTML = `
+    <h4>${current.title}</h4>
+    <ul>${(current.points || []).map((p) => `<li>${p}</li>`).join('')}</ul>
+  `;
 };
 
 const renderProductDetailTable = () => {
@@ -778,6 +847,7 @@ const render = () => {
   renderCards(sectionTargets.highlights, t.highlights, 'highlights');
   renderCards(sectionTargets.business, mergeCards(t.business, 'business', legacyCards), 'business');
   renderCards(sectionTargets.product, mergeCards(t.product, 'product', legacyCards), 'product');
+  renderProductFocus();
   renderCards(sectionTargets.introduce, mergeCards(t.introduce, 'introduce', legacyCards), 'introduce');
   renderCards(sectionTargets.customer, mergeCards(t.customer, 'customer', legacyCards), 'customer');
 

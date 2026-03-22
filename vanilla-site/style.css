@@ -329,6 +329,23 @@ body {
   font-size: 29px;
 }
 
+.card--highlights .card__icon-badge {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  background: linear-gradient(140deg, #eef5ff, #e3eefc);
+  border-color: rgba(11, 58, 130, 0.16);
+}
+
+.card--highlights .card__image {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  border: 1px solid rgba(11, 58, 130, 0.12);
+  background: linear-gradient(140deg, #eef5ff, #e3eefc);
+  padding: 0.8rem;
+}
+
 .card--introduce .card__image,
 .card--customer .card__image {
   width: 76px;

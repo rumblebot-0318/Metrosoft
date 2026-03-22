@@ -55,11 +55,11 @@ const sectionTargets = {
 };
 
 const cardImages = {
-  highlights: ['assets/product_icons/EMR.svg', 'assets/product_icons/OCS.svg', 'assets/product_icons/ERP.svg'],
-  business: ['assets/product_icons/OCS.svg', 'assets/product_icons/EMR.svg', 'assets/product_icons/CRM.svg'],
+  highlights: ['assets/ui_icons/core.svg', 'assets/ui_icons/cloud.svg', 'assets/ui_icons/business.svg'],
+  business: ['assets/ui_icons/business.svg', 'assets/ui_icons/security.svg', 'assets/ui_icons/support.svg'],
   product: ['assets/product_icons/EMR.svg', 'assets/product_icons/iEMR.svg', 'assets/product_icons/OCS.svg', 'assets/product_icons/ERP.svg', 'assets/product_icons/CRM.svg', 'assets/product_icons/mPOC.svg'],
   introduce: ['assets/ui_icons/core.svg', 'assets/ui_icons/business.svg'],
-  customer: ['assets/product_icons/CRM.svg', 'assets/product_icons/OCS.svg']
+  customer: ['assets/ui_icons/support.svg', 'assets/ui_icons/crm.svg']
 };
 
 const titleTargets = {

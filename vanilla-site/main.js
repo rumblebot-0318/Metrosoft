@@ -226,7 +226,7 @@ const renderProductImageGrid = () => {
   if (!productImages) return;
   clearChildren(productImages);
 
-  const srcSet = new Set([
+  const items = [
     'assets/EMR.png',
     'assets/iEMR.png',
     'assets/HIS.png',
@@ -235,7 +235,7 @@ const renderProductImageGrid = () => {
     'assets/VOIP.png',
     'assets/cloud.png',
     'assets/businessContent.png'
-  ]);
+  ];
 
   const ocs = state.legacy.ocs;
   if (ocs && Array.isArray(ocs.Lists)) {
@@ -243,13 +243,24 @@ const renderProductImageGrid = () => {
       (group.contents || []).forEach((item) => {
         if (item.image && item.image.url) {
           const file = item.image.url.replace(/^\//, '');
-          srcSet.add(`assets/Metro_product/OCS/${file}`);
+          items.push(`assets/Metro_product/OCS/${file}`);
         }
       });
     });
   }
 
-  Array.from(srcSet).forEach((src) => {
+  // Normalize by filename stem (case-insensitive) to reduce duplicates like 01.jpg / 01.JPG
+  const seen = new Set();
+  const unique = [];
+  items.forEach((src) => {
+    const file = src.split('/').pop() || src;
+    const stem = file.replace(/\.[^.]+$/, '').toLowerCase();
+    if (seen.has(stem)) return;
+    seen.add(stem);
+    unique.push(src);
+  });
+
+  unique.forEach((src) => {
     const img = document.createElement('img');
     img.src = src;
     img.alt = 'product asset';
@@ -402,10 +413,28 @@ const buildLegacyCards = () => {
   const productCards = [];
   const emr = state.legacy.emr;
   if (emr && emr.intro) {
+    // 원본 컴포넌트 순서: EMR 소개 -> 진료 EMR -> 간호 EMR -> 보안 및 인증
     productCards.push({
       title: `${emr.intro.title || 'EMR'} ${emr.intro.subtitle || ''}`.trim(),
       description: firstSentence(emr.intro.content || ''),
-      points: (emr.treatment || []).slice(0, 6)
+      points: []
+    });
+    productCards.push({
+      title: '진료 EMR',
+      description: '원본 컴포넌트의 진료 EMR 항목',
+      points: (emr.treatment || []).slice(0, 7)
+    });
+    productCards.push({
+      title: '간호 EMR',
+      description: '원본 컴포넌트의 간호 EMR 항목',
+      points: (emr.nurse || []).slice(0, 6)
+    });
+    const securityIntro = emr.security && emr.security[0] ? firstSentence(emr.security[0].title || '') : '';
+    const securityPoints = emr.security && emr.security[1] ? (emr.security[1].content || []).slice(0, 6) : [];
+    productCards.push({
+      title: '보안 및 인증',
+      description: securityIntro || '전자 인증/전자 서명/권한 설정',
+      points: securityPoints
     });
   }
 
@@ -422,9 +451,13 @@ const buildLegacyCards = () => {
     productCards.push({
       title: `${ocs.title.title || 'OCS'} ${ocs.title.subtitle || ''}`.trim(),
       description: firstSentence(ocs.title.content || ''),
-      points: ocsPoints.slice(0, 6)
+      points: ocsPoints.slice(0, 7)
     });
   }
+
+  const mpoc = state.legacy.mpoc;
+  const mpocCard = titleBlockToCard(mpoc && mpoc.Title, mpoc && mpoc.features);
+  if (mpocCard) productCards.push(mpocCard);
 
   const erp = state.legacy.erp;
   if (erp && erp.MetroERP) {
@@ -442,10 +475,6 @@ const buildLegacyCards = () => {
   const crm = state.legacy.crm;
   const crmCard = titleBlockToCard(crm && crm.Title, crm && crm.features);
   if (crmCard) productCards.push(crmCard);
-
-  const mpoc = state.legacy.mpoc;
-  const mpocCard = titleBlockToCard(mpoc && mpoc.Title, mpoc && mpoc.features);
-  if (mpocCard) productCards.push(mpocCard);
 
   if (productCards.length) {
     out.product = productCards;
@@ -480,6 +509,12 @@ const mergeCards = (base, legacyKey, legacyCards) => {
   const add = legacyCards[legacyKey] || [];
   if (state.locale !== 'ko') return base;
   if (!add.length) return base;
+
+  // 제품/고객은 원본 컴포넌트 데이터를 우선 사용해 중복 카드 최소화
+  if (legacyKey === 'product' || legacyKey === 'customer') {
+    return add;
+  }
+
   return [...add, ...base];
 };
 

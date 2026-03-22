@@ -28,6 +28,9 @@ const productTableSub = $('[data-product-table-sub]');
 const productTable = $('[data-product-table]');
 const productImages = $('[data-product-images]');
 const customerTable = $('[data-customer-table]');
+const hospitalTitle = $('[data-hospital-title]');
+const hospitalSub = $('[data-hospital-sub]');
+const hospitalGrid = $('[data-hospital-grid]');
 
 const sectionTargets = {
   highlights: $('[data-highlights]'),
@@ -40,9 +43,9 @@ const sectionTargets = {
 const cardImages = {
   highlights: ['assets/cloud.png', 'assets/VOIP.png', 'assets/HIS.png'],
   business: ['assets/HIS.png', 'assets/cloud.png'],
-  product: ['assets/EMR.png', 'assets/iEMR.png', 'assets/HIS.png', 'assets/ERP.png', 'assets/CRM.png', 'assets/VOIP.png'],
+  product: [],
   introduce: ['assets/businessContent.png', 'assets/metrologo.png'],
-  customer: ['assets/CRM.png', 'assets/VOIP.png']
+  customer: []
 };
 
 const titleTargets = {
@@ -170,7 +173,8 @@ const renderProductDetailTable = () => {
 const renderProductImageGrid = () => {
   if (!productImages) return;
   clearChildren(productImages);
-  const srcs = [
+
+  const srcSet = new Set([
     'assets/EMR.png',
     'assets/iEMR.png',
     'assets/HIS.png',
@@ -179,11 +183,27 @@ const renderProductImageGrid = () => {
     'assets/VOIP.png',
     'assets/cloud.png',
     'assets/businessContent.png'
-  ];
-  srcs.forEach((src) => {
+  ]);
+
+  const ocs = state.legacy.ocs;
+  if (ocs && Array.isArray(ocs.Lists)) {
+    ocs.Lists.forEach((group) => {
+      (group.contents || []).forEach((item) => {
+        if (item.image && item.image.url) {
+          const file = item.image.url.replace(/^\//, '');
+          srcSet.add(`assets/Metro_product/OCS/${file}`);
+        }
+      });
+    });
+  }
+
+  Array.from(srcSet).forEach((src) => {
     const img = document.createElement('img');
     img.src = src;
     img.alt = 'product asset';
+    img.onerror = () => {
+      img.remove();
+    };
     productImages.appendChild(img);
   });
 };
@@ -220,6 +240,31 @@ const renderCustomerTable = () => {
     tbody.appendChild(tr);
   }
   customerTable.appendChild(tbody);
+};
+
+const renderHospitalGrid = () => {
+  const hospitals = state.legacy.hospitals;
+  if (!hospitalGrid) return;
+  clearChildren(hospitalGrid);
+  if (!hospitals || !Array.isArray(hospitals.content)) return;
+
+  hospitals.content.forEach((h) => {
+    if (!h || !h.img) return;
+    const a = document.createElement('a');
+    a.className = 'hospital-logo';
+    a.href = h.url || '#';
+    a.target = '_blank';
+    a.rel = 'noreferrer noopener';
+    a.title = h.title || 'hospital';
+
+    const img = document.createElement('img');
+    img.src = `assets/Hospital_icon/${h.img.replace(/^\//, '')}`;
+    img.alt = h.title || 'hospital icon';
+    img.onerror = () => a.remove();
+
+    a.appendChild(img);
+    hospitalGrid.appendChild(a);
+  });
 };
 
 const setLocale = (locale) => {
@@ -371,6 +416,10 @@ const render = () => {
   renderProductDetailTable();
   renderProductImageGrid();
   renderCustomerTable();
+  renderHospitalGrid();
+
+  if (hospitalTitle) hospitalTitle.textContent = state.locale === 'ko' ? '주요 고객사 병원' : 'Major Partner Hospitals';
+  if (hospitalSub) hospitalSub.textContent = state.locale === 'ko' ? '기존 프로젝트 아이콘 자산을 그대로 사용합니다.' : 'Using the original hospital icon assets from the legacy project.';
 
   if (t.cta) {
     ctaTitle.textContent = t.cta.title || '';
@@ -395,7 +444,8 @@ Promise.all([
   fetchJson('data/legacy/Product/CRM.json'),
   fetchJson('data/legacy/Product/mPOC.json'),
   fetchJson('data/legacy/Introduce/CeoIntroduce.json'),
-  fetchJson('data/legacy/Customer/index.json')
+  fetchJson('data/legacy/Customer/index.json'),
+  fetchJson('data/legacy/Business/Hospital.json')
 ]).then(([
   translations,
   metroHis,
@@ -406,10 +456,11 @@ Promise.all([
   crm,
   mpoc,
   ceo,
-  customer
+  customer,
+  hospitals
 ]) => {
   state.translations = translations;
-  state.legacy = { metroHis, emr, iemr, ocs, erp, crm, mpoc, ceo, customer };
+  state.legacy = { metroHis, emr, iemr, ocs, erp, crm, mpoc, ceo, customer, hospitals };
   render();
 }).catch((err) => {
   console.error('Failed to initialize data:', err);

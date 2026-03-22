@@ -230,6 +230,30 @@ body {
   background: #fff;
   padding: 0.45rem;
 }
+
+.hospital-grid {
+  margin-top: 0.8rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.7rem;
+}
+
+.hospital-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.5rem;
+  min-height: 88px;
+}
+
+.hospital-logo img {
+  max-width: 100%;
+  max-height: 60px;
+  object-fit: contain;
+}
 .card {
   background: #fff;
   border-radius: 14px;

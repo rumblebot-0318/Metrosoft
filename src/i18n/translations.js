@@ -18,11 +18,6 @@ export const translations = {
             description: 'MetroSMS/VOIP/알림톡 등을 통합해 환자와의 소통을 관리합니다.',
             highlights: ['자동 알림 흐름', '원격 화상 상담', '비상 대응 채널']
           },
-          {
-            title: '콘텐츠 스토리텔링',
-            description: '동화책과 인터랙티브 콘텐츠로 브랜드 경험을 확장합니다.',
-            highlights: ['Story-driven UX', 'Community narration', 'Multimedia delivery']
-          }
         ]
       },
       business: {
@@ -146,11 +141,6 @@ export const translations = {
             description: 'MetroSMS, VOIP, and AlimTalk for proactive outreach.',
             highlights: ['Automated notifications', 'Remote consultations', 'Emergency response']
           },
-          {
-            title: 'Story-driven content',
-            description: 'Expanding brand experience with fairy-tale inspired content.',
-            highlights: ['Story-driven UX', 'Community narration', 'Multimedia delivery']
-          }
         ]
       },
       business: {

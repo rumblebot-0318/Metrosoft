@@ -981,7 +981,8 @@ const renderHeaderUtility = () => {
       { label: '고객지원', href: '#customer' },
       { label: '오시는 길', href: '#company-info' },
       { label: '사이트맵', href: 'http://www.metrosoft.co.kr/sub05/sub_01.asp', external: true },
-      { label: '직원용', href: 'http://webmail.metrosoft.co.kr', external: true }
+      { label: '직원용', href: 'http://webmail.metrosoft.co.kr', external: true },
+      { label: '교육사항', href: 'http://metrosoft.edupure.net', external: true }
     ]
     : [
       { label: 'Home', href: '#home' },
@@ -989,7 +990,8 @@ const renderHeaderUtility = () => {
       { label: 'Customer Support', href: '#customer' },
       { label: 'Directions', href: '#company-info' },
       { label: 'Sitemap', href: 'http://www.metrosoft.co.kr/sub05/sub_01.asp', external: true },
-      { label: 'Staff', href: 'http://webmail.metrosoft.co.kr', external: true }
+      { label: 'Staff', href: 'http://webmail.metrosoft.co.kr', external: true },
+      { label: 'Training', href: 'http://metrosoft.edupure.net', external: true }
     ];
 
   headerUtility.innerHTML = links.map((item) => (
@@ -1187,6 +1189,14 @@ const renderLegacySitemap = () => {
           { label: '자료실', href: 'http://www.metrosoft.co.kr/sub04/sub_04.asp' },
           { label: '공지사항', href: 'http://www.metrosoft.co.kr/sub04/sub_05.asp' }
         ]
+      },
+      {
+        title: '채용정보',
+        links: [
+          { label: '인재상', href: 'http://www.metrosoft.co.kr/sub06/sub_01.asp' },
+          { label: '채용절차', href: 'http://www.metrosoft.co.kr/sub06/sub_02.asp' },
+          { label: '채용공고', href: 'http://www.metrosoft.co.kr/sub06/sub_03.asp' }
+        ]
       }
     ]
     : [
@@ -1228,6 +1238,14 @@ const renderLegacySitemap = () => {
           { label: 'Contacts', href: 'http://www.metrosoft.co.kr/sub04/sub_03.asp' },
           { label: 'Resource', href: 'http://www.metrosoft.co.kr/sub04/sub_04.asp' },
           { label: 'Notice', href: 'http://www.metrosoft.co.kr/sub04/sub_05.asp' }
+        ]
+      },
+      {
+        title: 'Recruitment',
+        links: [
+          { label: 'Ideal Candidate', href: 'http://www.metrosoft.co.kr/sub06/sub_01.asp' },
+          { label: 'Hiring Process', href: 'http://www.metrosoft.co.kr/sub06/sub_02.asp' },
+          { label: 'Job Posting', href: 'http://www.metrosoft.co.kr/sub06/sub_03.asp' }
         ]
       }
     ];

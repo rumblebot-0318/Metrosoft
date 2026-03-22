@@ -176,6 +176,25 @@ body {
   font-size: 0.94rem;
 }
 
+.menu-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0.3rem 0 1rem;
+}
+
+.menu-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(22, 155, 155, 0.35);
+  background: rgba(22, 155, 155, 0.08);
+  color: #0b6565;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));

@@ -65,6 +65,44 @@ const subTargets = {
   customer: $('[data-sub="customer"]')
 };
 
+const menuTargets = {
+  business: $('[data-menu="business"]'),
+  product: $('[data-menu="product"]'),
+  introduce: $('[data-menu="introduce"]'),
+  customer: $('[data-menu="customer"]')
+};
+
+const originalMenus = {
+  ko: {
+    nav: [
+      { label: '회사소개', target: 'introduce' },
+      { label: '사업영역', target: 'business' },
+      { label: '제품소개', target: 'product' },
+      { label: '고객센터', target: 'customer' }
+    ],
+    strips: {
+      introduce: ['인사말', '조직도', '회사소개', '연혁', '오시는 길'],
+      business: ['의료정보사업', 'Metro-cERP', '헬스케어 서비스', 'VOIP 사업', 'MetroSMS', '알림톡', '주요 고객사'],
+      product: ['EMR', 'iEMR', 'OCS', 'T-BIZ 모바일 EMR', 'ERP', 'CRM'],
+      customer: ['고객지원', '원격지원']
+    }
+  },
+  en: {
+    nav: [
+      { label: 'Introduce', target: 'introduce' },
+      { label: 'Business', target: 'business' },
+      { label: 'Products', target: 'product' },
+      { label: 'Customer', target: 'customer' }
+    ],
+    strips: {
+      introduce: ['Greetings', 'Organization', 'About', 'Timeline', 'Directions'],
+      business: ['Healthcare IT', 'Metro-cERP', 'Healthcare Service', 'VOIP', 'MetroSMS', 'AlimTalk', 'Clients'],
+      product: ['EMR', 'iEMR', 'OCS', 'T-BIZ', 'ERP', 'CRM'],
+      customer: ['Support', 'Remote']
+    }
+  }
+};
+
 const clearChildren = (el) => {
   if (!el) return;
   while (el.firstChild) el.removeChild(el.firstChild);
@@ -115,6 +153,19 @@ const renderNav = (items = []) => {
     link.href = `#${item.target}`;
     link.textContent = item.label;
     nav.appendChild(link);
+  });
+};
+
+const renderMenuStrips = (menus = {}) => {
+  Object.entries(menuTargets).forEach(([key, target]) => {
+    if (!target) return;
+    clearChildren(target);
+    (menus[key] || []).forEach((label) => {
+      const chip = document.createElement('span');
+      chip.className = 'menu-chip';
+      chip.textContent = label;
+      target.appendChild(chip);
+    });
   });
 };
 
@@ -436,12 +487,14 @@ const render = () => {
   if (!state.translations) return;
   const t = state.translations[state.locale] || state.translations.ko;
   const legacyCards = buildLegacyCards();
+  const menuConfig = originalMenus[state.locale] || originalMenus.ko;
 
   heroTitle.textContent = t.hero.title;
   heroDescription.textContent = t.hero.description;
   heroCta.textContent = t.hero.cta;
 
-  renderNav(t.nav);
+  renderNav(menuConfig.nav || t.nav || []);
+  renderMenuStrips(menuConfig.strips || {});
   renderMetrics(t.metrics || []);
   renderSpotlight(t.spotlight || {});
   if (productTableTitle) productTableTitle.textContent = state.locale === 'ko' ? 'Product 상세 구성표 (기존 OCS 구성)' : 'Product Detailed Composition (Legacy OCS Matrix)';

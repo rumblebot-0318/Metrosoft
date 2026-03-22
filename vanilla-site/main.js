@@ -34,7 +34,7 @@ const sectionTargets = {
 const cardImages = {
   highlights: ['assets/cloud.png', 'assets/VOIP.png', 'assets/HIS.png'],
   business: ['assets/HIS.png', 'assets/cloud.png'],
-  product: ['assets/EMR.png', 'assets/ERP.png'],
+  product: ['assets/EMR.png', 'assets/iEMR.png', 'assets/HIS.png', 'assets/ERP.png', 'assets/CRM.png', 'assets/VOIP.png'],
   introduce: ['assets/businessContent.png', 'assets/metrologo.png'],
   customer: ['assets/CRM.png', 'assets/VOIP.png']
 };
@@ -136,6 +136,23 @@ const setLocale = (locale) => {
   render();
 };
 
+const firstSentence = (text = '') => {
+  const cleaned = String(text).replace(/\s+/g, ' ').trim();
+  if (!cleaned) return '';
+  const bySlash = cleaned.split('/')[0].trim();
+  return bySlash || cleaned;
+};
+
+const titleBlockToCard = (block, points = []) => {
+  if (!block) return null;
+  const title = `${block.title || ''} ${block.subtitle || ''}`.trim();
+  return {
+    title: title || 'Legacy Product',
+    description: firstSentence(block.content || ''),
+    points: (points || []).slice(0, 6)
+  };
+};
+
 const buildLegacyCards = () => {
   const out = {};
   const his = state.legacy.metroHis;
@@ -144,20 +161,61 @@ const buildLegacyCards = () => {
       {
         title: 'MetroHIS (Legacy JSON)',
         description: '기존 MetroHIS 데이터 파일(src/database/Business/MetroHIS.json) 기반 내용입니다.',
-        points: [...(his.features || []).slice(0, 3), ...(his.effects || []).slice(0, 2)]
+        points: [...(his.features || []).slice(0, 4), ...(his.effects || []).slice(0, 2)]
       }
     ];
   }
 
+  const productCards = [];
   const emr = state.legacy.emr;
   if (emr && emr.intro) {
-    out.product = [
-      {
-        title: `${emr.intro.title || 'EMR'} ${emr.intro.subtitle || ''}`.trim(),
-        description: (emr.intro.content || '').split('/')[0]?.trim() || '기존 EMR 소개 데이터',
-        points: (emr.treatment || []).slice(0, 5)
-      }
+    productCards.push({
+      title: `${emr.intro.title || 'EMR'} ${emr.intro.subtitle || ''}`.trim(),
+      description: firstSentence(emr.intro.content || ''),
+      points: (emr.treatment || []).slice(0, 6)
+    });
+  }
+
+  const iemr = state.legacy.iemr;
+  const iemrCard = titleBlockToCard(iemr && iemr.Title, iemr && iemr.features);
+  if (iemrCard) productCards.push(iemrCard);
+
+  const ocs = state.legacy.ocs;
+  if (ocs && ocs.title) {
+    const ocsPoints = [
+      ...(ocs.composition && ocs.composition[0] ? ocs.composition[0] : []),
+      ...(ocs.composition && ocs.composition[1] ? ocs.composition[1] : [])
     ];
+    productCards.push({
+      title: `${ocs.title.title || 'OCS'} ${ocs.title.subtitle || ''}`.trim(),
+      description: firstSentence(ocs.title.content || ''),
+      points: ocsPoints.slice(0, 6)
+    });
+  }
+
+  const erp = state.legacy.erp;
+  if (erp && erp.MetroERP) {
+    productCards.push({
+      title: `${erp.MetroERP.title || 'ERP'} ${erp.MetroERP.subtitle || ''}`.trim(),
+      description: firstSentence(erp.MetroERP.content || ''),
+      points: [
+        ...(erp.management || []).slice(0, 2),
+        ...(erp.accounting || []).slice(0, 2),
+        ...(erp.stock || []).slice(0, 2)
+      ]
+    });
+  }
+
+  const crm = state.legacy.crm;
+  const crmCard = titleBlockToCard(crm && crm.Title, crm && crm.features);
+  if (crmCard) productCards.push(crmCard);
+
+  const mpoc = state.legacy.mpoc;
+  const mpocCard = titleBlockToCard(mpoc && mpoc.Title, mpoc && mpoc.features);
+  if (mpocCard) productCards.push(mpocCard);
+
+  if (productCards.length) {
+    out.product = productCards;
   }
 
   const ceo = state.legacy.ceo;
@@ -166,7 +224,7 @@ const buildLegacyCards = () => {
       {
         title: ceo.title || '인사말',
         description: ceo.subtitle || '회사 소개',
-        points: (ceo.content || []).slice(0, 3)
+        points: (ceo.content || []).slice(0, 4)
       }
     ];
   }
@@ -177,7 +235,7 @@ const buildLegacyCards = () => {
       {
         title: '고객 문의 (Legacy JSON)',
         description: 'src/database/Customer/index.json 기반 주요 연락처',
-        points: customer.address.slice(1, 4).map((row) => (row.content || []).slice(0, 2).join(' / '))
+        points: customer.address.slice(1, 5).map((row) => (row.content || []).slice(0, 3).join(' / '))
       }
     ];
   }
@@ -233,11 +291,27 @@ Promise.all([
   fetchJson('data/translations.json'),
   fetchJson('data/legacy/Business/MetroHIS.json'),
   fetchJson('data/legacy/Product/EMR.json'),
+  fetchJson('data/legacy/Product/iEMR.json'),
+  fetchJson('data/legacy/Product/OCS.json'),
+  fetchJson('data/legacy/Product/ERP.json'),
+  fetchJson('data/legacy/Product/CRM.json'),
+  fetchJson('data/legacy/Product/mPOC.json'),
   fetchJson('data/legacy/Introduce/CeoIntroduce.json'),
   fetchJson('data/legacy/Customer/index.json')
-]).then(([translations, metroHis, emr, ceo, customer]) => {
+]).then(([
+  translations,
+  metroHis,
+  emr,
+  iemr,
+  ocs,
+  erp,
+  crm,
+  mpoc,
+  ceo,
+  customer
+]) => {
   state.translations = translations;
-  state.legacy = { metroHis, emr, ceo, customer };
+  state.legacy = { metroHis, emr, iemr, ocs, erp, crm, mpoc, ceo, customer };
   render();
 }).catch((err) => {
   console.error('Failed to initialize data:', err);

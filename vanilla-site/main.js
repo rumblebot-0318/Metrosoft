@@ -1025,6 +1025,29 @@ const buildLegacyCards = () => {
     out.product = productCards;
   }
 
+  const ceo = state.legacy.ceo;
+  if (ceo) {
+    out.introduce = [
+      {
+        title: ceo.title || 'CEO 인사말',
+        description: ceo.subtitle || '메트로소프트에 방문해 주셔서 감사합니다.',
+        points: [
+          ...((ceo.content || []).slice(0, 3).map((text) => firstSentence(text))),
+          firstSentence(ceo.finish || '')
+        ].filter(Boolean)
+      },
+      {
+        title: '오시는 길',
+        description: '경기도 안양시 동안구 흥안대로 427번길 16 평촌디지털엠파이어 607호',
+        points: [
+          '안양IT밸리 607호 (주) 메트로소프트',
+          '대표전화: 031-465-9971~3',
+          '이메일: customer@metrosoft.co.kr'
+        ]
+      }
+    ];
+  }
+
   const customer = state.legacy.customer;
   if (customer && customer.address) {
     out.customer = [
@@ -1044,8 +1067,8 @@ const mergeCards = (base, legacyKey, legacyCards) => {
   if (state.locale !== 'ko') return base;
   if (!add.length) return base;
 
-  // 제품/고객은 원본 컴포넌트 데이터를 우선 사용해 중복 카드 최소화
-  if (legacyKey === 'product' || legacyKey === 'customer') {
+  // 제품/소개/고객은 원본 컴포넌트 데이터를 우선 사용해 중복 카드 최소화
+  if (legacyKey === 'product' || legacyKey === 'introduce' || legacyKey === 'customer') {
     return add;
   }
 

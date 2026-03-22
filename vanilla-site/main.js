@@ -16,6 +16,8 @@ const heroTitle = $('[data-hero-title]');
 const heroDescription = $('[data-hero-description]');
 const heroCta = $('[data-hero-cta]');
 const nav = $('[data-nav]');
+const headerInner = document.querySelector('.header-inner');
+const navToggle = $('[data-nav-toggle]');
 const localeButtons = $$('[data-locale]');
 const metricsTarget = $('[data-metrics]');
 const certifiedTitle = $('[data-certified-title]');
@@ -282,6 +284,35 @@ const renderMenuStrips = (menus = {}) => {
       target.appendChild(chip);
     });
   });
+};
+
+const bindMobileNav = () => {
+  if (!navToggle || !headerInner || !nav) return;
+
+  const closeMenu = () => {
+    headerInner.classList.remove('nav-open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  };
+
+  if (navToggle.dataset.bound !== '1') {
+    navToggle.addEventListener('click', () => {
+      const next = !headerInner.classList.contains('nav-open');
+      headerInner.classList.toggle('nav-open', next);
+      navToggle.setAttribute('aria-expanded', next ? 'true' : 'false');
+    });
+
+    nav.addEventListener('click', (event) => {
+      if (event.target && event.target.closest('a')) {
+        closeMenu();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) closeMenu();
+    }, { passive: true });
+
+    navToggle.dataset.bound = '1';
+  }
 };
 
 const bindCarousel = (container, prevBtn, nextBtn, dotsTarget, step = 320) => {
@@ -1032,6 +1063,7 @@ const render = () => {
   heroCta.textContent = t.hero.cta;
 
   renderNav(menuConfig.nav || t.nav || []);
+  bindMobileNav();
   bindActiveNav();
   renderMenuStrips(menuConfig.strips || {});
   renderMetrics(t.metrics || []);

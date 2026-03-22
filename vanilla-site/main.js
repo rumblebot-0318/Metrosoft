@@ -6,7 +6,7 @@ const state = {
   newsLoading: false,
   activeProductTab: 'treatment',
   activeFeatureTab: 0,
-  activeTimelineCategory: 'cert'
+  activeTimelineCategory: 'all'
 };
 
 const $ = (selector) => document.querySelector(selector);
@@ -25,6 +25,7 @@ const certifiedSub = $('[data-certified-sub]');
 const certifiedGrid = $('[data-certified-grid]');
 const certifiedHistoryTabs = $('[data-certified-history-tabs]');
 const certifiedTimeline = $('[data-certified-timeline]');
+const companyFacts = $('[data-company-facts]');
 
 const spotlightEyebrow = $('[data-spotlight-eyebrow]');
 const spotlightTitle = $('[data-spotlight-title]');
@@ -58,6 +59,7 @@ const customerTable = $('[data-customer-table]');
 const orgSummary = $('[data-org-summary]');
 const remoteSupport = $('[data-remote-support]');
 const supportLinks = $('[data-support-links]');
+const supportContacts = $('[data-support-contacts]');
 const companyMap = $('[data-company-map]');
 const hospitalTitle = $('[data-hospital-title]');
 const hospitalSub = $('[data-hospital-sub]');
@@ -433,6 +435,11 @@ const renderCertifiedTimeline = () => {
 
   const isKo = state.locale === 'ko';
   const categories = {
+    all: {
+      label: isKo ? '전체 주요 연혁' : 'All Milestones',
+      icon: 'calendar-range',
+      test: /./i
+    },
     cert: {
       label: isKo ? '인증' : 'Certification',
       icon: 'badge-check',
@@ -526,6 +533,33 @@ const renderCertifiedTimeline = () => {
 
   certifiedTimeline.appendChild(feed);
   certifiedTimeline.appendChild(tags);
+};
+
+const renderCompanyFacts = () => {
+  if (!companyFacts) return;
+  const timeline = state.legacy.timeline;
+  if (!timeline || !timeline.init) {
+    companyFacts.innerHTML = '';
+    return;
+  }
+
+  const isKo = state.locale === 'ko';
+  const init = timeline.init;
+  const facts = [
+    { label: isKo ? '회사명' : 'Company', value: init.company || '-' },
+    { label: isKo ? '설립' : 'Founded', value: init.birth || '-' },
+    { label: isKo ? '대표' : 'CEO', value: init.ceo || '-' },
+    { label: isKo ? '사업영역' : 'Business Area', value: init.area || '-' }
+  ];
+
+  companyFacts.innerHTML = `
+    <article class="company-facts-card">
+      <h3>${isKo ? '기업 기본 이력' : 'Company Snapshot'}</h3>
+      <ul>
+        ${facts.map((fact) => `<li><strong>${fact.label}</strong><span>${fact.value}</span></li>`).join('')}
+      </ul>
+    </article>
+  `;
 };
 
 const renderSpotlight = (spotlight = {}) => {
@@ -843,6 +877,43 @@ const renderSupportLinks = () => {
       <strong>${isKo ? 'Q&A / FAQ' : 'Q&A / FAQ'}</strong>
       <span>${isKo ? '자주 묻는 질문 바로가기' : 'Go to frequently asked questions'}</span>
     </a>
+  `;
+};
+
+const renderSupportContacts = () => {
+  if (!supportContacts) return;
+  const customer = state.legacy.customer;
+  const isKo = state.locale === 'ko';
+
+  if (!customer || !Array.isArray(customer.address) || customer.address.length < 4) {
+    supportContacts.innerHTML = '';
+    return;
+  }
+
+  const rows = customer.address.slice(1).map((entry) => {
+    const content = entry.content || [];
+    return {
+      team: (content[0] || '').trim(),
+      name: (content[1] || '').trim(),
+      role: (content[2] || '').trim(),
+      contact: (content[3] || '').trim()
+    };
+  }).filter((row) => row.team || row.name || row.contact);
+
+  supportContacts.innerHTML = `
+    <article class="support-contact-card">
+      <h3>${isKo ? '고객지원 담당자' : 'Support Contacts'}</h3>
+      <p>${isKo ? '레거시 고객센터 데이터 기반 담당자 안내' : 'Contact list based on legacy customer-center data.'}</p>
+      <div class="support-contact-grid">
+        ${rows.slice(0, 4).map((row) => `
+          <div class="support-contact-item">
+            <strong>${row.team || '-'}</strong>
+            <span>${[row.name, row.role].filter(Boolean).join(' · ')}</span>
+            <em>${row.contact || '-'}</em>
+          </div>
+        `).join('')}
+      </div>
+    </article>
   `;
 };
 
@@ -1232,6 +1303,7 @@ const render = () => {
     : 'Built with legacy partner certification assets from the original project.';
   renderCertified();
   renderCertifiedTimeline();
+  renderCompanyFacts();
   renderSpotlight(t.spotlight || {});
   if (productTableTitle) productTableTitle.textContent = state.locale === 'ko' ? 'OCS 기능 카테고리' : 'OCS Feature Categories';
   if (productTableSub) productTableSub.textContent = state.locale === 'ko' ? '필요한 영역만 탭으로 선택해 핵심 기능을 빠르게 확인할 수 있습니다.' : 'Use tabs to focus on the feature area you need.';
@@ -1251,6 +1323,7 @@ const render = () => {
   renderOrganizationSummary();
   renderRemoteSupport();
   renderSupportLinks();
+  renderSupportContacts();
   renderFeatureStack();
   renderProductImageGrid();
   renderProductTree();

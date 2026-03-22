@@ -54,12 +54,12 @@ const sectionTargets = {
   customer: $('[data-customer]')
 };
 
-const cardImages = {
-  highlights: ['assets/ui_icons/core.svg', 'assets/ui_icons/cloud.svg', 'assets/ui_icons/business.svg'],
-  business: ['assets/ui_icons/business.svg', 'assets/ui_icons/security.svg', 'assets/ui_icons/support.svg'],
-  product: ['assets/product_icons/EMR.svg', 'assets/product_icons/iEMR.svg', 'assets/product_icons/OCS.svg', 'assets/product_icons/ERP.svg', 'assets/product_icons/CRM.svg', 'assets/product_icons/mPOC.svg'],
-  introduce: ['assets/ui_icons/core.svg', 'assets/ui_icons/business.svg'],
-  customer: ['assets/ui_icons/support.svg', 'assets/ui_icons/crm.svg']
+const cardIcons = {
+  highlights: ['heart-pulse', 'messages-square', 'server-cog'],
+  business: ['building-2', 'shield-check', 'cloud-cog'],
+  product: ['file-heart', 'tablet-smartphone', 'network', 'briefcase-business', 'users-round', 'smartphone'],
+  introduce: ['landmark', 'users'],
+  customer: ['headset', 'phone-call']
 };
 
 const titleTargets = {
@@ -121,11 +121,14 @@ const clearChildren = (el) => {
   while (el.firstChild) el.removeChild(el.firstChild);
 };
 
-const cardSymbolMap = {
-  highlights: ['monitor_heart', 'hub', 'stacks'],
-  business: ['apartment', 'cloud_sync', 'support_agent'],
-  introduce: ['domain', 'groups'],
-  customer: ['support_agent', 'contact_phone']
+const refreshIcons = () => {
+  if (window.lucide && typeof window.lucide.createIcons === 'function') {
+    window.lucide.createIcons({
+      attrs: {
+        'stroke-width': 1.9
+      }
+    });
+  }
 };
 
 const renderCards = (target, cards = [], key = '') => {
@@ -136,25 +139,12 @@ const renderCards = (target, cards = [], key = '') => {
     const article = document.createElement('article');
     article.className = `card card--${key}`;
 
-    const iconNames = cardSymbolMap[key] || [];
-    const symbolName = iconNames[idx % iconNames.length];
-
-    if (symbolName) {
-      const badge = document.createElement('div');
-      badge.className = 'card__icon-badge';
-      badge.innerHTML = `<span class="material-symbols-rounded">${symbolName}</span>`;
-      article.appendChild(badge);
-    } else {
-      const imagePool = cardImages[key] || [];
-      const imageSrc = imagePool[idx % imagePool.length];
-      if (imageSrc) {
-        const img = document.createElement('img');
-        img.src = imageSrc;
-        img.alt = card.title || 'card image';
-        img.className = 'card__image';
-        article.appendChild(img);
-      }
-    }
+    const icons = cardIcons[key] || [];
+    const iconName = icons[idx % icons.length] || 'circle';
+    const badge = document.createElement('div');
+    badge.className = 'card__icon-badge';
+    badge.innerHTML = `<i data-lucide="${iconName}"></i>`;
+    article.appendChild(badge);
 
     const title = document.createElement('h3');
     title.textContent = card.title;
@@ -270,12 +260,12 @@ const renderSpotlight = (spotlight = {}) => {
   spotlightDescription.textContent = spotlight.description || '';
   clearChildren(spotlightCards);
 
-  const symbols = ['monitor_heart', 'business_center', 'cloud_sync'];
+  const icons = ['heart-pulse', 'briefcase-business', 'cloud-cog'];
   (spotlight.points || []).slice(0, 3).forEach((point, idx) => {
     const item = document.createElement('article');
     item.className = 'spotlight-card';
     item.innerHTML = `
-      <span class="material-symbols-rounded spotlight-card__icon">${symbols[idx % symbols.length]}</span>
+      <span class="spotlight-card__icon"><i data-lucide="${icons[idx % icons.length]}"></i></span>
       <p>${point}</p>
     `;
     spotlightCards.appendChild(item);
@@ -784,6 +774,8 @@ const render = () => {
     ctaDescription.textContent = t.cta.description || '';
     ctaButton.textContent = t.cta.button || '';
   }
+
+  refreshIcons();
 
   localeButtons.forEach((button) => {
     button.classList.toggle('active', button.dataset.locale === state.locale);

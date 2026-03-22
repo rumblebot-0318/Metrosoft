@@ -59,6 +59,7 @@ const productTabs = $('[data-product-tabs]');
 const productTabContent = $('[data-product-tab-content]');
 const customerTable = $('[data-customer-table]');
 const orgSummary = $('[data-org-summary]');
+const ceoMessage = $('[data-ceo-message]');
 const remoteSupport = $('[data-remote-support]');
 const supportLinks = $('[data-support-links]');
 const supportContacts = $('[data-support-contacts]');
@@ -858,6 +859,30 @@ const renderOrganizationSummary = () => {
   `;
 };
 
+const renderCeoMessage = () => {
+  if (!ceoMessage) return;
+  const ceo = state.legacy.ceo;
+  const timeline = state.legacy.timeline;
+  const isKo = state.locale === 'ko';
+
+  if (!ceo || !Array.isArray(ceo.content)) {
+    ceoMessage.innerHTML = '';
+    return;
+  }
+
+  const ceoName = (timeline && timeline.init && timeline.init.ceo) ? timeline.init.ceo : (isKo ? '대표이사' : 'CEO');
+  const quote = (ceo.content || []).slice(0, 2).join(' ').replace(/\s+/g, ' ').trim();
+
+  ceoMessage.innerHTML = `
+    <article class="ceo-card">
+      <h3>${isKo ? '대표 인사말 요약' : 'CEO Message Snapshot'}</h3>
+      <p>${isKo ? '레거시 회사소개 문구를 현대 페이지에 그대로 연결했습니다.' : 'Legacy company-introduction text is preserved on this page.'}</p>
+      <blockquote class="ceo-card__quote">${quote}</blockquote>
+      <div class="ceo-card__sign">${ceo.finish || ceoName}</div>
+    </article>
+  `;
+};
+
 const renderRemoteSupport = () => {
   if (!remoteSupport) return;
   const isKo = state.locale === 'ko';
@@ -1334,7 +1359,18 @@ const render = () => {
   bindMobileNav();
   bindActiveNav();
   renderMenuStrips(menuConfig.strips || {});
-  renderMetrics(t.metrics || []);
+
+  const metrics = Array.isArray(t.metrics) ? [...t.metrics] : [];
+  const founded = parseInt(String((((state.legacy.timeline || {}).init || {}).birth || '')).match(/\d{4}/)?.[0] || '', 10);
+  const currentYear = new Date().getFullYear();
+  const hospitalsCount = Array.isArray(((state.legacy.hospitals || {}).content)) ? state.legacy.hospitals.content.length : null;
+  if (metrics[0] && hospitalsCount) metrics[0].value = `${hospitalsCount}+`;
+  if (metrics[3] && Number.isFinite(founded)) {
+    const years = Math.max(1, currentYear - founded);
+    metrics[3].value = `${years}yr`;
+  }
+  renderMetrics(metrics);
+
   if (certifiedTitle) certifiedTitle.textContent = 'Certified Partnership';
   if (certifiedSub) certifiedSub.textContent = state.locale === 'ko'
     ? '기존 프로젝트의 파트너 인증 자산을 기반으로 구성했습니다.'
@@ -1359,6 +1395,7 @@ const render = () => {
   renderCards(sectionTargets.customer, mergeCards(t.customer, 'customer', legacyCards), 'customer');
 
   renderOrganizationSummary();
+  renderCeoMessage();
   renderRemoteSupport();
   renderSupportLinks();
   renderSupportContacts();

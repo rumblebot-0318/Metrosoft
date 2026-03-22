@@ -756,7 +756,7 @@ const render = () => {
   bindCarousel(hospitalGrid, hospitalPrevBtn, hospitalNextBtn, hospitalDots, 420);
 
   if (hospitalTitle) hospitalTitle.textContent = state.locale === 'ko' ? '주요 고객사 병원' : 'Major Partner Hospitals';
-  if (hospitalSub) hospitalSub.textContent = state.locale === 'ko' ? '기존 프로젝트 아이콘 자산을 그대로 사용합니다.' : 'Using the original hospital icon assets from the legacy project.';
+  if (hospitalSub) hospitalSub.textContent = state.locale === 'ko' ? '주요 파트너 병원의 로고와 정보를 확인하실 수 있습니다.' : 'Browse logos and information for our major partner hospitals.';
 
   if (newsTitle) newsTitle.textContent = state.locale === 'ko' ? 'Metrosoft News' : 'Metrosoft News';
   if (newsSub) newsSub.textContent = state.locale === 'ko' ? 'Google RSS에서 메트로소프트가 제목에 포함된 기사만 표시합니다.' : 'Showing only Google RSS headlines containing Metrosoft.';

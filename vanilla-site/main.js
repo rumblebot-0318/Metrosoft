@@ -27,6 +27,7 @@ const productTableTitle = $('[data-product-table-title]');
 const productTableSub = $('[data-product-table-sub]');
 const productTable = $('[data-product-table]');
 const productImages = $('[data-product-images]');
+const productTree = $('[data-product-tree]');
 const customerTable = $('[data-customer-table]');
 const hospitalTitle = $('[data-hospital-title]');
 const hospitalSub = $('[data-hospital-sub]');
@@ -205,6 +206,50 @@ const renderProductImageGrid = () => {
       img.remove();
     };
     productImages.appendChild(img);
+  });
+};
+
+const renderTreeList = (items = []) => {
+  const ul = document.createElement('ul');
+  items.forEach((item) => {
+    const li = document.createElement('li');
+    if (typeof item === 'string') {
+      li.textContent = item;
+    } else if (item && typeof item === 'object') {
+      li.textContent = item.title || '';
+      if (Array.isArray(item.contents) && item.contents.length) {
+        li.appendChild(renderTreeList(item.contents));
+      }
+    }
+    ul.appendChild(li);
+  });
+  return ul;
+};
+
+const renderProductTree = () => {
+  if (!productTree) return;
+  clearChildren(productTree);
+  const ocs = state.legacy.ocs;
+  if (!ocs || !Array.isArray(ocs.Lists)) return;
+
+  ocs.Lists.forEach((group) => {
+    const block = document.createElement('article');
+    block.className = 'tree-block';
+
+    const title = document.createElement('h4');
+    title.textContent = group.title || '';
+
+    const desc = document.createElement('p');
+    desc.textContent = (group.description || '').replace(/\|/g, ' ');
+
+    block.appendChild(title);
+    block.appendChild(desc);
+
+    if (Array.isArray(group.contents) && group.contents.length) {
+      block.appendChild(renderTreeList(group.contents));
+    }
+
+    productTree.appendChild(block);
   });
 };
 
@@ -415,6 +460,7 @@ const render = () => {
 
   renderProductDetailTable();
   renderProductImageGrid();
+  renderProductTree();
   renderCustomerTable();
   renderHospitalGrid();
 

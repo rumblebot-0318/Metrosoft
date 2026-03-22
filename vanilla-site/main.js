@@ -21,6 +21,7 @@ const headerInner = document.querySelector('.header-inner');
 const navToggle = $('[data-nav-toggle]');
 const localeButtons = $$('[data-locale]');
 const metricsTarget = $('[data-metrics]');
+const footerYear = $('[data-footer-year]');
 const certifiedTitle = $('[data-certified-title]');
 const certifiedSub = $('[data-certified-sub]');
 const certifiedGrid = $('[data-certified-grid]');
@@ -1524,6 +1525,7 @@ const render = () => {
   renderCompanyMap();
   if (quickInquiryText) quickInquiryText.textContent = companyInfo.quickLabel;
   if (quickRemoteText) quickRemoteText.textContent = state.locale === 'ko' ? '원격지원' : 'Remote Support';
+  if (footerYear) footerYear.textContent = String(new Date().getFullYear());
 
   refreshIcons();
 

@@ -55,7 +55,7 @@ const cardImages = {
   highlights: ['assets/product_icons/EMR.svg', 'assets/product_icons/OCS.svg', 'assets/product_icons/ERP.svg'],
   business: ['assets/product_icons/OCS.svg', 'assets/product_icons/EMR.svg', 'assets/product_icons/CRM.svg'],
   product: ['assets/product_icons/EMR.svg', 'assets/product_icons/iEMR.svg', 'assets/product_icons/OCS.svg', 'assets/product_icons/ERP.svg', 'assets/product_icons/CRM.svg', 'assets/product_icons/mPOC.svg'],
-  introduce: ['assets/product_icons/mEAMS.svg', 'assets/product_icons/EMR.svg'],
+  introduce: ['assets/ui_icons/core.svg', 'assets/ui_icons/business.svg'],
   customer: ['assets/product_icons/CRM.svg', 'assets/product_icons/OCS.svg']
 };
 
@@ -124,7 +124,7 @@ const renderCards = (target, cards = [], key = '') => {
 
   cards.forEach((card, idx) => {
     const article = document.createElement('article');
-    article.className = 'card';
+    article.className = `card card--${key}`;
 
     const imagePool = cardImages[key] || [];
     const imageSrc = imagePool[idx % imagePool.length];

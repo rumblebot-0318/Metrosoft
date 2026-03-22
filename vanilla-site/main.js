@@ -16,6 +16,9 @@ const heroCta = $('[data-hero-cta]');
 const nav = $('[data-nav]');
 const localeButtons = $$('[data-locale]');
 const metricsTarget = $('[data-metrics]');
+const certifiedTitle = $('[data-certified-title]');
+const certifiedSub = $('[data-certified-sub]');
+const certifiedGrid = $('[data-certified-grid]');
 
 const spotlightEyebrow = $('[data-spotlight-eyebrow]');
 const spotlightTitle = $('[data-spotlight-title]');
@@ -295,6 +298,27 @@ const renderMetrics = (metrics = []) => {
     box.className = 'metric';
     box.innerHTML = `<strong>${metric.value}</strong><span>${metric.label}</span>`;
     metricsTarget.appendChild(box);
+  });
+};
+
+const renderCertified = () => {
+  if (!certifiedGrid) return;
+  clearChildren(certifiedGrid);
+
+  const items = [
+    { src: 'assets/Certified/01.png', alt: 'Microsoft Partner', label: 'Microsoft Partner' },
+    { src: 'assets/Certified/02.png', alt: 'HP Partner', label: 'HP e-Korea Partner' },
+    { src: 'assets/Certified/03.png', alt: 'OCS Certified', label: 'OCS Certified' }
+  ];
+
+  items.forEach((item) => {
+    const card = document.createElement('article');
+    card.className = 'certified-card';
+    card.innerHTML = `
+      <img src="${item.src}" alt="${item.alt}" />
+      <p>${item.label}</p>
+    `;
+    certifiedGrid.appendChild(card);
   });
 };
 
@@ -835,6 +859,11 @@ const render = () => {
   renderNav(menuConfig.nav || t.nav || []);
   renderMenuStrips(menuConfig.strips || {});
   renderMetrics(t.metrics || []);
+  if (certifiedTitle) certifiedTitle.textContent = 'Certified Partnership';
+  if (certifiedSub) certifiedSub.textContent = state.locale === 'ko'
+    ? '기존 프로젝트의 파트너 인증 자산을 기반으로 구성했습니다.'
+    : 'Built with legacy partner certification assets from the original project.';
+  renderCertified();
   renderSpotlight(t.spotlight || {});
   if (productTableTitle) productTableTitle.textContent = state.locale === 'ko' ? 'Product 상세 구성표 (기존 OCS 구성)' : 'Product Detailed Composition (Legacy OCS Matrix)';
   if (productTableSub) productTableSub.textContent = state.locale === 'ko' ? '기존 컴포넌트에서 사용하던 표 형식 내용을 그대로 재구성했습니다.' : 'Reconstructed from the original table-based component structure.';

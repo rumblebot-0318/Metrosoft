@@ -46,6 +46,7 @@ const companyContactList = $('[data-company-contact-list]');
 const companyAccessTitle = $('[data-company-access-title]');
 const companyAccessList = $('[data-company-access-list]');
 const quickInquiryText = $('[data-quick-inquiry-text]');
+const quickDemoText = $('[data-quick-demo-text]');
 const quickRemoteText = $('[data-quick-remote-text]');
 const headerUtility = $('[data-header-utility]');
 const customerQuickMenu = $('[data-customer-quick-menu]');
@@ -571,11 +572,19 @@ const renderCompanyFacts = () => {
 
   const isKo = state.locale === 'ko';
   const init = timeline.init;
+  const timelineEntries = Array.isArray(timeline.content)
+    ? timeline.content.flatMap((row) => (Array.isArray(row && row.content) ? row.content : []))
+    : [];
+  const certCount = timelineEntries.filter((text) => /인증|cert|inno-biz|벤처|msp/i.test(String(text || ''))).length;
+  const partnerHospitals = ((state.legacy.hospitals || {}).content || []).filter((item) => item && item.title).length;
+
   const facts = [
     { label: isKo ? '회사명' : 'Company', value: init.company || '-' },
     { label: isKo ? '설립' : 'Founded', value: init.birth || '-' },
     { label: isKo ? '대표' : 'CEO', value: init.ceo || '-' },
-    { label: isKo ? '사업영역' : 'Business Area', value: init.area || '-' }
+    { label: isKo ? '사업영역' : 'Business Area', value: init.area || '-' },
+    { label: isKo ? '인증/파트너 이력' : 'Certification Milestones', value: certCount ? `${certCount}${isKo ? '건' : ''}` : '-' },
+    { label: isKo ? '레퍼런스 병원 로고' : 'Partner Hospital Logos', value: partnerHospitals ? `${partnerHospitals}${isKo ? '개' : ''}` : '-' }
   ];
 
   companyFacts.innerHTML = `
@@ -1872,6 +1881,7 @@ const render = () => {
   renderSimpleList(companyAccessList, companyInfo.access);
   renderCompanyMap();
   if (quickInquiryText) quickInquiryText.textContent = companyInfo.quickLabel;
+  if (quickDemoText) quickDemoText.textContent = state.locale === 'ko' ? '도입 문의' : 'Request Demo';
   if (quickRemoteText) quickRemoteText.textContent = state.locale === 'ko' ? '원격지원' : 'Remote Support';
   if (footerYear) footerYear.textContent = String(new Date().getFullYear());
 

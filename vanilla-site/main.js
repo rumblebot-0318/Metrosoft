@@ -59,6 +59,7 @@ const productTabs = $('[data-product-tabs]');
 const productTabContent = $('[data-product-tab-content]');
 const customerTable = $('[data-customer-table]');
 const orgSummary = $('[data-org-summary]');
+const timelineSummary = $('[data-timeline-summary]');
 const ceoMessage = $('[data-ceo-message]');
 const remoteSupport = $('[data-remote-support]');
 const supportLinks = $('[data-support-links]');
@@ -859,6 +860,36 @@ const renderOrganizationSummary = () => {
   `;
 };
 
+const renderTimelineSummary = () => {
+  if (!timelineSummary) return;
+  const timeline = state.legacy.timeline;
+  const isKo = state.locale === 'ko';
+
+  if (!timeline || !Array.isArray(timeline.content)) {
+    timelineSummary.innerHTML = '';
+    return;
+  }
+
+  const milestones = timeline.content
+    .filter((row) => row && row.year && Array.isArray(row.content))
+    .slice(-4)
+    .map((row) => {
+      const latest = row.content[row.content.length - 1] || '';
+      return { year: row.year, text: latest };
+    })
+    .filter((item) => item.text);
+
+  timelineSummary.innerHTML = `
+    <article class="timeline-summary-card">
+      <h3>${isKo ? '회사 연혁 하이라이트' : 'Company Timeline Highlights'}</h3>
+      <p>${isKo ? '레거시 연혁 데이터에서 최근 주요 이력을 요약했습니다.' : 'Recent milestones summarized from legacy timeline data.'}</p>
+      <ul>
+        ${milestones.map((m) => `<li><strong>${m.year}</strong><span>${m.text}</span></li>`).join('')}
+      </ul>
+    </article>
+  `;
+};
+
 const renderCeoMessage = () => {
   if (!ceoMessage) return;
   const ceo = state.legacy.ceo;
@@ -905,6 +936,10 @@ const renderRemoteSupport = () => {
 const renderSupportLinks = () => {
   if (!supportLinks) return;
   const isKo = state.locale === 'ko';
+  const customer = state.legacy.customer;
+  const headContact = (((customer && customer.address && customer.address[0]) || {}).content || [])[3] || '';
+  const [headEmail = 'customer@metrosoft.co.kr'] = headContact.split('/');
+
   supportLinks.innerHTML = `
     <a class="support-link-card" href="http://www.metrosoft.co.kr/customer" target="_blank" rel="noreferrer noopener">
       <strong>${isKo ? '고객지원' : 'Customer Support'}</strong>
@@ -917,6 +952,14 @@ const renderSupportLinks = () => {
     <a class="support-link-card" href="http://www.metrosoft.co.kr/qna" target="_blank" rel="noreferrer noopener">
       <strong>${isKo ? 'Q&A / FAQ' : 'Q&A / FAQ'}</strong>
       <span>${isKo ? '자주 묻는 질문 바로가기' : 'Go to frequently asked questions'}</span>
+    </a>
+    <a class="support-link-card" href="mailto:${headEmail}?subject=${encodeURIComponent(isKo ? 'Metrosoft 솔루션 데모 요청' : 'Metrosoft Demo Request')}">
+      <strong>${isKo ? '데모 신청' : 'Request Demo'}</strong>
+      <span>${isKo ? '도입 검토용 제품 데모를 요청합니다.' : 'Ask for a product demo for evaluation.'}</span>
+    </a>
+    <a class="support-link-card" href="mailto:${headEmail}?subject=${encodeURIComponent(isKo ? '맞춤 제안서 요청' : 'Request Proposal')}">
+      <strong>${isKo ? '맞춤 제안서 요청' : 'Request Proposal'}</strong>
+      <span>${isKo ? '병원 규모/요구사항 기반 제안서 요청' : 'Get a proposal tailored to your hospital.'}</span>
     </a>
   `;
 };
@@ -1395,6 +1438,7 @@ const render = () => {
   renderCards(sectionTargets.customer, mergeCards(t.customer, 'customer', legacyCards), 'customer');
 
   renderOrganizationSummary();
+  renderTimelineSummary();
   renderCeoMessage();
   renderRemoteSupport();
   renderSupportLinks();

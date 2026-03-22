@@ -1427,6 +1427,7 @@ button:focus-visible,
 }
 
 .org-summary,
+.timeline-summary,
 .remote-support,
 .support-links,
 .support-contacts {
@@ -1434,6 +1435,7 @@ button:focus-visible,
 }
 
 .org-card,
+.timeline-summary-card,
 .remote-card,
 .ceo-card {
   background: var(--surface);
@@ -1443,6 +1445,7 @@ button:focus-visible,
 }
 
 .org-card h3,
+.timeline-summary-card h3,
 .remote-card h3,
 .ceo-card h3 {
   margin: 0;
@@ -1450,6 +1453,7 @@ button:focus-visible,
 }
 
 .org-card p,
+.timeline-summary-card p,
 .remote-card p,
 .ceo-card p {
   margin: 0.45rem 0 0;
@@ -1497,6 +1501,34 @@ button:focus-visible,
   color: var(--text);
 }
 
+.timeline-summary-card ul {
+  list-style: none;
+  margin: 0.7rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.48rem;
+}
+
+.timeline-summary-card li {
+  border: 1px solid #e3ebf9;
+  background: #f8fbff;
+  border-radius: 10px;
+  padding: 0.5rem 0.62rem;
+  display: grid;
+  gap: 0.12rem;
+}
+
+.timeline-summary-card li strong {
+  font-size: 0.76rem;
+  color: #1f3f6c;
+}
+
+.timeline-summary-card li span {
+  font-size: 0.82rem;
+  color: #334155;
+  line-height: 1.5;
+}
+
 .remote-card {
   display: flex;
   flex-wrap: wrap;
@@ -1517,7 +1549,7 @@ button:focus-visible,
 
 .support-links {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
   gap: 0.65rem;
 }
 

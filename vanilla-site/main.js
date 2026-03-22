@@ -16,6 +16,7 @@ const $$ = (selector) => document.querySelectorAll(selector);
 const heroTitle = $('[data-hero-title]');
 const heroDescription = $('[data-hero-description]');
 const heroCta = $('[data-hero-cta]');
+const heroQuickLinks = $('[data-hero-quick-links]');
 const nav = $('[data-nav]');
 const headerInner = document.querySelector('.header-inner');
 const navToggle = $('[data-nav-toggle]');
@@ -934,6 +935,26 @@ const renderRemoteSupport = () => {
   `;
 };
 
+const renderHeroQuickLinks = () => {
+  if (!heroQuickLinks) return;
+  const isKo = state.locale === 'ko';
+  const links = isKo
+    ? [
+      { label: '제품 상세', href: '#product-detail' },
+      { label: '견적요청', href: '#customer' },
+      { label: '원격지원', href: 'http://www.metrosoft.co.kr/Remote/TeamViewerQS-idc3g4qy58.exe', external: true }
+    ]
+    : [
+      { label: 'Product Detail', href: '#product-detail' },
+      { label: 'Request Quote', href: '#customer' },
+      { label: 'Remote Support', href: 'http://www.metrosoft.co.kr/Remote/TeamViewerQS-idc3g4qy58.exe', external: true }
+    ];
+
+  heroQuickLinks.innerHTML = links.map((item) => `
+    <a href="${item.href}" class="hero-quick-link" ${item.external ? 'target="_blank" rel="noreferrer noopener"' : ''}>${item.label}</a>
+  `).join('');
+};
+
 const renderSupportLinks = () => {
   if (!supportLinks) return;
   const isKo = state.locale === 'ko';
@@ -941,32 +962,28 @@ const renderSupportLinks = () => {
   const headContact = (((customer && customer.address && customer.address[0]) || {}).content || [])[3] || '';
   const [headEmail = 'customer@metrosoft.co.kr'] = headContact.split('/');
 
-  supportLinks.innerHTML = `
-    <a class="support-link-card" href="mailto:${headEmail}?subject=${encodeURIComponent(isKo ? '메트로소프트 문의하기' : 'Metrosoft Inquiry')}" >
-      <strong>${isKo ? '문의하기' : 'Contact Us'}</strong>
-      <span>${isKo ? '도입/유지보수/제휴 문의를 접수합니다.' : 'Send inquiries on implementation, support, and partnerships.'}</span>
+  const legacyShortcuts = isKo
+    ? [
+      { title: '수리 및 A/S 요청', desc: '문제 접수 후 담당 엔지니어가 확인합니다.', href: `mailto:${headEmail}?subject=${encodeURIComponent('수리 및 A/S 요청')}` },
+      { title: '견적요청', desc: '병원 규모/요구사항 기반 맞춤 견적을 요청합니다.', href: `mailto:${headEmail}?subject=${encodeURIComponent('메트로소프트 견적요청')}` },
+      { title: '연락처 / 문의', desc: '고객센터 담당자 연락처와 문의 채널을 확인합니다.', href: '#customer' },
+      { title: '원격지원', desc: 'QuickSupport 실행파일 다운로드 후 즉시 지원받기', href: 'http://www.metrosoft.co.kr/Remote/TeamViewerQS-idc3g4qy58.exe', external: true },
+      { title: '사이트맵', desc: '기존 사이트 구조를 확인합니다.', href: 'http://www.metrosoft.co.kr/sub05/sub_01.asp', external: true }
+    ]
+    : [
+      { title: 'Repair & A/S Request', desc: 'Submit issues for engineer follow-up.', href: `mailto:${headEmail}?subject=${encodeURIComponent('Repair and A/S Request')}` },
+      { title: 'Request Quotation', desc: 'Ask for tailored pricing by hospital requirements.', href: `mailto:${headEmail}?subject=${encodeURIComponent('Metrosoft Quotation Request')}` },
+      { title: 'Contact Center', desc: 'See support contacts and inquiry channels.', href: '#customer' },
+      { title: 'Remote Support', desc: 'Download QuickSupport and receive immediate help.', href: 'http://www.metrosoft.co.kr/Remote/TeamViewerQS-idc3g4qy58.exe', external: true },
+      { title: 'Legacy Sitemap', desc: 'Review legacy website structure.', href: 'http://www.metrosoft.co.kr/sub05/sub_01.asp', external: true }
+    ];
+
+  supportLinks.innerHTML = legacyShortcuts.map((item) => `
+    <a class="support-link-card" href="${item.href}" ${item.external ? 'target="_blank" rel="noreferrer noopener"' : ''}>
+      <strong>${item.title}</strong>
+      <span>${item.desc}</span>
     </a>
-    <a class="support-link-card" href="http://www.metrosoft.co.kr/customer" target="_blank" rel="noreferrer noopener">
-      <strong>${isKo ? '고객지원' : 'Customer Support'}</strong>
-      <span>${isKo ? '문의 채널 및 운영 안내' : 'Inquiry channels and operating guide'}</span>
-    </a>
-    <a class="support-link-card" href="http://www.metrosoft.co.kr/notice" target="_blank" rel="noreferrer noopener">
-      <strong>${isKo ? '공지사항' : 'Notices'}</strong>
-      <span>${isKo ? '업데이트/점검 공지 확인' : 'Check updates and maintenance notices'}</span>
-    </a>
-    <a class="support-link-card" href="http://www.metrosoft.co.kr/qna" target="_blank" rel="noreferrer noopener">
-      <strong>${isKo ? 'Q&A / FAQ' : 'Q&A / FAQ'}</strong>
-      <span>${isKo ? '자주 묻는 질문 바로가기' : 'Go to frequently asked questions'}</span>
-    </a>
-    <a class="support-link-card" href="mailto:${headEmail}?subject=${encodeURIComponent(isKo ? 'Metrosoft 솔루션 데모 요청' : 'Metrosoft Demo Request')}">
-      <strong>${isKo ? '데모 신청' : 'Request Demo'}</strong>
-      <span>${isKo ? '도입 검토용 제품 데모를 요청합니다.' : 'Ask for a product demo for evaluation.'}</span>
-    </a>
-    <a class="support-link-card" href="mailto:${headEmail}?subject=${encodeURIComponent(isKo ? '맞춤 제안서 요청' : 'Request Proposal')}">
-      <strong>${isKo ? '맞춤 제안서 요청' : 'Request Proposal'}</strong>
-      <span>${isKo ? '병원 규모/요구사항 기반 제안서 요청' : 'Get a proposal tailored to your hospital.'}</span>
-    </a>
-  `;
+  `).join('');
 };
 
 const renderSupportContacts = () => {
@@ -1402,6 +1419,11 @@ const render = () => {
   heroTitle.textContent = t.hero.title;
   heroDescription.textContent = t.hero.description;
   heroCta.textContent = t.hero.cta;
+  heroCta.onclick = () => {
+    const target = document.getElementById('product-detail');
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+  renderHeroQuickLinks();
 
   renderNav(menuConfig.nav || t.nav || []);
   bindMobileNav();

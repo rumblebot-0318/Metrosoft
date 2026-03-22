@@ -55,6 +55,8 @@ const productFocusDesc = $('[data-product-focus-desc]');
 const productTabs = $('[data-product-tabs]');
 const productTabContent = $('[data-product-tab-content]');
 const customerTable = $('[data-customer-table]');
+const orgSummary = $('[data-org-summary]');
+const remoteSupport = $('[data-remote-support]');
 const hospitalTitle = $('[data-hospital-title]');
 const hospitalSub = $('[data-hospital-sub]');
 const hospitalGrid = $('[data-hospital-grid]');
@@ -778,6 +780,51 @@ const renderCustomerTable = () => {
   customerTable.appendChild(tbody);
 };
 
+const renderOrganizationSummary = () => {
+  if (!orgSummary) return;
+  clearChildren(orgSummary);
+
+  const org = state.legacy.organization;
+  if (!org || !Array.isArray(org.content)) return;
+
+  const isKo = state.locale === 'ko';
+  const units = org.content
+    .map((row) => Object.values(row || {})[0])
+    .filter(Boolean)
+    .slice(0, 7);
+
+  orgSummary.innerHTML = `
+    <article class="org-card">
+      <h3>${isKo ? '조직도 요약' : 'Organization Snapshot'}</h3>
+      <p>${org.title || ''}</p>
+      <div class="org-meta">
+        <span>${isKo ? '기준일' : 'Updated'}: ${org.updata_date || '-'}</span>
+        <span>${isKo ? '정원/현원' : 'Headcount'}: ${org.total || '-'} / ${org.now || '-'}</span>
+      </div>
+      <ul>${units.map((name) => `<li>${name}</li>`).join('')}</ul>
+    </article>
+  `;
+};
+
+const renderRemoteSupport = () => {
+  if (!remoteSupport) return;
+  const isKo = state.locale === 'ko';
+
+  remoteSupport.innerHTML = `
+    <article class="remote-card">
+      <div>
+        <h3>${isKo ? '원격지원' : 'Remote Support'}</h3>
+        <p>${isKo
+          ? '장애 발생 시 원격 접속으로 문제를 빠르게 진단/해결해드립니다.'
+          : 'When issues occur, we diagnose and resolve quickly via remote access.'}</p>
+      </div>
+      <a class="remote-card__btn" href="http://www.metrosoft.co.kr/Remote/TeamViewerQS-idc3g4qy58.exe" target="_blank" rel="noreferrer noopener">
+        ${isKo ? '원격지원 실행파일 다운로드' : 'Download QuickSupport'}
+      </a>
+    </article>
+  `;
+};
+
 const renderHospitalGrid = () => {
   const hospitals = state.legacy.hospitals;
   if (!hospitalGrid) return;
@@ -1130,6 +1177,8 @@ const render = () => {
   renderCards(sectionTargets.introduce, mergeCards(t.introduce, 'introduce', legacyCards), 'introduce');
   renderCards(sectionTargets.customer, mergeCards(t.customer, 'customer', legacyCards), 'customer');
 
+  renderOrganizationSummary();
+  renderRemoteSupport();
   renderFeatureStack();
   renderProductImageGrid();
   renderProductTree();
@@ -1227,7 +1276,8 @@ Promise.all([
   fetchJson('data/legacy/Introduce/CeoIntroduce.json'),
   fetchJson('data/legacy/Customer/index.json'),
   fetchJson('data/legacy/Business/Hospital.json'),
-  fetchJson('data/legacy/Introduce/Timeline.json')
+  fetchJson('data/legacy/Introduce/Timeline.json'),
+  fetchJson('data/legacy/Introduce/Organization.json')
 ]).then(([
   translations,
   metroHis,
@@ -1240,10 +1290,11 @@ Promise.all([
   ceo,
   customer,
   hospitals,
-  timeline
+  timeline,
+  organization
 ]) => {
   state.translations = translations;
-  state.legacy = { metroHis, emr, iemr, ocs, erp, crm, mpoc, ceo, customer, hospitals, timeline };
+  state.legacy = { metroHis, emr, iemr, ocs, erp, crm, mpoc, ceo, customer, hospitals, timeline, organization };
   render();
   fetchMetroNews();
 }).catch((err) => {

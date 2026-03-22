@@ -1319,3 +1319,68 @@ button:focus-visible,
     bottom: 0.8rem;
   }
 }
+
+.org-summary,
+.remote-support {
+  margin-top: 1rem;
+}
+
+.org-card,
+.remote-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1rem 1.1rem;
+}
+
+.org-card h3,
+.remote-card h3 {
+  margin: 0;
+  color: var(--primary);
+}
+
+.org-card p,
+.remote-card p {
+  margin: 0.45rem 0 0;
+  color: var(--muted);
+}
+
+.org-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 0.55rem;
+}
+
+.org-meta span {
+  background: rgba(11, 58, 130, 0.07);
+  color: var(--primary);
+  border-radius: 999px;
+  padding: 0.25rem 0.62rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.org-card ul {
+  margin: 0.75rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--text);
+}
+
+.remote-card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.remote-card__btn {
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 0.55rem 0.95rem;
+  border: 1px solid rgba(11, 58, 130, 0.24);
+  color: var(--primary);
+  font-weight: 800;
+  background: rgba(11, 58, 130, 0.06);
+}

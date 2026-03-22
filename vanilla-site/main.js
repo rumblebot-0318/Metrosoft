@@ -23,6 +23,12 @@ const ctaTitle = $('[data-cta-title]');
 const ctaDescription = $('[data-cta-description]');
 const ctaButton = $('[data-cta-button]');
 
+const productTableTitle = $('[data-product-table-title]');
+const productTableSub = $('[data-product-table-sub]');
+const productTable = $('[data-product-table]');
+const productImages = $('[data-product-images]');
+const customerTable = $('[data-customer-table]');
+
 const sectionTargets = {
   highlights: $('[data-highlights]'),
   business: $('[data-business]'),
@@ -128,6 +134,92 @@ const renderSpotlight = (spotlight = {}) => {
     li.textContent = point;
     spotlightPoints.appendChild(li);
   });
+};
+
+const renderProductDetailTable = () => {
+  const ocs = state.legacy.ocs;
+  if (!productTable) return;
+  clearChildren(productTable);
+  if (!ocs || !ocs.composition) return;
+
+  const headers = ['원무/보험', '진료', '진료지원', '경영관리'];
+  const thead = document.createElement('thead');
+  const htr = document.createElement('tr');
+  headers.forEach((h) => {
+    const th = document.createElement('th');
+    th.textContent = h;
+    htr.appendChild(th);
+  });
+  thead.appendChild(htr);
+  productTable.appendChild(thead);
+
+  const tbody = document.createElement('tbody');
+  const maxRows = Math.max(...ocs.composition.map((col) => col.length));
+  for (let i = 0; i < maxRows; i += 1) {
+    const tr = document.createElement('tr');
+    ocs.composition.forEach((col) => {
+      const td = document.createElement('td');
+      td.textContent = col[i] || '';
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  }
+  productTable.appendChild(tbody);
+};
+
+const renderProductImageGrid = () => {
+  if (!productImages) return;
+  clearChildren(productImages);
+  const srcs = [
+    'assets/EMR.png',
+    'assets/iEMR.png',
+    'assets/HIS.png',
+    'assets/ERP.png',
+    'assets/CRM.png',
+    'assets/VOIP.png',
+    'assets/cloud.png',
+    'assets/businessContent.png'
+  ];
+  srcs.forEach((src) => {
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = 'product asset';
+    productImages.appendChild(img);
+  });
+};
+
+const renderCustomerTable = () => {
+  const customer = state.legacy.customer;
+  if (!customerTable) return;
+  clearChildren(customerTable);
+  if (!customer || !customer.address || !customer.address.length) return;
+
+  const headCols = customer.address.map((row) => row.title).filter(Boolean);
+  const thead = document.createElement('thead');
+  const htr = document.createElement('tr');
+  headCols.forEach((h) => {
+    const th = document.createElement('th');
+    th.textContent = h;
+    htr.appendChild(th);
+  });
+  thead.appendChild(htr);
+  customerTable.appendChild(thead);
+
+  const rowCount = Math.max(...customer.address.map((row) => (row.content || []).length));
+  const tbody = document.createElement('tbody');
+
+  for (let i = 0; i < rowCount; i += 1) {
+    const tr = document.createElement('tr');
+    customer.address.forEach((row) => {
+      if (!row.title) return;
+      const td = document.createElement('td');
+      const cell = (row.content && row.content[i]) || '';
+      td.textContent = cell;
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  }
+  customerTable.appendChild(tbody);
 };
 
 const setLocale = (locale) => {
@@ -262,6 +354,8 @@ const render = () => {
   renderNav(t.nav);
   renderMetrics(t.metrics || []);
   renderSpotlight(t.spotlight || {});
+  if (productTableTitle) productTableTitle.textContent = state.locale === 'ko' ? 'Product 상세 구성표 (기존 OCS 구성)' : 'Product Detailed Composition (Legacy OCS Matrix)';
+  if (productTableSub) productTableSub.textContent = state.locale === 'ko' ? '기존 컴포넌트에서 사용하던 표 형식 내용을 그대로 재구성했습니다.' : 'Reconstructed from the original table-based component structure.';
 
   Object.keys(titleTargets).forEach((key) => {
     if (titleTargets[key]) titleTargets[key].textContent = t.titles[key] || key;
@@ -273,6 +367,10 @@ const render = () => {
   renderCards(sectionTargets.product, mergeCards(t.product, 'product', legacyCards), 'product');
   renderCards(sectionTargets.introduce, mergeCards(t.introduce, 'introduce', legacyCards), 'introduce');
   renderCards(sectionTargets.customer, mergeCards(t.customer, 'customer', legacyCards), 'customer');
+
+  renderProductDetailTable();
+  renderProductImageGrid();
+  renderCustomerTable();
 
   if (t.cta) {
     ctaTitle.textContent = t.cta.title || '';

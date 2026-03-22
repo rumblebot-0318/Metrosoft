@@ -1,0 +1,13 @@
+{
+    "Title" : {
+        "title" : "Metro-iEMR",
+        "subtitle" : "(Image Electronic Medical Record)",
+        "content" : "EMR이 도입되지 않은 의료기관에서 환자 서비스를 위해 필요한 기존의 종이 의무 기록 차트를 Scanning하고 이를 체계적으로 / indexing하여 OCS System과 연계함으로써 기존의 진료 시스템을 유지하며 진료지원 부서와 공유도를 높이고 환자 진료의 활용도를 높였습니다. / 또한 차트의 보관 및 불출의 번거로움을 없앤 인적,물적 자원의 절약과 진료 효율을 높이는 영상의무기록시스템입니다."   
+    },
+    "features" : [
+        "OCS 및 EMR, PACS System과의 연동",
+        "동시간대에 동일한 차트를 필요로 하는 부서의 차트 공유 기능",
+        "Attach File 등으로 정보 활용 증대",
+        "데이터 전환으로 정보 활용성 증대"
+    ]
+}

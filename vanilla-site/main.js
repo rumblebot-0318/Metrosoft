@@ -67,6 +67,7 @@ const timelineSummary = $('[data-timeline-summary]');
 const ceoMessage = $('[data-ceo-message]');
 const remoteSupport = $('[data-remote-support]');
 const supportLinks = $('[data-support-links]');
+const resourceCenter = $('[data-resource-center]');
 const supportContacts = $('[data-support-contacts]');
 const legacySitemap = $('[data-legacy-sitemap]');
 const productKpi = $('[data-product-kpi]');
@@ -1040,6 +1041,62 @@ const renderCustomerQuickMenu = () => {
   `).join('');
 };
 
+const renderResourceCenter = () => {
+  if (!resourceCenter) return;
+  const isKo = state.locale === 'ko';
+
+  const items = isKo
+    ? [
+      {
+        title: '견적요청',
+        desc: '병상 규모/운영 형태에 맞는 EMR·OCS·ERP 구성을 상담합니다.',
+        href: 'http://www.metrosoft.co.kr/sub04/sub_02.asp'
+      },
+      {
+        title: '자료실',
+        desc: '제품 소개서, 원격지원 안내 등 고객지원 문서를 확인합니다.',
+        href: 'http://www.metrosoft.co.kr/sub04/sub_04.asp'
+      },
+      {
+        title: '공지사항',
+        desc: '업데이트/점검 공지와 신규 안내를 빠르게 확인할 수 있습니다.',
+        href: 'http://www.metrosoft.co.kr/sub04/sub_05.asp'
+      }
+    ]
+    : [
+      {
+        title: 'Quotation Request',
+        desc: 'Consult the right EMR/OCS/ERP package for your hospital size and workflow.',
+        href: 'http://www.metrosoft.co.kr/sub04/sub_02.asp'
+      },
+      {
+        title: 'Resource Center',
+        desc: 'Review product brochures and remote-support guidance documents.',
+        href: 'http://www.metrosoft.co.kr/sub04/sub_04.asp'
+      },
+      {
+        title: 'Notices',
+        desc: 'Check recent updates, maintenance schedules, and announcements.',
+        href: 'http://www.metrosoft.co.kr/sub04/sub_05.asp'
+      }
+    ];
+
+  resourceCenter.innerHTML = `
+    <article class="resource-center-card">
+      <h3>${isKo ? '고객지원 리소스 센터' : 'Customer Resource Center'}</h3>
+      <p>${isKo ? '레거시 고객센터 IA(견적요청/자료실/공지사항)를 현대 화면에서 바로 접근할 수 있게 구성했습니다.' : 'Legacy customer-center IA (quotation/resources/notices) is surfaced for quick access.'}</p>
+      <div class="resource-center-grid">
+        ${items.map((item) => `
+          <a href="${item.href}" target="_blank" rel="noreferrer noopener">
+            <strong>${item.title}</strong>
+            <span>${item.desc}</span>
+          </a>
+        `).join('')}
+      </div>
+    </article>
+  `;
+};
+
 const renderLegacySitemap = () => {
   if (!legacySitemap) return;
   const isKo = state.locale === 'ko';
@@ -1053,6 +1110,27 @@ const renderLegacySitemap = () => {
           { label: '회사연혁', href: 'http://www.metrosoft.co.kr/sub01/sub_02.asp' },
           { label: '조직도', href: 'http://www.metrosoft.co.kr/sub01/sub_03.asp' },
           { label: '오시는 길', href: 'http://www.metrosoft.co.kr/sub01/sub_04.asp' }
+        ]
+      },
+      {
+        title: '사업영역',
+        links: [
+          { label: '의료정보사업', href: 'http://www.metrosoft.co.kr/sub02/sub_01.asp' },
+          { label: 'Metro-cERP', href: 'http://www.metrosoft.co.kr/sub02/sub_02.asp' },
+          { label: '헬스케어 서비스', href: 'http://www.metrosoft.co.kr/sub02/sub_03.asp' },
+          { label: 'VOIP 사업', href: 'http://www.metrosoft.co.kr/sub02/sub_04.asp' }
+        ]
+      },
+      {
+        title: '제품소개',
+        links: [
+          { label: 'EMR', href: 'http://www.metrosoft.co.kr/sub03/sub_01.asp' },
+          { label: 'iEMR', href: 'http://www.metrosoft.co.kr/sub03/sub_02.asp' },
+          { label: 'OCS', href: 'http://www.metrosoft.co.kr/sub03/sub_03.asp' },
+          { label: 'T-BIZ 모바일 EMR', href: 'http://www.metrosoft.co.kr/sub03/sub_04.asp' },
+          { label: 'ERP', href: 'http://www.metrosoft.co.kr/sub03/sub_05.asp' },
+          { label: 'CRM', href: 'http://www.metrosoft.co.kr/sub03/sub_06.asp' },
+          { label: 'mPOC', href: 'http://www.metrosoft.co.kr/sub03/sub_07.asp' }
         ]
       },
       {
@@ -1074,6 +1152,27 @@ const renderLegacySitemap = () => {
           { label: 'History', href: 'http://www.metrosoft.co.kr/sub01/sub_02.asp' },
           { label: 'Organization', href: 'http://www.metrosoft.co.kr/sub01/sub_03.asp' },
           { label: 'Directions', href: 'http://www.metrosoft.co.kr/sub01/sub_04.asp' }
+        ]
+      },
+      {
+        title: 'Business Area',
+        links: [
+          { label: 'Healthcare IT', href: 'http://www.metrosoft.co.kr/sub02/sub_01.asp' },
+          { label: 'Metro-cERP', href: 'http://www.metrosoft.co.kr/sub02/sub_02.asp' },
+          { label: 'Healthcare Service', href: 'http://www.metrosoft.co.kr/sub02/sub_03.asp' },
+          { label: 'VOIP', href: 'http://www.metrosoft.co.kr/sub02/sub_04.asp' }
+        ]
+      },
+      {
+        title: 'Products',
+        links: [
+          { label: 'EMR', href: 'http://www.metrosoft.co.kr/sub03/sub_01.asp' },
+          { label: 'iEMR', href: 'http://www.metrosoft.co.kr/sub03/sub_02.asp' },
+          { label: 'OCS', href: 'http://www.metrosoft.co.kr/sub03/sub_03.asp' },
+          { label: 'T-BIZ Mobile EMR', href: 'http://www.metrosoft.co.kr/sub03/sub_04.asp' },
+          { label: 'ERP', href: 'http://www.metrosoft.co.kr/sub03/sub_05.asp' },
+          { label: 'CRM', href: 'http://www.metrosoft.co.kr/sub03/sub_06.asp' },
+          { label: 'mPOC', href: 'http://www.metrosoft.co.kr/sub03/sub_07.asp' }
         ]
       },
       {
@@ -1646,6 +1745,7 @@ const render = () => {
   renderCeoMessage();
   renderRemoteSupport();
   renderSupportLinks();
+  renderResourceCenter();
   renderCustomerQuickMenu();
   renderLegacySitemap();
   renderSupportContacts();

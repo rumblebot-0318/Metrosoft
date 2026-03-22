@@ -1828,7 +1828,8 @@ button:focus-visible,
 }
 
 .legacy-sitemap-card,
-.product-kpi-card {
+.product-kpi-card,
+.resource-center-card {
   margin-top: 1rem;
   border: 1px solid #d7e4f7;
   border-radius: 14px;
@@ -1836,10 +1837,39 @@ button:focus-visible,
   padding: 1rem 1.1rem;
 }
 
-.legacy-sitemap-card > p {
+.legacy-sitemap-card > p,
+.resource-center-card > p {
   margin-top: 0.35rem;
   color: #557095;
   font-size: 0.92rem;
+}
+
+.resource-center-grid {
+  margin-top: 0.8rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.62rem;
+}
+
+.resource-center-grid a {
+  text-decoration: none;
+  border: 1px solid #dbe6f6;
+  border-radius: 10px;
+  background: #f9fbff;
+  padding: 0.7rem;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.resource-center-grid a strong {
+  color: #1f3f6c;
+  font-size: 0.9rem;
+}
+
+.resource-center-grid a span {
+  color: #557095;
+  font-size: 0.81rem;
+  line-height: 1.4;
 }
 
 .legacy-sitemap-grid {
@@ -1903,7 +1933,8 @@ button:focus-visible,
 
 @media (max-width: 900px) {
   .legacy-sitemap-grid,
-  .product-kpi-grid {
+  .product-kpi-grid,
+  .resource-center-grid {
     grid-template-columns: 1fr;
   }
 }

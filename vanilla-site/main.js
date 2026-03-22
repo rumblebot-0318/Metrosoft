@@ -1102,12 +1102,22 @@ const buildLegacyCards = () => {
         ].filter(Boolean)
       },
       {
+        title: '회사소개',
+        description: '레퍼런스 사이트의 기업 기본정보를 기준으로 핵심 항목을 정리했습니다.',
+        points: [
+          '사업자명: 메트로소프트(주) / 대표자: 김형근',
+          '사업분야: 의료정보사업 · 헬스케어 서비스 · VOIP 사업 · 알림톡',
+          '회사설립연도: 2002년 / 홈페이지: www.metrosoft.co.kr'
+        ]
+      },
+      {
         title: '오시는 길',
         description: '경기도 안양시 동안구 흥안대로 427번길 16 평촌디지털엠파이어 607호',
         points: [
           '안양IT밸리 607호 (주) 메트로소프트',
-          '대표전화: 031-465-9971~3',
-          '이메일: customer@metrosoft.co.kr'
+          '대표전화: 031-465-9971~3 / FAX: 031-465-9974',
+          '지하철: 금정역 2번 출구 직진 200m → 미니스톱 좌회전 → 교량통과 후 우측 건물',
+          '버스: 범계역 6-2번(LS타워 하차), 명학역 1번 출구 65번(LS타워 하차)'
         ]
       }
     ];
@@ -1206,20 +1216,20 @@ const render = () => {
       overviewTitle: '기업 기본 정보',
       overview: [
         '상호: 메트로소프트(주)',
-        '사업자번호: 123-81-97190',
-        '별정통신사업자 등록'
+        '사업자번호: 105-86-28613',
+        '별정통신사업자 등록: 제111068호'
       ],
       contactTitle: '고객지원 / 문의하기',
       contact: [
-        '대표전화: 031-465-9971~3',
+        '대표전화: 031-465-9971~3 / FAX: 031-465-9974',
         '대표 메일: customer@metrosoft.co.kr',
         '문의 채널: 고객지원 · 원격지원'
       ],
       accessTitle: '본사 주소 · 이용안내',
       access: [
         '본사주소: 경기도 안양시 동안구 흥안대로 427번길 16 평촌디지털엠파이어 607호',
-        '이용안내: 평일 09:00 ~ 18:00',
-        '주말/공휴일: 긴급 장애 접수 중심 운영'
+        '지하철: 금정역 2번 출구 직진 200m 후 미니스톱 좌회전',
+        '버스: 범계역 6-2번/명학역 65번 LS타워 하차'
       ],
       quickLabel: '빠른 문의'
     }
@@ -1228,20 +1238,20 @@ const render = () => {
       overviewTitle: 'Corporate Details',
       overview: [
         'Company: Metrosoft Co., Ltd.',
-        'Business ID: 123-81-97190',
-        'Licensed Value-Added Telecom Operator'
+        'Business ID: 105-86-28613',
+        'Value-Added Telecom License: No.111068'
       ],
       contactTitle: 'Support / Inquiries',
       contact: [
-        'Main: +82-31-465-9971~3',
+        'Main: +82-31-465-9971~3 / FAX: +82-31-465-9974',
         'Email: customer@metrosoft.co.kr',
         'Channels: Support · Remote Assistance'
       ],
-      accessTitle: 'Head Office · Hours',
+      accessTitle: 'Head Office · Visitor Guide',
       access: [
         'Address: #607, 16 Heungan-daero 427beon-gil, Dongan-gu, Anyang-si, Gyeonggi-do',
-        'Business hours: Weekdays 09:00 - 18:00',
-        'Weekends/Holidays: Emergency issue reception'
+        'Subway: Geumjeong Stn Exit 2, about 200m then left at Mini Stop',
+        'Bus: Beomgye 6-2 / Myeonghak 65, get off at LS Tower'
       ],
       quickLabel: 'Quick Inquiry'
     };

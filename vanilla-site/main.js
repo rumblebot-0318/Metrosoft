@@ -220,9 +220,55 @@ const renderNav = (items = []) => {
   items.forEach((item) => {
     const link = document.createElement('a');
     link.href = `#${item.target}`;
+    link.dataset.target = item.target;
     link.textContent = item.label;
     nav.appendChild(link);
   });
+};
+
+const setActiveNavById = (sectionId = '') => {
+  const links = nav ? nav.querySelectorAll('a[data-target]') : [];
+  links.forEach((link) => {
+    link.classList.toggle('active', link.dataset.target === sectionId);
+  });
+};
+
+const bindActiveNav = () => {
+  if (!nav) return;
+
+  const links = nav.querySelectorAll('a[data-target]');
+  if (!links.length) return;
+
+  const sections = Array.from(links)
+    .map((link) => document.getElementById(link.dataset.target))
+    .filter(Boolean);
+
+  const syncWithHash = () => {
+    const hashId = (window.location.hash || '').replace('#', '');
+    if (hashId) setActiveNavById(hashId);
+  };
+
+  syncWithHash();
+  window.addEventListener('hashchange', syncWithHash);
+
+  if (nav.dataset.observerBound === '1') return;
+
+  const observer = new IntersectionObserver((entries) => {
+    const visible = entries
+      .filter((entry) => entry.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+    if (visible && visible.target && visible.target.id) {
+      setActiveNavById(visible.target.id);
+    }
+  }, {
+    root: null,
+    rootMargin: '-20% 0px -65% 0px',
+    threshold: [0.2, 0.45, 0.7]
+  });
+
+  sections.forEach((section) => observer.observe(section));
+  nav.dataset.observerBound = '1';
 };
 
 const renderMenuStrips = (menus = {}) => {
@@ -577,47 +623,31 @@ const renderProductImageGrid = () => {
   if (!productImages) return;
   clearChildren(productImages);
 
-  const items = [
-    'assets/EMR.png',
-    'assets/iEMR.png',
-    'assets/HIS.png',
-    'assets/ERP.png',
-    'assets/CRM.png',
-    'assets/TBiz.png',
-    'assets/sign.png'
-  ];
-
+  const iconCycle = ['file-text', 'shield-check', 'stethoscope', 'flask-conical', 'folder-open', 'messages-square', 'tablet-smartphone'];
   const ocs = state.legacy.ocs;
+
+  const labels = [];
   if (ocs && Array.isArray(ocs.Lists)) {
     ocs.Lists.forEach((group) => {
-      (group.contents || []).forEach((item) => {
-        if (item.image && item.image.url) {
-          const file = item.image.url.replace(/^\//, '');
-          items.push(`assets/Metro_product/OCS/${file}`);
-        }
-      });
+      const title = (group.title || '').replace(/^\d+\.\s*/, '').trim();
+      if (title) labels.push(title);
     });
   }
 
-  // Normalize by filename stem (case-insensitive) to reduce duplicates like 01.jpg / 01.JPG
-  const seen = new Set();
-  const unique = [];
-  items.forEach((src) => {
-    const file = src.split('/').pop() || src;
-    const stem = file.replace(/\.[^.]+$/, '').toLowerCase();
-    if (seen.has(stem)) return;
-    seen.add(stem);
-    unique.push(src);
-  });
+  const fallback = state.locale === 'ko'
+    ? ['원무/보험', '진료', '진료지원', '검진', '약국', '경영관리', '모바일']
+    : ['Admin', 'Clinical', 'Support', 'Checkup', 'Pharmacy', 'Management', 'Mobile'];
 
-  unique.forEach((src) => {
-    const img = document.createElement('img');
-    img.src = src;
-    img.alt = 'product asset';
-    img.onerror = () => {
-      img.remove();
-    };
-    productImages.appendChild(img);
+  const uniqueLabels = Array.from(new Set((labels.length ? labels : fallback))).slice(0, 8);
+
+  uniqueLabels.forEach((label, idx) => {
+    const tile = document.createElement('article');
+    tile.className = 'feature-thumb';
+    tile.innerHTML = `
+      <span class="feature-thumb__icon"><i data-lucide="${iconCycle[idx % iconCycle.length]}"></i></span>
+      <p>${label}</p>
+    `;
+    productImages.appendChild(tile);
   });
 };
 
@@ -1002,6 +1032,7 @@ const render = () => {
   heroCta.textContent = t.hero.cta;
 
   renderNav(menuConfig.nav || t.nav || []);
+  bindActiveNav();
   renderMenuStrips(menuConfig.strips || {});
   renderMetrics(t.metrics || []);
   if (certifiedTitle) certifiedTitle.textContent = 'Certified Partnership';
@@ -1011,8 +1042,8 @@ const render = () => {
   renderCertified();
   renderCertifiedTimeline();
   renderSpotlight(t.spotlight || {});
-  if (productTableTitle) productTableTitle.textContent = state.locale === 'ko' ? 'Product 상세 구성표 (기존 OCS 구성)' : 'Product Detailed Composition (Legacy OCS Matrix)';
-  if (productTableSub) productTableSub.textContent = state.locale === 'ko' ? '기존 컴포넌트에서 사용하던 표 형식 내용을 그대로 재구성했습니다.' : 'Reconstructed from the original table-based component structure.';
+  if (productTableTitle) productTableTitle.textContent = state.locale === 'ko' ? 'OCS 기능 카테고리' : 'OCS Feature Categories';
+  if (productTableSub) productTableSub.textContent = state.locale === 'ko' ? '필요한 영역만 탭으로 선택해 핵심 기능을 빠르게 확인할 수 있습니다.' : 'Use tabs to focus on the feature area you need.';
 
   Object.keys(titleTargets).forEach((key) => {
     if (titleTargets[key]) titleTargets[key].textContent = t.titles[key] || key;

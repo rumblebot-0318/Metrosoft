@@ -395,6 +395,52 @@ body {
   line-height: 1.5;
 }
 
+.product-mockup {
+  margin-top: 0.7rem;
+  border: 1px solid #ccd9ea;
+  border-radius: 14px;
+  background: #111827;
+  padding: 0.45rem;
+}
+
+.product-mockup__header {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.2rem 0.25rem 0.4rem;
+}
+
+.product-mockup__header span {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.product-mockup__screen {
+  border-radius: 10px;
+  background: #fff;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.product-mockup__screen img {
+  width: 100%;
+  height: 132px;
+  object-fit: contain;
+  background: #fff;
+}
+
+.product-mockup__label {
+  margin: 0.45rem 0 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.72rem;
+  text-align: center;
+  letter-spacing: 0.03em;
+}
+
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));

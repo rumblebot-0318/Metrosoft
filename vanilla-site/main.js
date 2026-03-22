@@ -346,17 +346,23 @@ const renderProductFocus = () => {
     treatment: {
       label: isKo ? '진료 EMR' : 'Clinical EMR',
       title: isKo ? '종이 없는 스마트 진료 환경 구축' : 'Paperless clinical workflow',
-      points: (emr.treatment || []).slice(0, 3)
+      points: (emr.treatment || []).slice(0, 3),
+      image: 'assets/EMR.png',
+      imageLabel: isKo ? '진료 화면 목업' : 'Clinical UI mockup'
     },
     nurse: {
       label: isKo ? '간호 EMR' : 'Nursing EMR',
       title: isKo ? '간호 프로세스 표준화와 기록 자동화' : 'Standardized nursing operations',
-      points: (emr.nurse || []).slice(0, 3)
+      points: (emr.nurse || []).slice(0, 3),
+      image: 'assets/iEMR.png',
+      imageLabel: isKo ? '간호 화면 목업' : 'Nursing UI mockup'
     },
     security: {
       label: isKo ? '보안/인증' : 'Security',
       title: isKo ? '의료정보 보호를 위한 인증 체계' : 'Protection-focused authentication',
-      points: ((emr.security && emr.security[1] && emr.security[1].content) || []).slice(0, 3)
+      points: ((emr.security && emr.security[1] && emr.security[1].content) || []).slice(0, 3),
+      image: 'assets/sign.png',
+      imageLabel: isKo ? '보안/인증 화면 목업' : 'Security UI mockup'
     }
   };
 
@@ -387,6 +393,15 @@ const renderProductFocus = () => {
   productTabContent.innerHTML = `
     <h4>${current.title}</h4>
     <ul>${(current.points || []).map((p) => `<li>${p}</li>`).join('')}</ul>
+    <div class="product-mockup">
+      <div class="product-mockup__header">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="product-mockup__screen">
+        <img src="${current.image}" alt="${current.imageLabel}" />
+      </div>
+      <p class="product-mockup__label">${current.imageLabel}</p>
+    </div>
   `;
 };
 

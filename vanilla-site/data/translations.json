@@ -52,11 +52,6 @@
         "title": "디지털 커뮤니케이션",
         "description": "MetroSMS/VOIP/알림톡으로 소통을 자동화합니다.",
         "points": ["자동 알림 흐름", "원격 화상 상담", "비상 대응 채널"]
-      },
-      {
-        "title": "콘텐츠 스토리텔링",
-        "description": "동화책과 인터랙티브 콘텐츠로 브랜드 경험을 확장합니다.",
-        "points": ["Story-driven UX", "Community narration", "Multimedia delivery"]
       }
     ],
     "business": [
@@ -166,11 +161,6 @@
         "title": "Digital communication",
         "description": "MetroSMS, VOIP, and AlimTalk for proactive outreach.",
         "points": ["Automated notifications", "Remote consultations", "Emergency response"]
-      },
-      {
-        "title": "Story-driven content",
-        "description": "Fairy-tale inspired brand experience.",
-        "points": ["Story-driven UX", "Community narration", "Multimedia delivery"]
       }
     ],
     "business": [

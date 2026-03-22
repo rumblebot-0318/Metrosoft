@@ -52,11 +52,11 @@ const sectionTargets = {
 };
 
 const cardImages = {
-  highlights: ['assets/ui_icons/core.svg', 'assets/ui_icons/cloud.svg', 'assets/ui_icons/business.svg'],
-  business: ['assets/ui_icons/business.svg', 'assets/ui_icons/cloud.svg', 'assets/ui_icons/support.svg'],
-  product: ['assets/ui_icons/emr.svg', 'assets/ui_icons/product.svg', 'assets/ui_icons/security.svg', 'assets/ui_icons/crm.svg', 'assets/ui_icons/support.svg', 'assets/ui_icons/cloud.svg'],
-  introduce: ['assets/ui_icons/core.svg', 'assets/ui_icons/business.svg'],
-  customer: ['assets/ui_icons/support.svg', 'assets/ui_icons/crm.svg']
+  highlights: ['assets/product_icons/EMR.svg', 'assets/product_icons/OCS.svg', 'assets/product_icons/ERP.svg'],
+  business: ['assets/product_icons/OCS.svg', 'assets/product_icons/EMR.svg', 'assets/product_icons/CRM.svg'],
+  product: ['assets/product_icons/EMR.svg', 'assets/product_icons/iEMR.svg', 'assets/product_icons/OCS.svg', 'assets/product_icons/ERP.svg', 'assets/product_icons/CRM.svg', 'assets/product_icons/mPOC.svg'],
+  introduce: ['assets/product_icons/mEAMS.svg', 'assets/product_icons/EMR.svg'],
+  customer: ['assets/product_icons/CRM.svg', 'assets/product_icons/OCS.svg']
 };
 
 const titleTargets = {
@@ -264,14 +264,13 @@ const renderProductImageGrid = () => {
   clearChildren(productImages);
 
   const items = [
-    'assets/ui_icons/emr.svg',
-    'assets/ui_icons/product.svg',
-    'assets/ui_icons/security.svg',
-    'assets/ui_icons/crm.svg',
-    'assets/ui_icons/support.svg',
-    'assets/ui_icons/cloud.svg',
-    'assets/ui_icons/business.svg',
-    'assets/ui_icons/core.svg'
+    'assets/product_icons/EMR.svg',
+    'assets/product_icons/iEMR.svg',
+    'assets/product_icons/OCS.svg',
+    'assets/product_icons/ERP.svg',
+    'assets/product_icons/CRM.svg',
+    'assets/product_icons/mPOC.svg',
+    'assets/product_icons/mEAMS.svg'
   ];
 
   const ocs = state.legacy.ocs;
@@ -401,16 +400,19 @@ const renderHospitalGrid = () => {
     a.rel = 'noreferrer noopener';
     a.title = h.title || 'hospital';
 
-    const icon = document.createElement('span');
-    icon.className = 'hospital-badge';
-    const initials = (h.title.match(/[A-Za-z가-힣]/g) || []).slice(0, 2).join('').toUpperCase();
-    icon.textContent = initials || 'H';
+    const img = document.createElement('img');
+    img.src = `assets/Hospital_icon/${(h.img || '').replace(/^\//, '')}`;
+    img.alt = h.title || 'hospital icon';
 
     const label = document.createElement('span');
     label.className = 'hospital-name';
     label.textContent = h.title;
 
-    a.appendChild(icon);
+    img.onerror = () => {
+      img.remove();
+    };
+
+    a.appendChild(img);
     a.appendChild(label);
     hospitalGrid.appendChild(a);
   });

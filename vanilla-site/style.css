@@ -43,20 +43,21 @@ body {
   min-height: 68px;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.4rem;
   justify-content: space-between;
 }
 
 .logo img { width: 138px; display: block; }
 
-.nav { display: flex; gap: 1.05rem; align-items: center; }
+.nav { display: flex; gap: 1.6rem; align-items: center; }
 .nav a {
   text-decoration: none;
   color: #334155;
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.16em;
   font-weight: 700;
+  padding: 0.25rem 0.15rem;
 }
 .nav a:hover { color: var(--primary); }
 
@@ -322,35 +323,31 @@ body {
 .hospital-logo {
   width: 180px;
   min-width: 180px;
-  min-height: 88px;
+  min-height: 110px;
   border: 1px solid var(--border);
   border-radius: 10px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 0.6rem;
+  justify-content: center;
+  gap: 0.45rem;
   background: #fff;
   padding: 0.55rem 0.65rem;
   text-decoration: none;
 }
 
-.hospital-badge {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary), var(--primary-2));
-  color: #fff;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.72rem;
-  font-weight: 800;
-  flex: 0 0 auto;
+.hospital-logo img {
+  width: 100%;
+  max-width: 120px;
+  height: 42px;
+  object-fit: contain;
 }
 
 .hospital-name {
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   color: #334155;
-  line-height: 1.4;
+  line-height: 1.35;
+  text-align: center;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;

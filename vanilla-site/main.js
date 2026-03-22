@@ -68,6 +68,8 @@ const ceoMessage = $('[data-ceo-message]');
 const remoteSupport = $('[data-remote-support]');
 const supportLinks = $('[data-support-links]');
 const supportContacts = $('[data-support-contacts]');
+const legacySitemap = $('[data-legacy-sitemap]');
+const productKpi = $('[data-product-kpi]');
 const companyMap = $('[data-company-map]');
 const hospitalTitle = $('[data-hospital-title]');
 const hospitalSub = $('[data-hospital-sub]');
@@ -1038,6 +1040,104 @@ const renderCustomerQuickMenu = () => {
   `).join('');
 };
 
+const renderLegacySitemap = () => {
+  if (!legacySitemap) return;
+  const isKo = state.locale === 'ko';
+
+  const groups = isKo
+    ? [
+      {
+        title: '회사소개',
+        links: [
+          { label: '인사말', href: 'http://www.metrosoft.co.kr/sub01/sub_01.asp' },
+          { label: '회사연혁', href: 'http://www.metrosoft.co.kr/sub01/sub_02.asp' },
+          { label: '조직도', href: 'http://www.metrosoft.co.kr/sub01/sub_03.asp' },
+          { label: '오시는 길', href: 'http://www.metrosoft.co.kr/sub01/sub_04.asp' }
+        ]
+      },
+      {
+        title: '고객센터',
+        links: [
+          { label: '고객지원', href: 'http://www.metrosoft.co.kr/sub04/sub_01.asp' },
+          { label: '견적요청', href: 'http://www.metrosoft.co.kr/sub04/sub_02.asp' },
+          { label: '연락처', href: 'http://www.metrosoft.co.kr/sub04/sub_03.asp' },
+          { label: '자료실', href: 'http://www.metrosoft.co.kr/sub04/sub_04.asp' },
+          { label: '공지사항', href: 'http://www.metrosoft.co.kr/sub04/sub_05.asp' }
+        ]
+      }
+    ]
+    : [
+      {
+        title: 'Company',
+        links: [
+          { label: 'Greeting', href: 'http://www.metrosoft.co.kr/sub01/sub_01.asp' },
+          { label: 'History', href: 'http://www.metrosoft.co.kr/sub01/sub_02.asp' },
+          { label: 'Organization', href: 'http://www.metrosoft.co.kr/sub01/sub_03.asp' },
+          { label: 'Directions', href: 'http://www.metrosoft.co.kr/sub01/sub_04.asp' }
+        ]
+      },
+      {
+        title: 'Customer Center',
+        links: [
+          { label: 'Support', href: 'http://www.metrosoft.co.kr/sub04/sub_01.asp' },
+          { label: 'Quotation', href: 'http://www.metrosoft.co.kr/sub04/sub_02.asp' },
+          { label: 'Contacts', href: 'http://www.metrosoft.co.kr/sub04/sub_03.asp' },
+          { label: 'Resource', href: 'http://www.metrosoft.co.kr/sub04/sub_04.asp' },
+          { label: 'Notice', href: 'http://www.metrosoft.co.kr/sub04/sub_05.asp' }
+        ]
+      }
+    ];
+
+  legacySitemap.innerHTML = `
+    <article class="legacy-sitemap-card">
+      <h3>${isKo ? '레거시 사이트맵 (원본 IA 바로가기)' : 'Legacy Sitemap (Original IA Links)'}</h3>
+      <p>${isKo ? '기존 metrosoft.co.kr의 메뉴 구조를 유지한 바로가기입니다.' : 'Quick links preserving the menu structure of metrosoft.co.kr.'}</p>
+      <div class="legacy-sitemap-grid">
+        ${groups.map((group) => `
+          <section>
+            <strong>${group.title}</strong>
+            <div class="legacy-sitemap-links">
+              ${group.links.map((link) => `<a href="${link.href}" target="_blank" rel="noreferrer noopener">${link.label}</a>`).join('')}
+            </div>
+          </section>
+        `).join('')}
+      </div>
+    </article>
+  `;
+};
+
+const renderProductKpi = () => {
+  if (!productKpi) return;
+  const isKo = state.locale === 'ko';
+
+  const items = isKo
+    ? [
+      { label: '진료/원무 처리 리드타임', value: '단축', desc: 'EMR·OCS 연동으로 접수~수납 흐름 간소화' },
+      { label: '청구/정산 정확도', value: '향상', desc: '원무/보험심사 데이터 일관성 강화' },
+      { label: '장애 대응 시간', value: '최소화', desc: '원격지원 + 담당자 연락망 즉시 연결' }
+    ]
+    : [
+      { label: 'Clinical/Admin Lead Time', value: 'Reduced', desc: 'EMR-OCS integration streamlines registration-to-billing.' },
+      { label: 'Claim/Billing Accuracy', value: 'Improved', desc: 'Consistency across admin and insurance workflows.' },
+      { label: 'Incident Response Time', value: 'Minimized', desc: 'Remote support and contact channels are directly connected.' }
+    ];
+
+  productKpi.innerHTML = `
+    <article class="product-kpi-card">
+      <h3>${isKo ? '도입 기대효과' : 'Expected Outcomes'}</h3>
+      <div class="product-kpi-grid">
+        ${items.map((item) => `
+          <div class="product-kpi-item">
+            <strong>${item.label}</strong>
+            <em>${item.value}</em>
+            <span>${item.desc}</span>
+          </div>
+        `).join('')}
+      </div>
+    </article>
+  `;
+};
+
 const renderSupportContacts = () => {
   if (!supportContacts) return;
   const customer = state.legacy.customer;
@@ -1547,8 +1647,10 @@ const render = () => {
   renderRemoteSupport();
   renderSupportLinks();
   renderCustomerQuickMenu();
+  renderLegacySitemap();
   renderSupportContacts();
   renderFeatureStack();
+  renderProductKpi();
   renderProductImageGrid();
   renderProductTree();
   renderCustomerTable();

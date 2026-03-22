@@ -1826,3 +1826,84 @@ button:focus-visible,
     padding-top: 0.2rem;
   }
 }
+
+.legacy-sitemap-card,
+.product-kpi-card {
+  margin-top: 1rem;
+  border: 1px solid #d7e4f7;
+  border-radius: 14px;
+  background: #fff;
+  padding: 1rem 1.1rem;
+}
+
+.legacy-sitemap-card > p {
+  margin-top: 0.35rem;
+  color: #557095;
+  font-size: 0.92rem;
+}
+
+.legacy-sitemap-grid {
+  margin-top: 0.85rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.legacy-sitemap-grid section {
+  border: 1px solid #e3ebf8;
+  border-radius: 10px;
+  padding: 0.72rem;
+  background: #f9fbff;
+}
+
+.legacy-sitemap-links {
+  margin-top: 0.55rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.legacy-sitemap-links a {
+  text-decoration: none;
+  border: 1px solid #cedef6;
+  border-radius: 999px;
+  padding: 0.28rem 0.6rem;
+  font-size: 0.8rem;
+  color: #20487a;
+  background: #fff;
+}
+
+.product-kpi-grid {
+  margin-top: 0.72rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.product-kpi-item {
+  border: 1px solid #e2eaf7;
+  border-radius: 10px;
+  padding: 0.68rem;
+  display: grid;
+  gap: 0.25rem;
+  background: #f9fcff;
+}
+
+.product-kpi-item em {
+  font-style: normal;
+  color: #0e4ea4;
+  font-weight: 700;
+}
+
+.product-kpi-item span {
+  color: #516f94;
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 900px) {
+  .legacy-sitemap-grid,
+  .product-kpi-grid {
+    grid-template-columns: 1fr;
+  }
+}

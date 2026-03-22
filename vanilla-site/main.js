@@ -34,6 +34,14 @@ const spotlightCards = $('[data-spotlight-cards]');
 const ctaTitle = $('[data-cta-title]');
 const ctaDescription = $('[data-cta-description]');
 const ctaButton = $('[data-cta-button]');
+const companyTitle = $('[data-company-title]');
+const companyOverviewTitle = $('[data-company-overview-title]');
+const companyOverviewList = $('[data-company-overview-list]');
+const companyContactTitle = $('[data-company-contact-title]');
+const companyContactList = $('[data-company-contact-list]');
+const companyAccessTitle = $('[data-company-access-title]');
+const companyAccessList = $('[data-company-access-list]');
+const quickInquiryText = $('[data-quick-inquiry-text]');
 
 const productTableTitle = $('[data-product-table-title]');
 const productTableSub = $('[data-product-table-sub]');
@@ -142,6 +150,16 @@ const refreshIcons = () => {
       }
     });
   }
+};
+
+const renderSimpleList = (target, items = []) => {
+  if (!target) return;
+  clearChildren(target);
+  items.forEach((text) => {
+    const li = document.createElement('li');
+    li.textContent = text;
+    target.appendChild(li);
+  });
 };
 
 const getProductCardImage = (title = '', idx = 0) => {
@@ -1132,6 +1150,61 @@ const render = () => {
     ctaDescription.textContent = t.cta.description || '';
     ctaButton.textContent = t.cta.button || '';
   }
+
+  const companyInfo = state.locale === 'ko'
+    ? {
+      title: '회사 정보 · 이용 안내',
+      overviewTitle: '기업 기본 정보',
+      overview: [
+        '상호: 메트로소프트(주)',
+        '사업자번호: 123-81-97190',
+        '별정통신사업자 등록'
+      ],
+      contactTitle: '고객지원 / 문의하기',
+      contact: [
+        '대표전화: 031-465-9971~3',
+        '대표 메일: customer@metrosoft.co.kr',
+        '문의 채널: 고객지원 · 원격지원'
+      ],
+      accessTitle: '본사 주소 · 이용안내',
+      access: [
+        '본사주소: 경기도 안양시 동안구 흥안대로 427번길 16 평촌디지털엠파이어 607호',
+        '이용안내: 평일 09:00 ~ 18:00',
+        '주말/공휴일: 긴급 장애 접수 중심 운영'
+      ],
+      quickLabel: '빠른 문의'
+    }
+    : {
+      title: 'Company Info · Visitor Guide',
+      overviewTitle: 'Corporate Details',
+      overview: [
+        'Company: Metrosoft Co., Ltd.',
+        'Business ID: 123-81-97190',
+        'Licensed Value-Added Telecom Operator'
+      ],
+      contactTitle: 'Support / Inquiries',
+      contact: [
+        'Main: +82-31-465-9971~3',
+        'Email: customer@metrosoft.co.kr',
+        'Channels: Support · Remote Assistance'
+      ],
+      accessTitle: 'Head Office · Hours',
+      access: [
+        'Address: #607, 16 Heungan-daero 427beon-gil, Dongan-gu, Anyang-si, Gyeonggi-do',
+        'Business hours: Weekdays 09:00 - 18:00',
+        'Weekends/Holidays: Emergency issue reception'
+      ],
+      quickLabel: 'Quick Inquiry'
+    };
+
+  if (companyTitle) companyTitle.textContent = companyInfo.title;
+  if (companyOverviewTitle) companyOverviewTitle.textContent = companyInfo.overviewTitle;
+  renderSimpleList(companyOverviewList, companyInfo.overview);
+  if (companyContactTitle) companyContactTitle.textContent = companyInfo.contactTitle;
+  renderSimpleList(companyContactList, companyInfo.contact);
+  if (companyAccessTitle) companyAccessTitle.textContent = companyInfo.accessTitle;
+  renderSimpleList(companyAccessList, companyInfo.access);
+  if (quickInquiryText) quickInquiryText.textContent = companyInfo.quickLabel;
 
   refreshIcons();
 

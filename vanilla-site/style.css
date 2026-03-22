@@ -20,6 +20,11 @@ body {
   font-family: 'Manrope', 'Spoqa Han Sans', system-ui, sans-serif;
   color: var(--text);
   background: var(--bg);
+  line-height: 1.6;
+}
+
+p {
+  line-height: 1.7;
 }
 
 .container {
@@ -242,6 +247,12 @@ body {
   align-items: center;
   gap: 0.6rem;
   background: linear-gradient(180deg, #fbfdff, #f6f9ff);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.spotlight-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(15, 52, 102, 0.08);
 }
 
 .spotlight-card__icon {
@@ -517,6 +528,13 @@ body {
   border-radius: 12px;
   padding: 1rem;
   background: #fff;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgba(15, 52, 102, 0.1);
+  border-color: #c8d8ec;
 }
 
 .card__image {
@@ -920,6 +938,14 @@ body {
   .hero-panel { width: 100%; }
   .product-focus { grid-template-columns: 1fr; }
   .feature-tabs { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 @media (max-width: 768px) {

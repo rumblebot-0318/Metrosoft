@@ -526,7 +526,7 @@ const renderFeatureStack = () => {
   const headers = isKo
     ? ['원무/보험', '진료', '진료지원', '경영관리']
     : ['Admin/Insurance', 'Clinical', 'Care Support', 'Management'];
-  const icons = ['receipt-text', 'stethoscope', 'syringe', 'briefcase-business'];
+  const icons = ['file-text', 'heart-pulse', 'flask-conical', 'chart-no-axes-column'];
 
   if (state.activeFeatureTab >= headers.length) state.activeFeatureTab = 0;
 
@@ -578,13 +578,13 @@ const renderProductImageGrid = () => {
   clearChildren(productImages);
 
   const items = [
-    'assets/product_icons/EMR.svg',
-    'assets/product_icons/iEMR.svg',
-    'assets/product_icons/OCS.svg',
-    'assets/product_icons/ERP.svg',
-    'assets/product_icons/CRM.svg',
-    'assets/product_icons/mPOC.svg',
-    'assets/product_icons/mEAMS.svg'
+    'assets/EMR.png',
+    'assets/iEMR.png',
+    'assets/HIS.png',
+    'assets/ERP.png',
+    'assets/CRM.png',
+    'assets/TBiz.png',
+    'assets/sign.png'
   ];
 
   const ocs = state.legacy.ocs;

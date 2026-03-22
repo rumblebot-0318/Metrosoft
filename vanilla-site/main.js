@@ -31,6 +31,14 @@ const sectionTargets = {
   customer: $('[data-customer]')
 };
 
+const cardImages = {
+  highlights: ['assets/cloud.png', 'assets/VOIP.png', 'assets/HIS.png'],
+  business: ['assets/HIS.png', 'assets/cloud.png'],
+  product: ['assets/EMR.png', 'assets/ERP.png'],
+  introduce: ['assets/businessContent.png', 'assets/metrologo.png'],
+  customer: ['assets/CRM.png', 'assets/VOIP.png']
+};
+
 const titleTargets = {
   highlights: $('[data-title="highlights"]'),
   business: $('[data-title="business"]'),
@@ -52,13 +60,23 @@ const clearChildren = (el) => {
   while (el.firstChild) el.removeChild(el.firstChild);
 };
 
-const renderCards = (target, cards = []) => {
+const renderCards = (target, cards = [], key = '') => {
   if (!target) return;
   clearChildren(target);
 
-  cards.forEach((card) => {
+  cards.forEach((card, idx) => {
     const article = document.createElement('article');
     article.className = 'card';
+
+    const imagePool = cardImages[key] || [];
+    const imageSrc = imagePool[idx % imagePool.length];
+    if (imageSrc) {
+      const img = document.createElement('img');
+      img.src = imageSrc;
+      img.alt = card.title || 'card image';
+      img.className = 'card__image';
+      article.appendChild(img);
+    }
 
     const title = document.createElement('h3');
     title.textContent = card.title;
@@ -192,11 +210,11 @@ const render = () => {
     if (subTargets[key]) subTargets[key].textContent = (t.subs && t.subs[key]) || '';
   });
 
-  renderCards(sectionTargets.highlights, t.highlights);
-  renderCards(sectionTargets.business, mergeCards(t.business, 'business', legacyCards));
-  renderCards(sectionTargets.product, mergeCards(t.product, 'product', legacyCards));
-  renderCards(sectionTargets.introduce, mergeCards(t.introduce, 'introduce', legacyCards));
-  renderCards(sectionTargets.customer, mergeCards(t.customer, 'customer', legacyCards));
+  renderCards(sectionTargets.highlights, t.highlights, 'highlights');
+  renderCards(sectionTargets.business, mergeCards(t.business, 'business', legacyCards), 'business');
+  renderCards(sectionTargets.product, mergeCards(t.product, 'product', legacyCards), 'product');
+  renderCards(sectionTargets.introduce, mergeCards(t.introduce, 'introduce', legacyCards), 'introduce');
+  renderCards(sectionTargets.customer, mergeCards(t.customer, 'customer', legacyCards), 'customer');
 
   if (t.cta) {
     ctaTitle.textContent = t.cta.title || '';

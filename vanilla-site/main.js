@@ -964,17 +964,6 @@ const buildLegacyCards = () => {
     out.product = productCards;
   }
 
-  const ceo = state.legacy.ceo;
-  if (ceo) {
-    out.introduce = [
-      {
-        title: ceo.title || '인사말',
-        description: ceo.subtitle || '회사 소개',
-        points: (ceo.content || []).slice(0, 4)
-      }
-    ];
-  }
-
   const customer = state.legacy.customer;
   if (customer && customer.address) {
     out.customer = [

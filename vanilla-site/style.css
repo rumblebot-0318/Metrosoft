@@ -333,6 +333,41 @@ body {
 }
 .hospital-logo img { max-width: 100%; max-height: 60px; object-fit: contain; }
 
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.85rem;
+}
+
+.news-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.95rem;
+  background: #fff;
+}
+
+.news-card a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 700;
+  line-height: 1.4;
+  display: block;
+}
+
+.news-card a:hover {
+  text-decoration: underline;
+}
+
+.news-card .meta {
+  margin-top: 0.45rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.news-card.loading {
+  color: var(--muted);
+}
+
 .cta-band {
   margin-top: 2.5rem;
   border-radius: 16px;

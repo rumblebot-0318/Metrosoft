@@ -1,7 +1,8 @@
 const state = {
   locale: localStorage.getItem('metrosoft-locale') || 'ko',
   translations: null,
-  legacy: {}
+  legacy: {},
+  metroNews: []
 };
 
 const $ = (selector) => document.querySelector(selector);
@@ -32,6 +33,10 @@ const customerTable = $('[data-customer-table]');
 const hospitalTitle = $('[data-hospital-title]');
 const hospitalSub = $('[data-hospital-sub]');
 const hospitalGrid = $('[data-hospital-grid]');
+
+const newsTitle = $('[data-news-title]');
+const newsSub = $('[data-news-sub]');
+const newsList = $('[data-news-list]');
 
 const productPrevBtn = $('[data-carousel-prev="product"]');
 const productNextBtn = $('[data-carousel-next="product"]');
@@ -406,6 +411,56 @@ const renderHospitalGrid = () => {
   });
 };
 
+const renderNews = () => {
+  if (!newsList) return;
+  clearChildren(newsList);
+  if (!state.metroNews.length) {
+    const fallback = document.createElement('article');
+    fallback.className = 'news-card loading';
+    fallback.textContent = state.locale === 'ko' ? '관련 뉴스를 찾지 못했습니다.' : 'No Metrosoft-related news found.';
+    newsList.appendChild(fallback);
+    return;
+  }
+
+  state.metroNews.forEach((item) => {
+    const card = document.createElement('article');
+    card.className = 'news-card';
+    const safeDate = item.pubDate ? new Date(item.pubDate).toLocaleString() : '';
+    card.innerHTML = `
+      <a href="${item.link}" target="_blank" rel="noreferrer noopener">${item.title}</a>
+      <div class="meta">${safeDate}</div>
+    `;
+    newsList.appendChild(card);
+  });
+};
+
+const fetchMetroNews = async () => {
+  const query = encodeURIComponent('메트로소프트 OR metrosoft');
+  const rssUrl = `https://news.google.com/rss/search?q=${query}&hl=ko&gl=KR&ceid=KR:ko`;
+  const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(rssUrl)}`;
+
+  try {
+    const res = await fetch(proxyUrl);
+    if (!res.ok) throw new Error('Failed to fetch RSS');
+    const xml = await res.text();
+    const doc = new DOMParser().parseFromString(xml, 'text/xml');
+    const items = Array.from(doc.querySelectorAll('item')).map((item) => ({
+      title: item.querySelector('title')?.textContent?.trim() || '',
+      link: item.querySelector('link')?.textContent?.trim() || '',
+      pubDate: item.querySelector('pubDate')?.textContent?.trim() || ''
+    }));
+
+    state.metroNews = items
+      .filter((it) => /메트로소프트|metrosoft/i.test(it.title))
+      .slice(0, 8);
+  } catch (error) {
+    console.error('Failed to fetch Metrosoft news:', error);
+    state.metroNews = [];
+  }
+
+  renderNews();
+};
+
 const setLocale = (locale) => {
   state.locale = locale;
   localStorage.setItem('metrosoft-locale', locale);
@@ -590,6 +645,10 @@ const render = () => {
   if (hospitalTitle) hospitalTitle.textContent = state.locale === 'ko' ? '주요 고객사 병원' : 'Major Partner Hospitals';
   if (hospitalSub) hospitalSub.textContent = state.locale === 'ko' ? '기존 프로젝트 아이콘 자산을 그대로 사용합니다.' : 'Using the original hospital icon assets from the legacy project.';
 
+  if (newsTitle) newsTitle.textContent = state.locale === 'ko' ? 'Metrosoft News' : 'Metrosoft News';
+  if (newsSub) newsSub.textContent = state.locale === 'ko' ? 'Google RSS에서 메트로소프트가 제목에 포함된 기사만 표시합니다.' : 'Showing only Google RSS headlines containing Metrosoft.';
+  renderNews();
+
   if (t.cta) {
     ctaTitle.textContent = t.cta.title || '';
     ctaDescription.textContent = t.cta.description || '';
@@ -631,6 +690,7 @@ Promise.all([
   state.translations = translations;
   state.legacy = { metroHis, emr, iemr, ocs, erp, crm, mpoc, ceo, customer, hospitals };
   render();
+  fetchMetroNews();
 }).catch((err) => {
   console.error('Failed to initialize data:', err);
 });

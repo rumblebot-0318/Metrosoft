@@ -1336,6 +1336,17 @@ const buildLegacyCards = () => {
     });
   }
 
+  out.business = out.business || [];
+  out.business.push({
+    title: '통신 부가서비스 (MetroSMS · 알림톡)',
+    description: '레거시 사이트의 고객 커뮤니케이션 영역(MetroSMS/HPS/알림톡) 핵심 문구를 반영했습니다.',
+    points: [
+      '카카오 알림톡 발송 실패 시 SMS/LMS 자동 전환',
+      'HPS 기반 문자 발송으로 비용 절감 및 대량 발송 지원',
+      '고객관리 시스템 API 연동 및 실시간 메시지 통계 확인'
+    ]
+  });
+
   const productCards = [];
   const emr = state.legacy.emr;
   if (emr && emr.intro) {
@@ -1575,6 +1586,7 @@ const render = () => {
         '대표전화: 031-465-9971~3 / FAX: 031-465-9974',
         '대표 메일: customer@metrosoft.co.kr',
         `홈페이지: ${legacyHomepage}`,
+        '이용안내: 평일(대표전화/고객문의), 주말(원격지원 접수)',
         '문의 채널: 고객지원 · 원격지원'
       ],
       accessTitle: '본사 주소 · 이용안내',
@@ -1598,6 +1610,7 @@ const render = () => {
         'Main: +82-31-465-9971~3 / FAX: +82-31-465-9974',
         'Email: customer@metrosoft.co.kr',
         `Homepage: ${legacyHomepage}`,
+        'Guide: Weekday(main inquiry), Weekend(remote support intake)',
         'Channels: Support · Remote Assistance'
       ],
       accessTitle: 'Head Office · Visitor Guide',

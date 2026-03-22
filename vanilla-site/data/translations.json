@@ -8,8 +8,8 @@
       { "label": "Customer", "target": "customer" }
     ],
     "hero": {
-      "title": "의료와 예술을 연결하는 메트로소프트",
-      "description": "디지털 헬스케어와 스토리텔링을 결합한 통합 솔루션을 제공합니다.",
+      "title": "병원 운영을 혁신하는 메트로소프트",
+      "description": "EMR·OCS·ERP 기반의 통합 의료정보 솔루션으로 진료와 경영 효율을 높입니다.",
       "cta": "메트로소프트 소개"
     },
     "metrics": [
@@ -117,8 +117,8 @@
       { "label": "Customer", "target": "customer" }
     ],
     "hero": {
-      "title": "Connecting healthcare and storytelling",
-      "description": "Integrated solutions combining digital healthcare and narrative experiences.",
+      "title": "Metrosoft for smarter hospital operations",
+      "description": "Integrated EMR, OCS, and ERP solutions that improve clinical and operational efficiency.",
       "cta": "Discover Metrosoft"
     },
     "metrics": [

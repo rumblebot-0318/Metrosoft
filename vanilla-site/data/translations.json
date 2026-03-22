@@ -36,7 +36,7 @@
       "customer": "Customer"
     },
     "subs": {
-      "highlights": "브랜드와 제품의 방향성을 한 눈에 보여주는 핵심 포인트",
+      "highlights": "핵심 서비스 요약",
       "business": "병원 운영 전반을 커버하는 통합 솔루션",
       "product": "의료 현장을 위한 제품 포트폴리오",
       "introduce": "회사를 소개하는 조직/비전/메시지",
@@ -145,7 +145,7 @@
       "customer": "Customer"
     },
     "subs": {
-      "highlights": "Core value propositions across product, experience, and brand",
+      "highlights": "Core service summary",
       "business": "Integrated services for healthcare operations",
       "product": "Product portfolio for medical field teams",
       "introduce": "Organization and vision overview",

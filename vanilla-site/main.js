@@ -457,22 +457,22 @@ const renderProductFocus = () => {
       label: isKo ? '진료 EMR' : 'Clinical EMR',
       title: isKo ? '종이 없는 스마트 진료 환경 구축' : 'Paperless clinical workflow',
       points: (emr.treatment || []).slice(0, 3),
-      image: 'assets/EMR.png',
-      imageLabel: isKo ? '진료 화면 목업' : 'Clinical UI mockup'
+      image: 'assets/Metro_product/OCS/01.JPG',
+      imageLabel: isKo ? '레거시 OCS 진료 화면' : 'Legacy OCS clinical screen'
     },
     nurse: {
       label: isKo ? '간호 EMR' : 'Nursing EMR',
       title: isKo ? '간호 프로세스 표준화와 기록 자동화' : 'Standardized nursing operations',
       points: (emr.nurse || []).slice(0, 3),
-      image: 'assets/iEMR.png',
-      imageLabel: isKo ? '간호 화면 목업' : 'Nursing UI mockup'
+      image: 'assets/Metro_product/OCS/00.png',
+      imageLabel: isKo ? '레거시 OCS 간호 화면' : 'Legacy OCS nursing screen'
     },
     security: {
       label: isKo ? '보안/인증' : 'Security',
       title: isKo ? '의료정보 보호를 위한 인증 체계' : 'Protection-focused authentication',
       points: ((emr.security && emr.security[1] && emr.security[1].content) || []).slice(0, 3),
-      image: 'assets/sign.png',
-      imageLabel: isKo ? '보안/인증 화면 목업' : 'Security UI mockup'
+      image: 'assets/Metro_product/OCS/08.JPG',
+      imageLabel: isKo ? '레거시 OCS 관리 화면' : 'Legacy OCS management screen'
     }
   };
 
@@ -543,6 +543,13 @@ const renderFeatureStack = () => {
     featureTabs.appendChild(btn);
   });
 
+  const mockImages = [
+    'assets/Metro_product/OCS/00.png',
+    'assets/Metro_product/OCS/01.JPG',
+    'assets/Metro_product/OCS/03.JPG',
+    'assets/Metro_product/OCS/08.JPG'
+  ];
+
   const selected = ocs.composition[state.activeFeatureTab] || [];
   const title = document.createElement('h4');
   title.textContent = headers[state.activeFeatureTab];
@@ -555,8 +562,15 @@ const renderFeatureStack = () => {
     list.appendChild(li);
   });
 
+  const mock = document.createElement('div');
+  mock.className = 'feature-mock';
+  mock.innerHTML = `
+    <img src="${mockImages[state.activeFeatureTab]}" alt="${headers[state.activeFeatureTab]} mock" />
+  `;
+
   featurePanel.appendChild(title);
   featurePanel.appendChild(list);
+  featurePanel.appendChild(mock);
 };
 
 const renderProductImageGrid = () => {

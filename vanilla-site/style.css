@@ -1506,6 +1506,34 @@ button:focus-visible,
   font-size: 0.8rem;
 }
 
+.support-contact-quick {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin-bottom: 0.55rem;
+}
+
+.support-contact-quick a {
+  text-decoration: none;
+  border: 1px solid #dbe6f6;
+  border-radius: 10px;
+  background: #fff;
+  padding: 0.55rem 0.62rem;
+  display: grid;
+  gap: 0.16rem;
+}
+
+.support-contact-quick strong {
+  color: #1f3f6c;
+  font-size: 0.8rem;
+}
+
+.support-contact-quick span {
+  color: #64748b;
+  font-size: 0.78rem;
+  word-break: break-word;
+}
+
 .support-contact-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1536,6 +1564,7 @@ button:focus-visible,
 
 @media (max-width: 900px) {
   .support-links,
+  .support-contact-quick,
   .support-contact-grid {
     grid-template-columns: 1fr;
   }

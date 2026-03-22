@@ -900,10 +900,23 @@ const renderSupportContacts = () => {
     };
   }).filter((row) => row.team || row.name || row.contact);
 
+  const headContact = (((customer.address[0] || {}).content || [])[3] || '').trim();
+  const [headEmail = '', headPhone = ''] = headContact.split('/');
+
   supportContacts.innerHTML = `
     <article class="support-contact-card">
       <h3>${isKo ? '고객지원 담당자' : 'Support Contacts'}</h3>
       <p>${isKo ? '레거시 고객센터 데이터 기반 담당자 안내' : 'Contact list based on legacy customer-center data.'}</p>
+      <div class="support-contact-quick">
+        <a href="mailto:${headEmail}">
+          <strong>${isKo ? '대표 메일' : 'Main Email'}</strong>
+          <span>${headEmail || 'customer@metrosoft.co.kr'}</span>
+        </a>
+        <a href="tel:${(headPhone || '').replace(/[^0-9+]/g, '')}">
+          <strong>${isKo ? '대표 전화' : 'Main Phone'}</strong>
+          <span>${headPhone || '031-465-9971~3'}</span>
+        </a>
+      </div>
       <div class="support-contact-grid">
         ${rows.slice(0, 4).map((row) => `
           <div class="support-contact-item">
@@ -1223,7 +1236,16 @@ const buildLegacyCards = () => {
   }
 
   const ceo = state.legacy.ceo;
+  const timeline = state.legacy.timeline;
   if (ceo) {
+    const init = timeline && timeline.init ? timeline.init : {};
+    const company = init.company || '메트로소프트(주)';
+    const ceoName = init.ceo || '-';
+    const founded = init.birth || '-';
+    const homepage = init.homepage || 'www.metrosoft.co.kr';
+    const companyAddress = init.address || '경기도 안양시 동안구 흥안대로 427번길 16 평촌디지털엠파이어 607호';
+    const mainTel = (init.tel || '').replace(/\s+/g, ' ').trim() || '031-465-9971~3 / 031-465-9974';
+
     out.introduce = [
       {
         title: ceo.title || 'CEO 인사말',
@@ -1235,19 +1257,19 @@ const buildLegacyCards = () => {
       },
       {
         title: '회사소개',
-        description: '레퍼런스 사이트의 기업 기본정보를 기준으로 핵심 항목을 정리했습니다.',
+        description: '레거시 회사 기본정보(JSON) 기준으로 핵심 항목을 정리했습니다.',
         points: [
-          '사업자명: 메트로소프트(주) / 대표자: 김형근',
-          '사업분야: 의료정보사업 · 헬스케어 서비스 · VOIP 사업 · 알림톡',
-          '회사설립연도: 2002년 / 홈페이지: www.metrosoft.co.kr'
+          `법인명: ${company} / 대표: ${ceoName}`,
+          `사업분야: ${init.area || '의료정보시스템 · 헬스케어 · 통신 부가서비스'}`,
+          `설립: ${founded} / 홈페이지: ${homepage}`
         ]
       },
       {
         title: '오시는 길',
-        description: '경기도 안양시 동안구 흥안대로 427번길 16 평촌디지털엠파이어 607호',
+        description: companyAddress,
         points: [
-          '안양IT밸리 607호 (주) 메트로소프트',
-          '대표전화: 031-465-9971~3 / FAX: 031-465-9974',
+          companyAddress,
+          `대표 연락처: ${mainTel}`,
           '지하철: 금정역 2번 출구 직진 200m → 미니스톱 좌회전 → 교량통과 후 우측 건물',
           '버스: 범계역 6-2번(LS타워 하차), 명학역 1번 출구 65번(LS타워 하차)'
         ]

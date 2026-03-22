@@ -131,6 +131,23 @@ const refreshIcons = () => {
   }
 };
 
+const getProductCardImage = (title = '', idx = 0) => {
+  const t = String(title).toLowerCase();
+
+  if (t.includes('보안') || t.includes('인증')) return 'assets/sign.png';
+  if (t.includes('간호')) return 'assets/iEMR.png';
+  if (t.includes('진료 emr')) return 'assets/EMR.png';
+  if (t.includes('iemr')) return 'assets/iEMR.png';
+  if (t.includes('emr')) return 'assets/EMR.png';
+  if (t.includes('ocs')) return 'assets/HIS.png';
+  if (t.includes('erp')) return 'assets/ERP.png';
+  if (t.includes('crm')) return 'assets/CRM.png';
+  if (t.includes('mpoc') || t.includes('모바일') || t.includes('t-biz')) return 'assets/TBiz.png';
+
+  const fallback = ['assets/EMR.png', 'assets/iEMR.png', 'assets/HIS.png', 'assets/ERP.png', 'assets/CRM.png', 'assets/TBiz.png'];
+  return fallback[idx % fallback.length];
+};
+
 const renderCards = (target, cards = [], key = '') => {
   if (!target) return;
   clearChildren(target);
@@ -139,12 +156,23 @@ const renderCards = (target, cards = [], key = '') => {
     const article = document.createElement('article');
     article.className = `card card--${key}`;
 
-    const icons = cardIcons[key] || [];
-    const iconName = icons[idx % icons.length] || 'circle';
-    const badge = document.createElement('div');
-    badge.className = 'card__icon-badge';
-    badge.innerHTML = `<i data-lucide="${iconName}"></i>`;
-    article.appendChild(badge);
+    if (key === 'product') {
+      const img = document.createElement('img');
+      img.src = getProductCardImage(card.title, idx);
+      img.alt = `${card.title || 'product'} image`;
+      img.className = 'card__image';
+      img.onerror = () => {
+        img.src = 'assets/product_icons/EMR.svg';
+      };
+      article.appendChild(img);
+    } else {
+      const icons = cardIcons[key] || [];
+      const iconName = icons[idx % icons.length] || 'circle';
+      const badge = document.createElement('div');
+      badge.className = 'card__icon-badge';
+      badge.innerHTML = `<i data-lucide="${iconName}"></i>`;
+      article.appendChild(badge);
+    }
 
     const title = document.createElement('h3');
     title.textContent = card.title;

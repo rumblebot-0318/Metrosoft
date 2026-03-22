@@ -57,6 +57,8 @@ const productTabContent = $('[data-product-tab-content]');
 const customerTable = $('[data-customer-table]');
 const orgSummary = $('[data-org-summary]');
 const remoteSupport = $('[data-remote-support]');
+const supportLinks = $('[data-support-links]');
+const companyMap = $('[data-company-map]');
 const hospitalTitle = $('[data-hospital-title]');
 const hospitalSub = $('[data-hospital-sub]');
 const hospitalGrid = $('[data-hospital-grid]');
@@ -825,6 +827,45 @@ const renderRemoteSupport = () => {
   `;
 };
 
+const renderSupportLinks = () => {
+  if (!supportLinks) return;
+  const isKo = state.locale === 'ko';
+  supportLinks.innerHTML = `
+    <a class="support-link-card" href="http://www.metrosoft.co.kr/customer" target="_blank" rel="noreferrer noopener">
+      <strong>${isKo ? '고객지원' : 'Customer Support'}</strong>
+      <span>${isKo ? '문의 채널 및 운영 안내' : 'Inquiry channels and operating guide'}</span>
+    </a>
+    <a class="support-link-card" href="http://www.metrosoft.co.kr/notice" target="_blank" rel="noreferrer noopener">
+      <strong>${isKo ? '공지사항' : 'Notices'}</strong>
+      <span>${isKo ? '업데이트/점검 공지 확인' : 'Check updates and maintenance notices'}</span>
+    </a>
+    <a class="support-link-card" href="http://www.metrosoft.co.kr/qna" target="_blank" rel="noreferrer noopener">
+      <strong>${isKo ? 'Q&A / FAQ' : 'Q&A / FAQ'}</strong>
+      <span>${isKo ? '자주 묻는 질문 바로가기' : 'Go to frequently asked questions'}</span>
+    </a>
+  `;
+};
+
+const renderCompanyMap = () => {
+  if (!companyMap) return;
+  const isKo = state.locale === 'ko';
+  const query = encodeURIComponent('경기도 안양시 동안구 흥안대로 427번길 16 평촌디지털엠파이어 607호 메트로소프트');
+
+  companyMap.innerHTML = `
+    <div class="company-map__header">
+      <h3>${isKo ? '오시는 길' : 'Directions'}</h3>
+      <a href="https://maps.google.com/?q=${query}" target="_blank" rel="noreferrer noopener">
+        ${isKo ? '지도 앱에서 열기' : 'Open in Maps'}
+      </a>
+    </div>
+    <iframe
+      title="Metrosoft map"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      src="https://maps.google.com/maps?q=${query}&z=16&output=embed"></iframe>
+  `;
+};
+
 const renderHospitalGrid = () => {
   const hospitals = state.legacy.hospitals;
   if (!hospitalGrid) return;
@@ -1020,6 +1061,26 @@ const buildLegacyCards = () => {
     ];
   }
 
+  const cloud = state.legacy.cloud;
+  if (cloud && cloud.Title) {
+    out.business = out.business || [];
+    out.business.push({
+      title: cloud.Title.title || '클라우드형 ERP',
+      description: firstSentence(cloud.Title.content || ''),
+      points: (cloud.features || []).slice(0, 3).map((f) => firstSentence(f.title || ''))
+    });
+  }
+
+  const voip = state.legacy.voip;
+  if (voip && (voip.features || voip.effects)) {
+    out.business = out.business || [];
+    out.business.push({
+      title: 'VOIP 사업',
+      description: firstSentence(voip.intro || '인터넷 기반 양방향 통신 서비스'),
+      points: (voip.effects || []).slice(0, 3)
+    });
+  }
+
   const productCards = [];
   const emr = state.legacy.emr;
   if (emr && emr.intro) {
@@ -1189,6 +1250,7 @@ const render = () => {
 
   renderOrganizationSummary();
   renderRemoteSupport();
+  renderSupportLinks();
   renderFeatureStack();
   renderProductImageGrid();
   renderProductTree();
@@ -1263,6 +1325,7 @@ const render = () => {
   renderSimpleList(companyContactList, companyInfo.contact);
   if (companyAccessTitle) companyAccessTitle.textContent = companyInfo.accessTitle;
   renderSimpleList(companyAccessList, companyInfo.access);
+  renderCompanyMap();
   if (quickInquiryText) quickInquiryText.textContent = companyInfo.quickLabel;
 
   refreshIcons();
@@ -1277,6 +1340,8 @@ const fetchJson = (path) => fetch(path).then((res) => (res.ok ? res.json() : nul
 Promise.all([
   fetchJson('data/translations.json'),
   fetchJson('data/legacy/Business/MetroHIS.json'),
+  fetchJson('data/legacy/Business/Cloud.json'),
+  fetchJson('data/legacy/Business/VOIP.json'),
   fetchJson('data/legacy/Product/EMR.json'),
   fetchJson('data/legacy/Product/iEMR.json'),
   fetchJson('data/legacy/Product/OCS.json'),
@@ -1291,6 +1356,8 @@ Promise.all([
 ]).then(([
   translations,
   metroHis,
+  cloud,
+  voip,
   emr,
   iemr,
   ocs,
@@ -1304,7 +1371,7 @@ Promise.all([
   organization
 ]) => {
   state.translations = translations;
-  state.legacy = { metroHis, emr, iemr, ocs, erp, crm, mpoc, ceo, customer, hospitals, timeline, organization };
+  state.legacy = { metroHis, cloud, voip, emr, iemr, ocs, erp, crm, mpoc, ceo, customer, hospitals, timeline, organization };
   render();
   fetchMetroNews();
 }).catch((err) => {

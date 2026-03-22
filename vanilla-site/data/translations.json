@@ -12,6 +12,22 @@
       "description": "디지털 헬스케어와 스토리텔링을 결합한 통합 솔루션을 제공합니다.",
       "cta": "메트로소프트 소개"
     },
+    "metrics": [
+      { "value": "120+", "label": "도입 병원" },
+      { "value": "24/7", "label": "고객 지원" },
+      { "value": "9", "label": "핵심 제품군" },
+      { "value": "15yr", "label": "업력" }
+    ],
+    "spotlight": {
+      "eyebrow": "Core Platform",
+      "title": "MetroHIS 중심의 통합 의료 운영 플랫폼",
+      "description": "원무/진료/지원/경영 데이터를 하나로 묶어 병원 운영의 흐름을 최적화합니다.",
+      "points": [
+        "EMR/OCS/CRM/ERP/EIS를 단일 흐름으로 통합",
+        "보험청구/수납/문서 자동화",
+        "환자 커뮤니케이션(알림톡/VOIP/MetroSMS) 연동"
+      ]
+    },
     "titles": {
       "highlights": "Highlights",
       "business": "Business",
@@ -90,7 +106,12 @@
         "description": "원격 접속 기반의 신속한 문제 해결.",
         "points": ["알림톡 연동", "원격 + 현장 협업", "응급 대응 채널"]
       }
-    ]
+    ],
+    "cta": {
+      "title": "메트로소프트와 함께 다음 병원 운영 모델을 설계하세요",
+      "description": "EMR부터 커뮤니케이션까지, 실제 현장에 맞는 구성으로 빠르게 전환합니다.",
+      "button": "도입 문의하기"
+    }
   },
   "en": {
     "nav": [
@@ -104,6 +125,22 @@
       "title": "Connecting healthcare and storytelling",
       "description": "Integrated solutions combining digital healthcare and narrative experiences.",
       "cta": "Discover Metrosoft"
+    },
+    "metrics": [
+      { "value": "120+", "label": "Hospitals" },
+      { "value": "24/7", "label": "Support" },
+      { "value": "9", "label": "Core Products" },
+      { "value": "15yr", "label": "Track Record" }
+    ],
+    "spotlight": {
+      "eyebrow": "Core Platform",
+      "title": "Unified healthcare operations powered by MetroHIS",
+      "description": "From admissions to finance, MetroHIS streamlines workflows and insight cycles.",
+      "points": [
+        "Single flow for EMR/OCS/CRM/ERP/EIS",
+        "Insurance, billing and document automation",
+        "Integrated patient communication channels"
+      ]
     },
     "titles": {
       "highlights": "Highlights",
@@ -183,6 +220,11 @@
         "description": "Fast troubleshooting via remote access.",
         "points": ["AlimTalk integration", "Remote + on-site collaboration", "Emergency response"]
       }
-    ]
+    ],
+    "cta": {
+      "title": "Design your next hospital operations model with Metrosoft",
+      "description": "From EMR to patient communication, deploy quickly with tailored modules.",
+      "button": "Contact Sales"
+    }
   }
 }

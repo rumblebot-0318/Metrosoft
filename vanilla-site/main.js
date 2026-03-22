@@ -11,6 +11,16 @@ const heroDescription = $('[data-hero-description]');
 const heroCta = $('[data-hero-cta]');
 const nav = $('[data-nav]');
 const localeButtons = $$('[data-locale]');
+const metricsTarget = $('[data-metrics]');
+
+const spotlightEyebrow = $('[data-spotlight-eyebrow]');
+const spotlightTitle = $('[data-spotlight-title]');
+const spotlightDescription = $('[data-spotlight-description]');
+const spotlightPoints = $('[data-spotlight-points]');
+
+const ctaTitle = $('[data-cta-title]');
+const ctaDescription = $('[data-cta-description]');
+const ctaButton = $('[data-cta-button]');
 
 const sectionTargets = {
   highlights: $('[data-highlights]'),
@@ -37,6 +47,7 @@ const subTargets = {
 };
 
 const clearChildren = (el) => {
+  if (!el) return;
   while (el.firstChild) el.removeChild(el.firstChild);
 };
 
@@ -78,6 +89,28 @@ const renderNav = (items = []) => {
   });
 };
 
+const renderMetrics = (metrics = []) => {
+  clearChildren(metricsTarget);
+  metrics.forEach((metric) => {
+    const box = document.createElement('div');
+    box.className = 'metric';
+    box.innerHTML = `<strong>${metric.value}</strong><span>${metric.label}</span>`;
+    metricsTarget.appendChild(box);
+  });
+};
+
+const renderSpotlight = (spotlight = {}) => {
+  spotlightEyebrow.textContent = spotlight.eyebrow || '';
+  spotlightTitle.textContent = spotlight.title || '';
+  spotlightDescription.textContent = spotlight.description || '';
+  clearChildren(spotlightPoints);
+  (spotlight.points || []).forEach((point) => {
+    const li = document.createElement('li');
+    li.textContent = point;
+    spotlightPoints.appendChild(li);
+  });
+};
+
 const setLocale = (locale) => {
   state.locale = locale;
   localStorage.setItem('metrosoft-locale', locale);
@@ -93,6 +126,8 @@ const render = () => {
   heroCta.textContent = t.hero.cta;
 
   renderNav(t.nav);
+  renderMetrics(t.metrics || []);
+  renderSpotlight(t.spotlight || {});
 
   Object.keys(titleTargets).forEach((key) => {
     if (titleTargets[key]) titleTargets[key].textContent = t.titles[key] || key;
@@ -104,6 +139,12 @@ const render = () => {
   renderCards(sectionTargets.product, t.product);
   renderCards(sectionTargets.introduce, t.introduce);
   renderCards(sectionTargets.customer, t.customer);
+
+  if (t.cta) {
+    ctaTitle.textContent = t.cta.title || '';
+    ctaDescription.textContent = t.cta.description || '';
+    ctaButton.textContent = t.cta.button || '';
+  }
 
   localeButtons.forEach((button) => {
     button.classList.toggle('active', button.dataset.locale === state.locale);

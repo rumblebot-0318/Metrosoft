@@ -309,8 +309,44 @@ body {
   font-weight: 700;
 }
 
+.certified-history {
+  margin-top: 0.85rem;
+}
+
+.certified-history__tabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.6rem;
+}
+
+.history-tab {
+  border: 1px solid #d1deee;
+  background: #fff;
+  border-radius: 999px;
+  padding: 0.35rem 0.72rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #3c5776;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.history-tab.active {
+  border-color: rgba(11,58,130,0.35);
+  background: rgba(11,58,130,0.08);
+  color: var(--primary);
+}
+
+.history-tab svg {
+  width: 14px;
+  height: 14px;
+}
+
 .certified-timeline {
-  margin-top: 0.9rem;
+  margin-top: 0.2rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 0.6rem;
@@ -569,6 +605,67 @@ body {
   font-weight: 700;
 }
 
+.feature-stack {
+  margin-top: 0.95rem;
+  border: 1px solid #dbe4f2;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #fbfdff, #f5f9ff);
+  padding: 0.8rem;
+}
+
+.feature-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  gap: 0.45rem;
+}
+
+.feature-tab {
+  border: 1px solid #d1deee;
+  background: #fff;
+  border-radius: 10px;
+  padding: 0.6rem 0.55rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  color: #3d5775;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.feature-tab.active {
+  border-color: rgba(11,58,130,0.35);
+  background: rgba(11,58,130,0.08);
+  color: var(--primary);
+}
+
+.feature-tab svg {
+  width: 16px;
+  height: 16px;
+}
+
+.feature-panel {
+  margin-top: 0.65rem;
+  border: 1px solid #dae6f5;
+  border-radius: 10px;
+  background: #fff;
+  padding: 0.75rem 0.8rem;
+}
+
+.feature-panel h4 {
+  margin: 0;
+  color: #1f3f6c;
+  font-size: 0.95rem;
+}
+
+.feature-list {
+  margin: 0.55rem 0 0;
+  padding-left: 1rem;
+  color: #425873;
+  line-height: 1.5;
+}
+
 .table-wrap {
   margin-top: 1rem;
   overflow-x: auto;
@@ -822,6 +919,7 @@ body {
   .hero__media { padding: 0 1rem 1.1rem; }
   .hero-panel { width: 100%; }
   .product-focus { grid-template-columns: 1fr; }
+  .feature-tabs { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
 }
 
 @media (max-width: 768px) {

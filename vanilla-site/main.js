@@ -4,7 +4,9 @@ const state = {
   legacy: {},
   metroNews: [],
   newsLoading: false,
-  activeProductTab: 'treatment'
+  activeProductTab: 'treatment',
+  activeFeatureTab: 0,
+  activeTimelineCategory: 'cert'
 };
 
 const $ = (selector) => document.querySelector(selector);
@@ -19,6 +21,7 @@ const metricsTarget = $('[data-metrics]');
 const certifiedTitle = $('[data-certified-title]');
 const certifiedSub = $('[data-certified-sub]');
 const certifiedGrid = $('[data-certified-grid]');
+const certifiedHistoryTabs = $('[data-certified-history-tabs]');
 const certifiedTimeline = $('[data-certified-timeline]');
 
 const spotlightEyebrow = $('[data-spotlight-eyebrow]');
@@ -32,7 +35,8 @@ const ctaButton = $('[data-cta-button]');
 
 const productTableTitle = $('[data-product-table-title]');
 const productTableSub = $('[data-product-table-sub]');
-const productTable = $('[data-product-table]');
+const featureTabs = $('[data-feature-tabs]');
+const featurePanel = $('[data-feature-panel]');
 const productImages = $('[data-product-images]');
 const productTree = $('[data-product-tree]');
 const productFocusKicker = $('[data-product-focus-kicker]');
@@ -321,22 +325,71 @@ const renderCertified = () => {
 };
 
 const renderCertifiedTimeline = () => {
-  if (!certifiedTimeline) return;
+  if (!certifiedTimeline || !certifiedHistoryTabs) return;
   clearChildren(certifiedTimeline);
+  clearChildren(certifiedHistoryTabs);
 
   const timeline = state.legacy.timeline;
   if (!timeline || !Array.isArray(timeline.content)) return;
 
-  const keywords = /인증|파트너|partnership|partner|isv|inno-biz|msp/i;
+  const isKo = state.locale === 'ko';
+  const categories = {
+    cert: {
+      label: isKo ? '인증' : 'Certification',
+      icon: 'badge-check',
+      test: /인증|cert|inno-biz|msp/i
+    },
+    award: {
+      label: isKo ? '수상' : 'Awards',
+      icon: 'trophy',
+      test: /수상|award|대상/i
+    },
+    partner: {
+      label: isKo ? '대외협력' : 'Partnership',
+      icon: 'handshake',
+      test: /협력|협정|partnership|partner|isv|hp|samsung|microsoft/i
+    },
+    product: {
+      label: isKo ? '제품출시/공급' : 'Product Milestones',
+      icon: 'rocket',
+      test: /공급|출시|솔루션|개발|구축|수주|서비스/i
+    }
+  };
 
+  if (!categories[state.activeTimelineCategory]) {
+    state.activeTimelineCategory = 'cert';
+  }
+
+  Object.entries(categories).forEach(([key, category]) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = `history-tab ${state.activeTimelineCategory === key ? 'active' : ''}`;
+    btn.innerHTML = `<i data-lucide="${category.icon}"></i><span>${category.label}</span>`;
+    btn.onclick = () => {
+      state.activeTimelineCategory = key;
+      renderCertifiedTimeline();
+      refreshIcons();
+    };
+    certifiedHistoryTabs.appendChild(btn);
+  });
+
+  const activeCategory = categories[state.activeTimelineCategory];
   const entries = timeline.content
     .filter((row) => row && row.year && Array.isArray(row.content))
     .map((row) => ({
       year: row.year,
-      hits: row.content.filter((c) => keywords.test(c))
+      hits: row.content.filter((text) => activeCategory.test.test(text))
     }))
     .filter((row) => row.hits.length)
     .slice(-8);
+
+  if (!entries.length) {
+    const empty = document.createElement('article');
+    empty.className = 'timeline-item';
+    empty.innerHTML = `<ul class="timeline-list"><li>${isKo ? '해당 분류의 연혁 데이터가 없습니다.' : 'No timeline entries for this category.'}</li></ul>`;
+    certifiedTimeline.appendChild(empty);
+    return;
+  }
 
   entries.forEach((entry) => {
     const item = document.createElement('article');
@@ -446,35 +499,48 @@ const renderProductFocus = () => {
   `;
 };
 
-const renderProductDetailTable = () => {
+const renderFeatureStack = () => {
   const ocs = state.legacy.ocs;
-  if (!productTable) return;
-  clearChildren(productTable);
-  if (!ocs || !ocs.composition) return;
+  if (!featureTabs || !featurePanel) return;
+  clearChildren(featureTabs);
+  clearChildren(featurePanel);
+  if (!ocs || !Array.isArray(ocs.composition)) return;
 
-  const headers = ['원무/보험', '진료', '진료지원', '경영관리'];
-  const thead = document.createElement('thead');
-  const htr = document.createElement('tr');
-  headers.forEach((h) => {
-    const th = document.createElement('th');
-    th.textContent = h;
-    htr.appendChild(th);
+  const isKo = state.locale === 'ko';
+  const headers = isKo
+    ? ['원무/보험', '진료', '진료지원', '경영관리']
+    : ['Admin/Insurance', 'Clinical', 'Care Support', 'Management'];
+  const icons = ['receipt-text', 'stethoscope', 'syringe', 'briefcase-business'];
+
+  if (state.activeFeatureTab >= headers.length) state.activeFeatureTab = 0;
+
+  headers.forEach((label, idx) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = `feature-tab ${state.activeFeatureTab === idx ? 'active' : ''}`;
+    btn.innerHTML = `<i data-lucide="${icons[idx] || 'circle'}"></i><span>${label}</span>`;
+    btn.onclick = () => {
+      state.activeFeatureTab = idx;
+      renderFeatureStack();
+      refreshIcons();
+    };
+    featureTabs.appendChild(btn);
   });
-  thead.appendChild(htr);
-  productTable.appendChild(thead);
 
-  const tbody = document.createElement('tbody');
-  const maxRows = Math.max(...ocs.composition.map((col) => col.length));
-  for (let i = 0; i < maxRows; i += 1) {
-    const tr = document.createElement('tr');
-    ocs.composition.forEach((col) => {
-      const td = document.createElement('td');
-      td.textContent = col[i] || '';
-      tr.appendChild(td);
-    });
-    tbody.appendChild(tr);
-  }
-  productTable.appendChild(tbody);
+  const selected = ocs.composition[state.activeFeatureTab] || [];
+  const title = document.createElement('h4');
+  title.textContent = headers[state.activeFeatureTab];
+
+  const list = document.createElement('ul');
+  list.className = 'feature-list';
+  selected.slice(0, 12).forEach((text) => {
+    const li = document.createElement('li');
+    li.textContent = text;
+    list.appendChild(li);
+  });
+
+  featurePanel.appendChild(title);
+  featurePanel.appendChild(list);
 };
 
 const renderProductImageGrid = () => {
@@ -941,7 +1007,7 @@ const render = () => {
   renderCards(sectionTargets.introduce, mergeCards(t.introduce, 'introduce', legacyCards), 'introduce');
   renderCards(sectionTargets.customer, mergeCards(t.customer, 'customer', legacyCards), 'customer');
 
-  renderProductDetailTable();
+  renderFeatureStack();
   renderProductImageGrid();
   renderProductTree();
   renderCustomerTable();

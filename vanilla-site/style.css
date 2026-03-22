@@ -1742,6 +1742,29 @@ button:focus-visible,
   word-break: break-word;
 }
 
+.support-contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.15rem;
+}
+
+.support-contact-actions a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.14rem 0.45rem;
+  border-radius: 999px;
+  border: 1px solid #dbe6f6;
+  color: #1f3f6c;
+  font-size: 0.72rem;
+  text-decoration: none;
+  background: #f5f9ff;
+}
+
+.support-contact-actions a:hover {
+  background: #e9f1ff;
+}
+
 @media (max-width: 900px) {
   .support-links,
   .support-contact-quick,

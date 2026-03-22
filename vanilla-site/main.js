@@ -1043,44 +1043,57 @@ const renderSupportContacts = () => {
   const customer = state.legacy.customer;
   const isKo = state.locale === 'ko';
 
-  if (!customer || !Array.isArray(customer.address) || customer.address.length < 4) {
+  if (!customer || !Array.isArray(customer.address) || customer.address.length < 2) {
     supportContacts.innerHTML = '';
     return;
   }
 
+  const parseContact = (raw = '') => {
+    const chunks = String(raw).split('/').map((item) => item.trim()).filter(Boolean);
+    const email = chunks.find((item) => item.includes('@')) || '';
+    const phone = chunks.find((item) => /\d{2,}/.test(item)) || '';
+    return { email, phone, raw: String(raw || '').trim() };
+  };
+
   const rows = customer.address.slice(1).map((entry) => {
     const content = entry.content || [];
+    const parsed = parseContact(content[3] || '');
     return {
       team: (content[0] || '').trim(),
       name: (content[1] || '').trim(),
       role: (content[2] || '').trim(),
-      contact: (content[3] || '').trim()
+      contactRaw: (content[3] || '').trim(),
+      email: parsed.email,
+      phone: parsed.phone
     };
-  }).filter((row) => row.team || row.name || row.contact);
+  }).filter((row) => row.team || row.name || row.contactRaw);
 
-  const headContact = (((customer.address[0] || {}).content || [])[3] || '').trim();
-  const [headEmail = '', headPhone = ''] = headContact.split('/');
+  const headContact = parseContact((((customer.address[0] || {}).content || [])[3] || '').trim());
 
   supportContacts.innerHTML = `
     <article class="support-contact-card">
       <h3>${isKo ? '고객지원 담당자' : 'Support Contacts'}</h3>
-      <p>${isKo ? '레거시 고객센터 데이터 기반 담당자 안내' : 'Contact list based on legacy customer-center data.'}</p>
+      <p>${isKo ? '레거시 고객센터 데이터를 기반으로 부서별 연락처를 그대로 보강했습니다.' : 'Department contacts are expanded from legacy customer-center data.'}</p>
       <div class="support-contact-quick">
-        <a href="mailto:${headEmail}">
+        <a href="mailto:${headContact.email || 'customer@metrosoft.co.kr'}">
           <strong>${isKo ? '대표 메일' : 'Main Email'}</strong>
-          <span>${headEmail || 'customer@metrosoft.co.kr'}</span>
+          <span>${headContact.email || 'customer@metrosoft.co.kr'}</span>
         </a>
-        <a href="tel:${(headPhone || '').replace(/[^0-9+]/g, '')}">
+        <a href="tel:${(headContact.phone || '031-465-9971').replace(/[^0-9+]/g, '')}">
           <strong>${isKo ? '대표 전화' : 'Main Phone'}</strong>
-          <span>${headPhone || '031-465-9971~3'}</span>
+          <span>${headContact.phone || '031-465-9971~3'}</span>
         </a>
       </div>
       <div class="support-contact-grid">
-        ${rows.slice(0, 4).map((row) => `
+        ${rows.map((row) => `
           <div class="support-contact-item">
             <strong>${row.team || '-'}</strong>
-            <span>${[row.name, row.role].filter(Boolean).join(' · ')}</span>
-            <em>${row.contact || '-'}</em>
+            <span>${[row.name, row.role].filter(Boolean).join(' · ') || '-'}</span>
+            <em>${row.contactRaw || '-'}</em>
+            <div class="support-contact-actions">
+              ${row.email ? `<a href="mailto:${row.email}">${isKo ? '메일' : 'Email'}</a>` : ''}
+              ${row.phone ? `<a href="tel:${row.phone.replace(/[^0-9+]/g, '')}">${isKo ? '전화' : 'Call'}</a>` : ''}
+            </div>
           </div>
         `).join('')}
       </div>
@@ -1545,6 +1558,9 @@ const render = () => {
     ctaButton.textContent = t.cta.button || '';
   }
 
+  const timelineInit = ((state.legacy || {}).timeline || {}).init || {};
+  const legacyHomepage = (timelineInit.homepage || 'www.metrosoft.co.kr').replace(/\s+/g, ' ').trim();
+
   const companyInfo = state.locale === 'ko'
     ? {
       title: '회사 정보 · 이용 안내',
@@ -1558,6 +1574,7 @@ const render = () => {
       contact: [
         '대표전화: 031-465-9971~3 / FAX: 031-465-9974',
         '대표 메일: customer@metrosoft.co.kr',
+        `홈페이지: ${legacyHomepage}`,
         '문의 채널: 고객지원 · 원격지원'
       ],
       accessTitle: '본사 주소 · 이용안내',
@@ -1580,6 +1597,7 @@ const render = () => {
       contact: [
         'Main: +82-31-465-9971~3 / FAX: +82-31-465-9974',
         'Email: customer@metrosoft.co.kr',
+        `Homepage: ${legacyHomepage}`,
         'Channels: Support · Remote Assistance'
       ],
       accessTitle: 'Head Office · Visitor Guide',

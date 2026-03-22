@@ -941,6 +941,10 @@ const renderSupportLinks = () => {
   const [headEmail = 'customer@metrosoft.co.kr'] = headContact.split('/');
 
   supportLinks.innerHTML = `
+    <a class="support-link-card" href="mailto:${headEmail}?subject=${encodeURIComponent(isKo ? '메트로소프트 문의하기' : 'Metrosoft Inquiry')}" >
+      <strong>${isKo ? '문의하기' : 'Contact Us'}</strong>
+      <span>${isKo ? '도입/유지보수/제휴 문의를 접수합니다.' : 'Send inquiries on implementation, support, and partnerships.'}</span>
+    </a>
     <a class="support-link-card" href="http://www.metrosoft.co.kr/customer" target="_blank" rel="noreferrer noopener">
       <strong>${isKo ? '고객지원' : 'Customer Support'}</strong>
       <span>${isKo ? '문의 채널 및 운영 안내' : 'Inquiry channels and operating guide'}</span>
@@ -1422,8 +1426,8 @@ const render = () => {
   renderCertifiedTimeline();
   renderCompanyFacts();
   renderSpotlight(t.spotlight || {});
-  if (productTableTitle) productTableTitle.textContent = state.locale === 'ko' ? 'OCS 기능 카테고리' : 'OCS Feature Categories';
-  if (productTableSub) productTableSub.textContent = state.locale === 'ko' ? '필요한 영역만 탭으로 선택해 핵심 기능을 빠르게 확인할 수 있습니다.' : 'Use tabs to focus on the feature area you need.';
+  if (productTableTitle) productTableTitle.textContent = state.locale === 'ko' ? '병원 업무 생산성 극대화를 위한 OCS 통합 모듈' : 'Integrated OCS Modules for Hospital Productivity';
+  if (productTableSub) productTableSub.textContent = state.locale === 'ko' ? '원무 효율화, 스마트 진료 지원, 수납/청구 정확도 향상까지 핵심 기능을 업무 가치 중심으로 확인할 수 있습니다.' : 'Explore key modules by business value: administration efficiency, smart care support, and billing accuracy.';
 
   Object.keys(titleTargets).forEach((key) => {
     if (titleTargets[key]) titleTargets[key].textContent = t.titles[key] || key;
@@ -1452,7 +1456,7 @@ const render = () => {
   bindCarousel(productImages, productPrevBtn, productNextBtn, productDots, 380);
 
   if (hospitalTitle) hospitalTitle.textContent = state.locale === 'ko' ? '주요 고객사 병원' : 'Major Partner Hospitals';
-  if (hospitalSub) hospitalSub.textContent = state.locale === 'ko' ? '대표 병원 로고를 자동 롤링 방식으로 소개합니다.' : 'Featured hospital logos in an automatic rolling ticker.';
+  if (hospitalSub) hospitalSub.textContent = state.locale === 'ko' ? '전국 120여 개 주요 의료기관이 선택한 검증된 솔루션 파트너십입니다.' : 'A trusted solution partnership chosen by 120+ leading healthcare institutions in Korea.';
 
   if (newsTitle) newsTitle.textContent = state.locale === 'ko' ? 'Metrosoft News' : 'Metrosoft News';
   if (newsSub) newsSub.textContent = state.locale === 'ko' ? 'Google RSS에서 메트로소프트가 제목에 포함된 기사만 표시합니다.' : 'Showing only Google RSS headlines containing Metrosoft.';

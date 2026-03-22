@@ -441,7 +441,45 @@ const renderNews = () => {
   });
 };
 
+const NEWS_CACHE_KEY = 'metrosoft-news-cache-v1';
+const NEWS_CACHE_TTL_MS = 1000 * 60 * 30; // 30분
+
+const readNewsCache = () => {
+  try {
+    const raw = localStorage.getItem(NEWS_CACHE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!parsed || !Array.isArray(parsed.items) || !parsed.ts) return null;
+    return parsed;
+  } catch (error) {
+    return null;
+  }
+};
+
+const writeNewsCache = (items = []) => {
+  try {
+    localStorage.setItem(
+      NEWS_CACHE_KEY,
+      JSON.stringify({
+        ts: Date.now(),
+        items
+      })
+    );
+  } catch (error) {
+    console.warn('Failed to write Metrosoft news cache:', error);
+  }
+};
+
 const fetchMetroNews = async () => {
+  const cached = readNewsCache();
+  if (cached?.items?.length) {
+    state.metroNews = cached.items;
+    renderNews();
+  }
+
+  const cacheFresh = cached && Date.now() - cached.ts < NEWS_CACHE_TTL_MS;
+  if (cacheFresh) return;
+
   const query = encodeURIComponent('메트로소프트 OR metrosoft');
   const rssUrl = `https://news.google.com/rss/search?q=${query}&hl=ko&gl=KR&ceid=KR:ko`;
   const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(rssUrl)}`;
@@ -460,9 +498,13 @@ const fetchMetroNews = async () => {
     state.metroNews = items
       .filter((it) => /메트로소프트|metrosoft/i.test(it.title))
       .slice(0, 8);
+
+    writeNewsCache(state.metroNews);
   } catch (error) {
     console.error('Failed to fetch Metrosoft news:', error);
-    state.metroNews = [];
+    if (!cached?.items?.length) {
+      state.metroNews = [];
+    }
   }
 
   renderNews();

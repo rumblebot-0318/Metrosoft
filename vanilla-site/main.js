@@ -176,16 +176,29 @@ const renderMenuStrips = (menus = {}) => {
 
 const bindCarousel = (container, prevBtn, nextBtn, step = 320) => {
   if (!container) return;
+
+  const updateButtons = () => {
+    const maxScroll = container.scrollWidth - container.clientWidth - 2;
+    if (prevBtn) prevBtn.disabled = container.scrollLeft <= 2;
+    if (nextBtn) nextBtn.disabled = container.scrollLeft >= maxScroll;
+  };
+
   if (prevBtn) {
     prevBtn.onclick = () => {
       container.scrollBy({ left: -step, behavior: 'smooth' });
+      setTimeout(updateButtons, 220);
     };
   }
+
   if (nextBtn) {
     nextBtn.onclick = () => {
       container.scrollBy({ left: step, behavior: 'smooth' });
+      setTimeout(updateButtons, 220);
     };
   }
+
+  container.addEventListener('scroll', updateButtons, { passive: true });
+  setTimeout(updateButtons, 80);
 };
 
 const renderMetrics = (metrics = []) => {

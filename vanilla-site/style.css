@@ -10,6 +10,8 @@
   --text: #111827;
   --muted: #475569;
   --border: #dbe3ef;
+  --section-gap: 2.2rem;
+  --section-padding: 1.35rem;
 }
 
 * { box-sizing: border-box; }
@@ -242,7 +244,7 @@ button:focus-visible,
 }
 
 .metrics {
-  margin-top: 1rem;
+  margin-top: calc(var(--section-gap) * 0.5);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: 0.7rem;
@@ -258,11 +260,11 @@ button:focus-visible,
 .metric span { color: var(--muted); font-size: 0.9rem; }
 
 .spotlight {
-  margin-top: 2.2rem;
+  margin-top: var(--section-gap);
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 16px;
-  padding: 1.4rem;
+  padding: var(--section-padding);
 }
 
 .spotlight__eyebrow {
@@ -329,11 +331,11 @@ button:focus-visible,
 }
 
 .section {
-  margin-top: 2.6rem;
+  margin-top: var(--section-gap);
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 16px;
-  padding: 1.2rem;
+  padding: var(--section-padding);
 }
 .section h2 { margin: 0; font-size: clamp(1.35rem, 1.8vw, 2rem); }
 .section-sub { margin: 0.5rem 0 1rem; color: var(--muted); }
@@ -354,6 +356,13 @@ button:focus-visible,
   background: linear-gradient(180deg, #fbfdff, #f5f9ff);
   padding: 0.85rem;
   text-align: center;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.certified-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(15, 52, 102, 0.1);
+  border-color: #c9d9ee;
 }
 
 .certified-card img {
@@ -1142,6 +1151,11 @@ button:focus-visible,
 }
 
 @media (max-width: 768px) {
+  :root {
+    --section-gap: 1.65rem;
+    --section-padding: 1rem;
+  }
+
   .header-inner {
     flex-wrap: wrap;
     row-gap: 0.45rem;

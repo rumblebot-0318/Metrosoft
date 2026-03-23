@@ -70,6 +70,7 @@ const recruitHub = $('[data-recruit-hub]');
 const remoteSupport = $('[data-remote-support]');
 const supportLinks = $('[data-support-links]');
 const resourceCenter = $('[data-resource-center]');
+const quoteProcess = $('[data-quote-process]');
 const supportContacts = $('[data-support-contacts]');
 const legacySitemap = $('[data-legacy-sitemap]');
 const productKpi = $('[data-product-kpi]');
@@ -1158,6 +1159,34 @@ const renderResourceCenter = () => {
   `;
 };
 
+const renderQuoteProcess = () => {
+  if (!quoteProcess) return;
+  const isKo = state.locale === 'ko';
+
+  const steps = isKo
+    ? [
+      { title: '1) 상담 접수', desc: '대표 메일 또는 담당자 연락처로 병상/진료과/운영 이슈를 전달합니다.' },
+      { title: '2) 요구사항 분석', desc: 'EMR·OCS·ERP 범위를 기준으로 병원 현장에 맞는 구성안을 제안합니다.' },
+      { title: '3) 견적/도입 일정 안내', desc: '모듈 범위, 구축 일정, 지원 방식(원격/현장)을 포함한 제안서를 전달합니다.' }
+    ]
+    : [
+      { title: '1) Inquiry Submission', desc: 'Share bed size, departments, and key operational issues via email or direct contact.' },
+      { title: '2) Requirement Review', desc: 'We propose the right EMR/OCS/ERP scope for your clinical workflow.' },
+      { title: '3) Proposal & Timeline', desc: 'Receive module scope, implementation timeline, and support model (remote/on-site).' }
+    ];
+
+  quoteProcess.innerHTML = `
+    <article class="quote-process-card">
+      <h3>${isKo ? '견적요청 진행 절차' : 'Quotation Request Flow'}</h3>
+      <p>${isKo ? '레거시 고객센터 IA(견적요청)를 현재 화면에서 바로 이해할 수 있도록 단계형으로 정리했습니다.' : 'Legacy quotation-request IA is condensed into a simple step flow for faster decision-making.'}</p>
+      <ol>
+        ${steps.map((step) => `<li><strong>${step.title}</strong><span>${step.desc}</span></li>`).join('')}
+      </ol>
+      <a href="mailto:customer@metrosoft.co.kr?subject=${encodeURIComponent('메트로소프트 견적요청')}">${isKo ? '견적요청 메일 보내기' : 'Send quotation request email'}</a>
+    </article>
+  `;
+};
+
 const renderProductLegacyLinks = () => {
   if (!productLegacyLinks) return;
   const isKo = state.locale === 'ko';
@@ -1841,8 +1870,7 @@ const render = () => {
   heroDescription.textContent = t.hero.description;
   heroCta.textContent = t.hero.cta;
   heroCta.onclick = () => {
-    const target = document.getElementById('product-detail');
-    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    window.location.href = 'mailto:customer@metrosoft.co.kr?subject=' + encodeURIComponent(state.locale === 'ko' ? '메트로소프트 무료 데모 신청' : 'Metrosoft Demo Request');
   };
   renderHeroQuickLinks();
   renderHeaderUtility();
@@ -1893,6 +1921,7 @@ const render = () => {
   renderRemoteSupport();
   renderSupportLinks();
   renderResourceCenter();
+  renderQuoteProcess();
   renderCustomerQuickMenu();
   renderLegacySitemap();
   renderSupportContacts();

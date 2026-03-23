@@ -10,7 +10,7 @@
     "hero": {
       "title": "병원 운영을 혁신하는 메트로소프트",
       "description": "EMR·OCS·ERP 기반의 통합 의료정보 솔루션으로 진료와 경영 효율을 높입니다.",
-      "cta": "메트로소프트 소개"
+      "cta": "무료 데모 신청하기"
     },
     "metrics": [
       { "value": "120+", "label": "도입 병원" },
@@ -119,7 +119,7 @@
     "hero": {
       "title": "Metrosoft for smarter hospital operations",
       "description": "Integrated EMR, OCS, and ERP solutions that improve clinical and operational efficiency.",
-      "cta": "Discover Metrosoft"
+      "cta": "Request Free Demo"
     },
     "metrics": [
       { "value": "120+", "label": "Hospitals" },

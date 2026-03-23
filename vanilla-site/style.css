@@ -1987,6 +1987,54 @@ button:focus-visible,
   line-height: 1.4;
 }
 
+.recruit-card {
+  margin-top: 0.9rem;
+  border: 1px solid #d8e5f9;
+  border-radius: 12px;
+  padding: 0.85rem;
+  background: #f8fbff;
+}
+
+.recruit-card p {
+  color: #57739a;
+  font-size: 0.85rem;
+}
+
+.recruit-links {
+  margin-top: 0.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.recruit-links a {
+  text-decoration: none;
+  border: 1px solid #cddff8;
+  border-radius: 999px;
+  padding: 0.3rem 0.68rem;
+  background: #fff;
+  color: #1f4b82;
+  font-size: 0.82rem;
+}
+
+.footer-legacy-links {
+  margin-top: 0.6rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  font-size: 0.8rem;
+}
+
+.footer-legacy-links a {
+  color: #6f86a8;
+  text-decoration: none;
+}
+
+.footer-legacy-links span {
+  color: #9bb0cd;
+}
+
 @media (max-width: 900px) {
   .legacy-sitemap-grid,
   .product-kpi-grid,

@@ -863,10 +863,74 @@ const renderOrganizationSummary = () => {
   if (!org || !Array.isArray(org.content)) return;
 
   const isKo = state.locale === 'ko';
-  const units = org.content
-    .map((row) => Object.values(row || {})[0])
-    .filter(Boolean)
-    .slice(0, 7);
+  const entries = org.content
+    .map((row) => {
+      const key = Object.keys(row || {})[0] || '';
+      const value = row ? row[key] : '';
+      const level = Number(String(key).replace('_', '')) || 0;
+      return { level, name: value };
+    })
+    .filter((item) => item.name);
+
+  const byLevel = {
+    0: entries.filter((e) => e.level === 0),
+    1: entries.filter((e) => e.level === 1),
+    2: entries.filter((e) => e.level === 2)
+  };
+
+  const W = 900;
+  const nodeW = 158;
+  const nodeH = 42;
+
+  const place = (arr, y) => arr.map((item, i) => ({
+    ...item,
+    x: ((i + 1) * W) / (arr.length + 1),
+    y
+  }));
+
+  const level0 = place(byLevel[0], 52);
+  const level1 = place(byLevel[1], 142);
+  const level2 = place(byLevel[2], 234);
+
+  const esc = (s = '') => String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+
+  const line = (x1, y1, x2, y2) => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#c9d7ea" stroke-width="2"/>`;
+  const node = (n) => `
+    <g>
+      <rect x="${n.x - nodeW / 2}" y="${n.y - nodeH / 2}" width="${nodeW}" height="${nodeH}" rx="10" fill="#ffffff" stroke="#d6e3f3"/>
+      <text x="${n.x}" y="${n.y}" text-anchor="middle" dominant-baseline="middle" fill="#1f3f6c" font-size="13" font-weight="700">${esc(n.name)}</text>
+    </g>
+  `;
+
+  let lines = '';
+  if (level0[0] && level1.length) {
+    lines += level1.map((n) => line(level0[0].x, level0[0].y + nodeH / 2, n.x, n.y - nodeH / 2)).join('');
+  }
+
+  if (level1.length && level2.length) {
+    lines += level2.map((n, idx) => {
+      const parent = level1[Math.floor((idx * level1.length) / level2.length)] || level1[0];
+      return line(parent.x, parent.y + nodeH / 2, n.x, n.y - nodeH / 2);
+    }).join('');
+  } else if (level0[0] && level2.length) {
+    lines += level2.map((n) => line(level0[0].x, level0[0].y + nodeH / 2, n.x, n.y - nodeH / 2)).join('');
+  }
+
+  const svg = `
+    <svg viewBox="0 0 ${W} 300" role="img" aria-label="organization chart" xmlns="http://www.w3.org/2000/svg">
+      ${lines}
+      ${level0.map(node).join('')}
+      ${level1.map(node).join('')}
+      ${level2.map(node).join('')}
+    </svg>
+  `;
+
+  const units = entries.map((e) => e.name).slice(0, 8);
 
   orgSummary.innerHTML = `
     <article class="org-card">
@@ -876,6 +940,7 @@ const renderOrganizationSummary = () => {
         <span>${isKo ? '기준일' : 'Updated'}: ${org.updata_date || '-'}</span>
         <span>${isKo ? '정원/현원' : 'Headcount'}: ${org.total || '-'} / ${org.now || '-'}</span>
       </div>
+      <div class="org-diagram">${svg}</div>
       <ul>${units.map((name) => `<li>${name}</li>`).join('')}</ul>
     </article>
   `;

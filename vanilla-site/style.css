@@ -1741,6 +1741,16 @@ button:focus-visible,
   word-break: break-word;
 }
 
+.support-contact-hours {
+  margin: 0 0 0.55rem;
+  border: 1px dashed #cfe0f9;
+  border-radius: 10px;
+  background: #f5f9ff;
+  padding: 0.45rem 0.62rem;
+  color: #48627f;
+  font-size: 0.76rem;
+}
+
 .support-contact-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1882,6 +1892,7 @@ button:focus-visible,
 
 .legacy-sitemap-card,
 .product-kpi-card,
+.ocs-modules-card,
 .product-legacy-links-card,
 .resource-center-card,
 .quote-process-card {
@@ -2019,6 +2030,41 @@ button:focus-visible,
   font-weight: 700;
 }
 
+.ocs-modules-grid {
+  margin-top: 0.72rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.62rem;
+}
+
+.ocs-module-item {
+  border: 1px solid #deebf8;
+  border-radius: 10px;
+  background: #f9fbff;
+  padding: 0.68rem;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.ocs-module-item strong {
+  color: #1f3f6c;
+  font-size: 0.86rem;
+}
+
+.ocs-module-item span {
+  color: #557095;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.ocs-module-item ul {
+  margin: 0.1rem 0 0;
+  padding-left: 1rem;
+  color: #445e80;
+  font-size: 0.79rem;
+  line-height: 1.35;
+}
+
 .product-legacy-links-grid {
   margin-top: 0.72rem;
   display: grid;
@@ -2125,6 +2171,7 @@ button:focus-visible,
 @media (max-width: 900px) {
   .legacy-sitemap-grid,
   .product-kpi-grid,
+  .ocs-modules-grid,
   .resource-center-grid {
     grid-template-columns: 1fr;
   }

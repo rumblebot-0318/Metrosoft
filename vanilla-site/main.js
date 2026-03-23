@@ -74,6 +74,7 @@ const quoteProcess = $('[data-quote-process]');
 const supportContacts = $('[data-support-contacts]');
 const legacySitemap = $('[data-legacy-sitemap]');
 const productKpi = $('[data-product-kpi]');
+const ocsModules = $('[data-ocs-modules]');
 const productLegacyLinks = $('[data-product-legacy-links]');
 const companyMap = $('[data-company-map]');
 const footerLegacyLinks = $('[data-footer-legacy-links]');
@@ -1410,6 +1411,47 @@ const renderProductKpi = () => {
   `;
 };
 
+const renderOCSModules = () => {
+  if (!ocsModules) return;
+  const ocs = state.legacy.ocs;
+  const isKo = state.locale === 'ko';
+
+  if (!ocs || !Array.isArray(ocs.Lists) || !ocs.Lists.length) {
+    ocsModules.innerHTML = '';
+    return;
+  }
+
+  const cards = ocs.Lists.slice(0, 3).map((group) => {
+    const topItems = Array.isArray(group.contents)
+      ? group.contents.flatMap((item) => Array.isArray(item.contents) ? item.contents : []).slice(0, 4)
+      : [];
+    return {
+      title: group.title || '-',
+      description: firstSentence(group.description || ''),
+      points: topItems.map((item) => item.title || '').filter(Boolean)
+    };
+  });
+
+  ocsModules.innerHTML = `
+    <article class="ocs-modules-card">
+      <h3>${isKo ? 'OCS 세부 업무영역' : 'OCS Functional Domains'}</h3>
+      <p>${isKo
+        ? '레거시 OCS 상세 데이터(원무/보험·진료·진료지원)에서 실무 기능을 발췌해 제품 신뢰도를 보강했습니다.'
+        : 'Practical module details are extracted from legacy OCS data (admin/insurance, clinical, support).'}
+      </p>
+      <div class="ocs-modules-grid">
+        ${cards.map((card) => `
+          <section class="ocs-module-item">
+            <strong>${card.title}</strong>
+            <span>${card.description || (isKo ? '레거시 상세 설명 기반 요약' : 'Summary based on legacy details')}</span>
+            <ul>${card.points.map((point) => `<li>${point}</li>`).join('')}</ul>
+          </section>
+        `).join('')}
+      </div>
+    </article>
+  `;
+};
+
 const renderSupportContacts = () => {
   if (!supportContacts) return;
   const customer = state.legacy.customer;
@@ -1455,6 +1497,9 @@ const renderSupportContacts = () => {
           <strong>${isKo ? '대표 전화' : 'Main Phone'}</strong>
           <span>${headContact.phone || '031-465-9971~3'}</span>
         </a>
+      </div>
+      <div class="support-contact-hours">
+        <span>${isKo ? '이용안내: 평일 대표전화/고객문의, 주말 원격지원 접수' : 'Guide: weekdays via main line/inquiry, weekends via remote support'}</span>
       </div>
       <div class="support-contact-grid">
         ${rows.map((row) => `
@@ -1927,6 +1972,7 @@ const render = () => {
   renderSupportContacts();
   renderFeatureStack();
   renderProductKpi();
+  renderOCSModules();
   renderProductLegacyLinks();
   renderProductImageGrid();
   renderProductTree();

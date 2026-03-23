@@ -1844,6 +1844,46 @@ button:focus-visible,
   }
 }
 
+.header-hotline {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.45rem 1.2rem 0.15rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: center;
+}
+
+.hotline-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid #d3e1f6;
+  border-radius: 999px;
+  padding: 0.24rem 0.62rem;
+  background: #f8fbff;
+}
+
+.hotline-pill strong {
+  font-size: 0.72rem;
+  color: #375984;
+}
+
+.hotline-pill a,
+.hotline-remote {
+  font-size: 0.76rem;
+  color: #0b3a82;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.hotline-remote {
+  border: 1px solid #bcd3f5;
+  border-radius: 999px;
+  padding: 0.24rem 0.62rem;
+  background: #eef5ff;
+}
+
 .header-utility {
   max-width: 1200px;
   margin: 0 auto;
@@ -1926,6 +1966,7 @@ button:focus-visible,
 
 .legacy-sitemap-card,
 .product-kpi-card,
+.role-guide-card,
 .ocs-modules-card,
 .product-legacy-links-card,
 .resource-center-card,
@@ -2047,6 +2088,40 @@ button:focus-visible,
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.65rem;
+}
+
+.role-guide-grid {
+  margin-top: 0.72rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.62rem;
+}
+
+.role-guide-item {
+  border: 1px solid #deebf8;
+  border-radius: 10px;
+  background: #f9fbff;
+  padding: 0.68rem;
+  display: grid;
+  gap: 0.22rem;
+}
+
+.role-guide-item strong {
+  color: #1f3f6c;
+  font-size: 0.86rem;
+}
+
+.role-guide-item em {
+  font-style: normal;
+  color: #0e4ea4;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.role-guide-item span {
+  color: #557095;
+  font-size: 0.81rem;
+  line-height: 1.4;
 }
 
 .product-kpi-item {
@@ -2205,6 +2280,7 @@ button:focus-visible,
 @media (max-width: 900px) {
   .legacy-sitemap-grid,
   .product-kpi-grid,
+  .role-guide-grid,
   .ocs-modules-grid,
   .resource-center-grid {
     grid-template-columns: 1fr;

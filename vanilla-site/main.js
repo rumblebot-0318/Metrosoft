@@ -48,6 +48,7 @@ const companyAccessList = $('[data-company-access-list]');
 const quickInquiryText = $('[data-quick-inquiry-text]');
 const quickDemoText = $('[data-quick-demo-text]');
 const quickRemoteText = $('[data-quick-remote-text]');
+const headerHotline = $('[data-header-hotline]');
 const headerUtility = $('[data-header-utility]');
 const customerQuickMenu = $('[data-customer-quick-menu]');
 
@@ -74,6 +75,7 @@ const quoteProcess = $('[data-quote-process]');
 const supportContacts = $('[data-support-contacts]');
 const legacySitemap = $('[data-legacy-sitemap]');
 const productKpi = $('[data-product-kpi]');
+const roleGuide = $('[data-role-guide]');
 const ocsModules = $('[data-ocs-modules]');
 const productLegacyLinks = $('[data-product-legacy-links]');
 const companyMap = $('[data-company-map]');
@@ -1089,6 +1091,23 @@ const renderHeroQuickLinks = () => {
   `).join('');
 };
 
+const renderHeaderHotline = () => {
+  if (!headerHotline) return;
+  const isKo = state.locale === 'ko';
+
+  headerHotline.innerHTML = `
+    <div class="hotline-pill">
+      <strong>${isKo ? '긴급 고객지원' : 'Priority Support'}</strong>
+      <a href="tel:0314659971">031-465-9971~3</a>
+    </div>
+    <div class="hotline-pill">
+      <strong>${isKo ? '대표 문의 메일' : 'Main Inquiry Email'}</strong>
+      <a href="mailto:customer@metrosoft.co.kr">customer@metrosoft.co.kr</a>
+    </div>
+    <a class="hotline-remote" href="http://www.metrosoft.co.kr/Remote/TeamViewerQS-idc3g4qy58.exe" target="_blank" rel="noreferrer noopener">${isKo ? '원격지원 실행' : 'Launch Remote Support'}</a>
+  `;
+};
+
 const renderHeaderUtility = () => {
   if (!headerUtility) return;
   const isKo = state.locale === 'ko';
@@ -1483,6 +1502,41 @@ const renderProductKpi = () => {
             <em>${item.value}</em>
             <span>${item.desc}</span>
           </div>
+        `).join('')}
+      </div>
+    </article>
+  `;
+};
+
+const renderRoleGuide = () => {
+  if (!roleGuide) return;
+  const isKo = state.locale === 'ko';
+
+  const roles = isKo
+    ? [
+      { role: '의료진(의사)', value: 'EMR + OCS', benefit: '진단/처방/검사 결과를 단일 화면 흐름으로 확인' },
+      { role: '간호부', value: 'Nursing EMR', benefit: '간호기록 표준화 및 처방 실행 연계 자동화' },
+      { role: '원무/보험', value: 'OCS 원무·보험', benefit: '접수/수납/청구 누락 감소 및 심사 대응 속도 향상' },
+      { role: '경영진/행정', value: 'ERP + CRM', benefit: '재무/인사/고객관계 데이터를 기반으로 운영 의사결정 지원' }
+    ]
+    : [
+      { role: 'Clinicians', value: 'EMR + OCS', benefit: 'Single workflow for diagnosis, orders, and test results.' },
+      { role: 'Nursing Team', value: 'Nursing EMR', benefit: 'Standardized nursing records with execution-linked logging.' },
+      { role: 'Administration/Insurance', value: 'OCS Admin/Claim', benefit: 'Fewer billing misses and faster claim response.' },
+      { role: 'Executives/Operations', value: 'ERP + CRM', benefit: 'Decision support with finance, HR, and customer data.' }
+    ];
+
+  roleGuide.innerHTML = `
+    <article class="role-guide-card">
+      <h3>${isKo ? '역할별 도입 가이드' : 'Role-based Adoption Guide'}</h3>
+      <p>${isKo ? '도입 검토 시 병원 내 이해관계자(의료진/간호/원무/경영진) 기준으로 필요한 모듈을 빠르게 확인할 수 있습니다.' : 'Quickly map required modules by stakeholder group.'}</p>
+      <div class="role-guide-grid">
+        ${roles.map((item) => `
+          <section class="role-guide-item">
+            <strong>${item.role}</strong>
+            <em>${item.value}</em>
+            <span>${item.benefit}</span>
+          </section>
         `).join('')}
       </div>
     </article>
@@ -2003,6 +2057,7 @@ const render = () => {
     window.location.href = 'mailto:customer@metrosoft.co.kr?subject=' + encodeURIComponent(state.locale === 'ko' ? '메트로소프트 무료 데모 신청' : 'Metrosoft Demo Request');
   };
   renderHeroQuickLinks();
+  renderHeaderHotline();
   renderHeaderUtility();
 
   renderNav(menuConfig.nav || t.nav || []);
@@ -2057,6 +2112,7 @@ const render = () => {
   renderSupportContacts();
   renderFeatureStack();
   renderProductKpi();
+  renderRoleGuide();
   renderOCSModules();
   renderProductLegacyLinks();
   renderProductImageGrid();

@@ -232,13 +232,16 @@ const renderCards = (target, cards = [], key = '') => {
     title.textContent = card.title;
 
     const desc = document.createElement('p');
-    desc.textContent = card.description;
+    const descLimit = key === 'product' ? 92 : 78;
+    desc.textContent = compactText(card.description, descLimit);
 
     const list = document.createElement('ul');
-    const limitedPoints = key === 'product' ? (card.points || []).slice(0, 3) : (card.points || []);
+    const rawPoints = card.points || [];
+    const maxPoints = key === 'product' ? 3 : 2;
+    const limitedPoints = rawPoints.slice(0, maxPoints);
     limitedPoints.forEach((point) => {
       const li = document.createElement('li');
-      li.textContent = point;
+      li.textContent = compactText(point, 56);
       list.appendChild(li);
     });
 
@@ -808,7 +811,7 @@ const renderProductTree = () => {
     title.textContent = group.title || '';
 
     const desc = document.createElement('p');
-    desc.textContent = (group.description || '').replace(/\|/g, ' ');
+    desc.textContent = compactText((group.description || '').replace(/\|/g, ' '), 120);
 
     block.appendChild(title);
     block.appendChild(desc);
@@ -1320,8 +1323,8 @@ const renderProductLegacyLinks = () => {
         ${cards.map((item) => `
           <article class="product-legacy-item">
             <h4>${item.title}</h4>
-            <p>${item.summary || (isKo ? '제품 상세 데이터 기반 요약입니다.' : 'Product-detail based summary.')}</p>
-            <ul>${(item.points || []).map((point) => `<li>${point}</li>`).join('')}</ul>
+            <p>${compactText(item.summary || (isKo ? '제품 상세 데이터 기반 요약입니다.' : 'Product-detail based summary.'), 88)}</p>
+            <ul>${(item.points || []).slice(0, 1).map((point) => `<li>${compactText(point, 58)}</li>`).join('')}</ul>
             <a href="#product-detail">${isKo ? '상세 구성 보기' : 'View detailed modules'}</a>
           </article>
         `).join('')}
@@ -1785,6 +1788,13 @@ const firstSentence = (text = '') => {
   if (!cleaned) return '';
   const bySlash = cleaned.split('/')[0].trim();
   return bySlash || cleaned;
+};
+
+const compactText = (text = '', max = 80) => {
+  const cleaned = String(text).replace(/\s+/g, ' ').trim();
+  if (!cleaned) return '';
+  if (cleaned.length <= max) return cleaned;
+  return `${cleaned.slice(0, max - 1).trimEnd()}…`;
 };
 
 const titleBlockToCard = (block, points = []) => {

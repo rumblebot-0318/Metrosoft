@@ -141,7 +141,7 @@ const originalMenus = {
       introduce: ['인사말', '조직도', '회사소개', '연혁', '오시는 길'],
       business: ['의료정보사업', 'Metro-cERP', '헬스케어 서비스', 'VOIP 사업', 'MetroSMS', '알림톡', '주요 고객사'],
       product: ['EMR', 'iEMR', 'OCS', 'T-BIZ 모바일 EMR', 'ERP', 'CRM'],
-      customer: ['고객지원', '원격지원']
+      customer: ['고객지원', '견적요청', '연락처', '자료실', '공지사항', '원격지원']
     }
   },
   en: {
@@ -155,7 +155,7 @@ const originalMenus = {
       introduce: ['Greetings', 'Organization', 'About', 'Timeline', 'Directions'],
       business: ['Healthcare IT', 'Metro-cERP', 'Healthcare Service', 'VOIP', 'MetroSMS', 'AlimTalk', 'Clients'],
       product: ['EMR', 'iEMR', 'OCS', 'T-BIZ', 'ERP', 'CRM'],
-      customer: ['Support', 'Remote']
+      customer: ['Support', 'Quotation', 'Contacts', 'Resources', 'Notice', 'Remote']
     }
   }
 };
@@ -1095,6 +1095,9 @@ const renderHeaderUtility = () => {
       { label: '홈', href: '#home' },
       { label: '원격지원', href: 'http://www.metrosoft.co.kr/Remote/TeamViewerQS-idc3g4qy58.exe', external: true },
       { label: '고객지원', href: '#customer' },
+      { label: '견적요청', href: '#quote-process' },
+      { label: '연락처', href: '#support-contacts' },
+      { label: '채용정보', href: '#recruit-hub' },
       { label: '오시는 길', href: '#company-info' },
       { label: '사이트맵', href: 'http://www.metrosoft.co.kr/sub05/sub_01.asp', external: true },
       { label: '직원용', href: 'http://webmail.metrosoft.co.kr', external: true },
@@ -1104,6 +1107,9 @@ const renderHeaderUtility = () => {
       { label: 'Home', href: '#home' },
       { label: 'Remote Support', href: 'http://www.metrosoft.co.kr/Remote/TeamViewerQS-idc3g4qy58.exe', external: true },
       { label: 'Customer Support', href: '#customer' },
+      { label: 'Quotation', href: '#quote-process' },
+      { label: 'Contacts', href: '#support-contacts' },
+      { label: 'Recruitment', href: '#recruit-hub' },
       { label: 'Directions', href: '#company-info' },
       { label: 'Sitemap', href: 'http://www.metrosoft.co.kr/sub05/sub_01.asp', external: true },
       { label: 'Staff', href: 'http://webmail.metrosoft.co.kr', external: true },
@@ -1153,14 +1159,18 @@ const renderCustomerQuickMenu = () => {
   const menus = isKo
     ? [
       { title: '수리 및 A/S 요청', href: 'mailto:customer@metrosoft.co.kr?subject=' + encodeURIComponent('수리 및 A/S 요청') },
-      { title: '견적요청', href: 'mailto:customer@metrosoft.co.kr?subject=' + encodeURIComponent('메트로소프트 견적요청') },
-      { title: '연락처 / 문의', href: '#customer' },
+      { title: '견적요청', href: '#quote-process' },
+      { title: '연락처 / 문의', href: '#support-contacts' },
+      { title: '자료실', href: 'http://www.metrosoft.co.kr/sub04/sub_04.asp', external: true },
+      { title: '공지사항', href: 'http://www.metrosoft.co.kr/sub04/sub_05.asp', external: true },
       { title: '원격지원', href: 'http://www.metrosoft.co.kr/Remote/TeamViewerQS-idc3g4qy58.exe', external: true }
     ]
     : [
       { title: 'Repair / A/S', href: 'mailto:customer@metrosoft.co.kr?subject=' + encodeURIComponent('Repair and A/S Request') },
-      { title: 'Request Quotation', href: 'mailto:customer@metrosoft.co.kr?subject=' + encodeURIComponent('Metrosoft Quotation Request') },
-      { title: 'Contact / Inquiry', href: '#customer' },
+      { title: 'Request Quotation', href: '#quote-process' },
+      { title: 'Contact / Inquiry', href: '#support-contacts' },
+      { title: 'Resources', href: 'http://www.metrosoft.co.kr/sub04/sub_04.asp', external: true },
+      { title: 'Notice', href: 'http://www.metrosoft.co.kr/sub04/sub_05.asp', external: true },
       { title: 'Remote Support', href: 'http://www.metrosoft.co.kr/Remote/TeamViewerQS-idc3g4qy58.exe', external: true }
     ];
 

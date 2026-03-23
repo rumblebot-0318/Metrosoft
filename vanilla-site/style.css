@@ -1936,9 +1936,8 @@ button:focus-visible,
     grid-template-columns: 1fr;
   }
 
-  .header-utility {
-    font-size: 0.73rem;
-    padding: 0.35rem 0.72rem 0.58rem;
+  .header-hotline {
+    padding: 0.26rem 0.72rem 0.1rem;
     flex-wrap: nowrap;
     overflow-x: auto;
     white-space: nowrap;
@@ -1947,20 +1946,37 @@ button:focus-visible,
     scrollbar-width: none;
   }
 
-  .header-utility::-webkit-scrollbar {
+  .header-hotline::-webkit-scrollbar {
     display: none;
   }
 
-  .header-utility > span[aria-hidden="true"] {
+  .hotline-pill {
+    padding: 0.18rem 0.5rem;
+    gap: 0.2rem;
+  }
+
+  .hotline-pill strong {
     display: none;
   }
 
-  .header-utility a {
-    border: 1px solid #d7e3f3;
-    border-radius: 999px;
-    padding: 0.22rem 0.56rem;
-    background: #fff;
-    color: #48627f;
+  .hotline-pill a,
+  .hotline-remote {
+    font-size: 0.72rem;
+  }
+
+  .hotline-pill a {
+    max-width: 210px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .hotline-remote {
+    padding: 0.18rem 0.5rem;
+  }
+
+  .header-utility {
+    display: none;
   }
 }
 

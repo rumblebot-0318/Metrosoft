@@ -66,6 +66,7 @@ const customerTable = $('[data-customer-table]');
 const orgSummary = $('[data-org-summary]');
 const timelineSummary = $('[data-timeline-summary]');
 const ceoMessage = $('[data-ceo-message]');
+const recruitHub = $('[data-recruit-hub]');
 const remoteSupport = $('[data-remote-support]');
 const supportLinks = $('[data-support-links]');
 const resourceCenter = $('[data-resource-center]');
@@ -74,6 +75,7 @@ const legacySitemap = $('[data-legacy-sitemap]');
 const productKpi = $('[data-product-kpi]');
 const productLegacyLinks = $('[data-product-legacy-links]');
 const companyMap = $('[data-company-map]');
+const footerLegacyLinks = $('[data-footer-legacy-links]');
 const hospitalTitle = $('[data-hospital-title]');
 const hospitalSub = $('[data-hospital-sub]');
 const hospitalGrid = $('[data-hospital-grid]');
@@ -931,6 +933,53 @@ const renderCeoMessage = () => {
   `;
 };
 
+const renderRecruitHub = () => {
+  if (!recruitHub) return;
+  const isKo = state.locale === 'ko';
+
+  const links = isKo
+    ? [
+      { label: '인재상', href: 'http://www.metrosoft.co.kr/sub06/sub_01.asp' },
+      { label: '채용절차', href: 'http://www.metrosoft.co.kr/sub06/sub_02.asp' },
+      { label: '채용공고', href: 'http://www.metrosoft.co.kr/sub06/sub_03.asp' }
+    ]
+    : [
+      { label: 'Ideal Candidate', href: 'http://www.metrosoft.co.kr/sub06/sub_01.asp' },
+      { label: 'Hiring Process', href: 'http://www.metrosoft.co.kr/sub06/sub_02.asp' },
+      { label: 'Job Posting', href: 'http://www.metrosoft.co.kr/sub06/sub_03.asp' }
+    ];
+
+  recruitHub.innerHTML = `
+    <article class="recruit-card">
+      <h3>${isKo ? '채용정보' : 'Recruitment'}</h3>
+      <p>${isKo ? '레거시 사이트의 채용 메뉴(인재상/채용절차/채용공고)를 소개 섹션에 연결했습니다.' : 'Legacy recruitment menus are surfaced in the introduce section.'}</p>
+      <div class="recruit-links">
+        ${links.map((item) => `<a href="${item.href}" target="_blank" rel="noreferrer noopener">${item.label}</a>`).join('')}
+      </div>
+    </article>
+  `;
+};
+
+const renderFooterLegacyLinks = () => {
+  if (!footerLegacyLinks) return;
+  const isKo = state.locale === 'ko';
+  const links = isKo
+    ? [
+      { label: '개인정보처리방침', href: 'http://www.metrosoft.co.kr/sub08/sub_01.asp' },
+      { label: '사이트맵', href: 'http://www.metrosoft.co.kr/sub05/sub_01.asp' },
+      { label: '직원용 메일', href: 'http://webmail.metrosoft.co.kr' }
+    ]
+    : [
+      { label: 'Privacy Policy', href: 'http://www.metrosoft.co.kr/sub08/sub_01.asp' },
+      { label: 'Sitemap', href: 'http://www.metrosoft.co.kr/sub05/sub_01.asp' },
+      { label: 'Staff Webmail', href: 'http://webmail.metrosoft.co.kr' }
+    ];
+
+  footerLegacyLinks.innerHTML = links
+    .map((item) => `<a href="${item.href}" target="_blank" rel="noreferrer noopener">${item.label}</a>`)
+    .join('<span aria-hidden="true">|</span>');
+};
+
 const renderRemoteSupport = () => {
   if (!remoteSupport) return;
   const isKo = state.locale === 'ko';
@@ -1113,32 +1162,64 @@ const renderProductLegacyLinks = () => {
   if (!productLegacyLinks) return;
   const isKo = state.locale === 'ko';
 
-  const links = isKo
-    ? [
-      { label: 'EMR', href: 'http://www.metrosoft.co.kr/sub03/sub_01.asp' },
-      { label: 'iEMR', href: 'http://www.metrosoft.co.kr/sub03/sub_02.asp' },
-      { label: 'OCS', href: 'http://www.metrosoft.co.kr/sub03/sub_03.asp' },
-      { label: 'T-BIZ 모바일 EMR', href: 'http://www.metrosoft.co.kr/sub03/sub_04.asp' },
-      { label: 'ERP', href: 'http://www.metrosoft.co.kr/sub03/sub_05.asp' },
-      { label: 'CRM', href: 'http://www.metrosoft.co.kr/sub03/sub_06.asp' },
-      { label: 'mPOC', href: 'http://www.metrosoft.co.kr/sub03/sub_07.asp' }
-    ]
-    : [
-      { label: 'EMR', href: 'http://www.metrosoft.co.kr/sub03/sub_01.asp' },
-      { label: 'iEMR', href: 'http://www.metrosoft.co.kr/sub03/sub_02.asp' },
-      { label: 'OCS', href: 'http://www.metrosoft.co.kr/sub03/sub_03.asp' },
-      { label: 'T-BIZ Mobile EMR', href: 'http://www.metrosoft.co.kr/sub03/sub_04.asp' },
-      { label: 'ERP', href: 'http://www.metrosoft.co.kr/sub03/sub_05.asp' },
-      { label: 'CRM', href: 'http://www.metrosoft.co.kr/sub03/sub_06.asp' },
-      { label: 'mPOC', href: 'http://www.metrosoft.co.kr/sub03/sub_07.asp' }
-    ];
+  const emr = state.legacy.emr || {};
+  const iemr = state.legacy.iemr || {};
+  const ocs = state.legacy.ocs || {};
+  const erp = state.legacy.erp || {};
+  const crm = state.legacy.crm || {};
+  const mpoc = state.legacy.mpoc || {};
+
+  const cards = [
+    {
+      title: 'EMR',
+      summary: firstSentence(emr?.intro?.content || ''),
+      points: (emr.treatment || []).slice(0, 2)
+    },
+    {
+      title: 'iEMR',
+      summary: firstSentence(iemr?.Title?.content || ''),
+      points: (iemr.features || []).slice(0, 2)
+    },
+    {
+      title: 'OCS',
+      summary: firstSentence(ocs?.title?.content || ''),
+      points: ((ocs.composition && ocs.composition[0]) || []).slice(0, 2)
+    },
+    {
+      title: isKo ? 'T-BIZ 모바일 EMR' : 'T-BIZ Mobile EMR',
+      summary: firstSentence(mpoc?.Title?.content || ''),
+      points: (mpoc.features || []).slice(0, 2)
+    },
+    {
+      title: 'ERP',
+      summary: firstSentence(erp?.MetroERP?.content || ''),
+      points: (erp.management || []).slice(0, 2)
+    },
+    {
+      title: 'CRM',
+      summary: firstSentence(crm?.Title?.content || ''),
+      points: (crm.features || []).slice(0, 2)
+    },
+    {
+      title: 'mPOC',
+      summary: firstSentence(mpoc?.Title?.content || ''),
+      points: (mpoc.features || []).slice(0, 2)
+    }
+  ];
 
   productLegacyLinks.innerHTML = `
     <article class="product-legacy-links-card">
-      <h3>${isKo ? '레거시 제품 상세 바로가기' : 'Legacy Product Detail Shortcuts'}</h3>
-      <p>${isKo ? '기존 metrosoft.co.kr 제품 상세 페이지를 섹션 내에서 바로 열 수 있게 보강했습니다.' : 'Direct links to the original metrosoft.co.kr product detail pages are now surfaced in-context.'}</p>
+      <h3>${isKo ? '레거시 제품 허브' : 'Legacy Product Hub'}</h3>
+      <p>${isKo ? '외부 바로가기 대신, 레거시 제품 내용을 현재 프로젝트 안에서 바로 확인할 수 있도록 요약했습니다.' : 'Legacy product content is summarized directly inside this project instead of sending users to external pages.'}</p>
       <div class="product-legacy-links-grid">
-        ${links.map((item) => `<a href="${item.href}" target="_blank" rel="noreferrer noopener">${item.label}</a>`).join('')}
+        ${cards.map((item) => `
+          <article class="product-legacy-item">
+            <h4>${item.title}</h4>
+            <p>${item.summary || (isKo ? '레거시 데이터 기반 제품 요약입니다.' : 'Legacy-data based product summary.')}</p>
+            <ul>${(item.points || []).map((point) => `<li>${point}</li>`).join('')}</ul>
+            <a href="#product-detail">${isKo ? '상세 구성 보기' : 'View detailed modules'}</a>
+          </article>
+        `).join('')}
       </div>
     </article>
   `;
@@ -1808,6 +1889,7 @@ const render = () => {
   renderOrganizationSummary();
   renderTimelineSummary();
   renderCeoMessage();
+  renderRecruitHub();
   renderRemoteSupport();
   renderSupportLinks();
   renderResourceCenter();
@@ -1898,6 +1980,7 @@ const render = () => {
   if (companyAccessTitle) companyAccessTitle.textContent = companyInfo.accessTitle;
   renderSimpleList(companyAccessList, companyInfo.access);
   renderCompanyMap();
+  renderFooterLegacyLinks();
   if (quickInquiryText) quickInquiryText.textContent = companyInfo.quickLabel;
   if (quickDemoText) quickDemoText.textContent = state.locale === 'ko' ? '도입 문의' : 'Request Demo';
   if (quickRemoteText) quickRemoteText.textContent = state.locale === 'ko' ? '원격지원' : 'Remote Support';

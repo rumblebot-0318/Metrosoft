@@ -630,21 +630,21 @@ const renderProductFocus = () => {
       title: isKo ? '종이 없는 스마트 진료 환경 구축' : 'Paperless clinical workflow',
       points: (emr.treatment || []).slice(0, 3),
       image: 'assets/Metro_product/OCS/01.JPG',
-      imageLabel: isKo ? '레거시 OCS 진료 화면' : 'Legacy OCS clinical screen'
+      imageLabel: isKo ? 'OCS 진료 화면' : 'OCS clinical screen'
     },
     nurse: {
       label: isKo ? '간호 EMR' : 'Nursing EMR',
       title: isKo ? '간호 프로세스 표준화와 기록 자동화' : 'Standardized nursing operations',
       points: (emr.nurse || []).slice(0, 3),
       image: 'assets/Metro_product/OCS/00.png',
-      imageLabel: isKo ? '레거시 OCS 간호 화면' : 'Legacy OCS nursing screen'
+      imageLabel: isKo ? 'OCS 간호 화면' : 'OCS nursing screen'
     },
     security: {
       label: isKo ? '보안/인증' : 'Security',
       title: isKo ? '의료정보 보호를 위한 인증 체계' : 'Protection-focused authentication',
       points: ((emr.security && emr.security[1] && emr.security[1].content) || []).slice(0, 3),
       image: 'assets/Metro_product/OCS/08.JPG',
-      imageLabel: isKo ? '레거시 OCS 관리 화면' : 'Legacy OCS management screen'
+      imageLabel: isKo ? 'OCS 관리 화면' : 'OCS management screen'
     }
   };
 
@@ -968,7 +968,7 @@ const renderTimelineSummary = () => {
   timelineSummary.innerHTML = `
     <article class="timeline-summary-card">
       <h3>${isKo ? '회사 연혁 하이라이트' : 'Company Timeline Highlights'}</h3>
-      <p>${isKo ? '레거시 연혁 데이터에서 최근 주요 이력을 요약했습니다.' : 'Recent milestones summarized from legacy timeline data.'}</p>
+      <p>${isKo ? '회사 연혁 데이터에서 최근 주요 이력을 요약했습니다.' : 'Recent milestones summarized from company timeline data.'}</p>
       <ul>
         ${milestones.map((m) => `<li><strong>${m.year}</strong><span>${m.text}</span></li>`).join('')}
       </ul>
@@ -993,7 +993,7 @@ const renderCeoMessage = () => {
   ceoMessage.innerHTML = `
     <article class="ceo-card">
       <h3>${isKo ? '대표 인사말 요약' : 'CEO Message Snapshot'}</h3>
-      <p>${isKo ? '레거시 회사소개 문구를 현대 페이지에 그대로 연결했습니다.' : 'Legacy company-introduction text is preserved on this page.'}</p>
+      <p>${isKo ? '회사소개 핵심 메시지를 현재 페이지에서 바로 확인할 수 있습니다.' : 'Key company introduction messages are presented directly on this page.'}</p>
       <blockquote class="ceo-card__quote">${quote}</blockquote>
       <div class="ceo-card__sign">${ceo.finish || ceoName}</div>
     </article>
@@ -1019,7 +1019,7 @@ const renderRecruitHub = () => {
   recruitHub.innerHTML = `
     <article class="recruit-card">
       <h3>${isKo ? '채용정보' : 'Recruitment'}</h3>
-      <p>${isKo ? '레거시 사이트의 채용 메뉴(인재상/채용절차/채용공고)를 소개 섹션에 연결했습니다.' : 'Legacy recruitment menus are surfaced in the introduce section.'}</p>
+      <p>${isKo ? '채용 메뉴(인재상/채용절차/채용공고)를 소개 섹션에서 바로 확인할 수 있습니다.' : 'Recruitment menus are surfaced directly in the introduce section.'}</p>
       <div class="recruit-links">
         ${links.map((item) => `<a href="${item.href}" target="_blank" rel="noreferrer noopener">${item.label}</a>`).join('')}
       </div>
@@ -1135,7 +1135,7 @@ const renderSupportLinks = () => {
       { title: 'Request Quotation', desc: 'Ask for tailored pricing by hospital requirements.', href: `mailto:${headEmail}?subject=${encodeURIComponent('Metrosoft Quotation Request')}` },
       { title: 'Contact Center', desc: 'See support contacts and inquiry channels.', href: '#customer' },
       { title: 'Remote Support', desc: 'Download QuickSupport and receive immediate help.', href: 'http://www.metrosoft.co.kr/Remote/TeamViewerQS-idc3g4qy58.exe', external: true },
-      { title: 'Legacy Sitemap', desc: 'Review legacy website structure.', href: 'http://www.metrosoft.co.kr/sub05/sub_01.asp', external: true }
+      { title: 'Sitemap', desc: 'Review website structure.', href: 'http://www.metrosoft.co.kr/sub05/sub_01.asp', external: true }
     ];
 
   supportLinks.innerHTML = legacyShortcuts.map((item) => `
@@ -1212,7 +1212,7 @@ const renderResourceCenter = () => {
   resourceCenter.innerHTML = `
     <article class="resource-center-card">
       <h3>${isKo ? '고객지원 리소스 센터' : 'Customer Resource Center'}</h3>
-      <p>${isKo ? '레거시 고객센터 IA(견적요청/자료실/공지사항)를 현대 화면에서 바로 접근할 수 있게 구성했습니다.' : 'Legacy customer-center IA (quotation/resources/notices) is surfaced for quick access.'}</p>
+      <p>${isKo ? '고객센터 핵심 메뉴(견적요청/자료실/공지사항)를 현재 화면에서 바로 접근할 수 있게 구성했습니다.' : 'Core customer-center menus (quotation/resources/notices) are surfaced for quick access.'}</p>
       <div class="resource-center-grid">
         ${items.map((item) => `
           <a href="${item.href}" target="_blank" rel="noreferrer noopener">
@@ -1244,7 +1244,7 @@ const renderQuoteProcess = () => {
   quoteProcess.innerHTML = `
     <article class="quote-process-card">
       <h3>${isKo ? '견적요청 진행 절차' : 'Quotation Request Flow'}</h3>
-      <p>${isKo ? '레거시 고객센터 IA(견적요청)를 현재 화면에서 바로 이해할 수 있도록 단계형으로 정리했습니다.' : 'Legacy quotation-request IA is condensed into a simple step flow for faster decision-making.'}</p>
+      <p>${isKo ? '견적요청 절차를 현재 화면에서 바로 이해할 수 있도록 단계형으로 정리했습니다.' : 'The quotation-request flow is condensed into a simple step sequence for faster decision-making.'}</p>
       <ol>
         ${steps.map((step) => `<li><strong>${step.title}</strong><span>${step.desc}</span></li>`).join('')}
       </ol>
@@ -1304,13 +1304,13 @@ const renderProductLegacyLinks = () => {
 
   productLegacyLinks.innerHTML = `
     <article class="product-legacy-links-card">
-      <h3>${isKo ? '레거시 제품 허브' : 'Legacy Product Hub'}</h3>
-      <p>${isKo ? '외부 바로가기 대신, 레거시 제품 내용을 현재 프로젝트 안에서 바로 확인할 수 있도록 요약했습니다.' : 'Legacy product content is summarized directly inside this project instead of sending users to external pages.'}</p>
+      <h3>${isKo ? '제품 상세 허브' : 'Product Detail Hub'}</h3>
+      <p>${isKo ? '외부 페이지 이동 없이 제품 핵심 내용을 현재 화면에서 바로 확인할 수 있도록 정리했습니다.' : 'Product highlights are summarized directly on this page so users don’t need to jump to external pages.'}</p>
       <div class="product-legacy-links-grid">
         ${cards.map((item) => `
           <article class="product-legacy-item">
             <h4>${item.title}</h4>
-            <p>${item.summary || (isKo ? '레거시 데이터 기반 제품 요약입니다.' : 'Legacy-data based product summary.')}</p>
+            <p>${item.summary || (isKo ? '제품 상세 데이터 기반 요약입니다.' : 'Product-detail based summary.')}</p>
             <ul>${(item.points || []).map((point) => `<li>${point}</li>`).join('')}</ul>
             <a href="#product-detail">${isKo ? '상세 구성 보기' : 'View detailed modules'}</a>
           </article>
@@ -1428,7 +1428,7 @@ const renderLegacySitemap = () => {
 
   legacySitemap.innerHTML = `
     <article class="legacy-sitemap-card">
-      <h3>${isKo ? '레거시 사이트맵 (원본 IA 바로가기)' : 'Legacy Sitemap (Original IA Links)'}</h3>
+      <h3>${isKo ? '사이트맵 (전체 메뉴 바로가기)' : 'Sitemap (All Menu Shortcuts)'}</h3>
       <p>${isKo ? '기존 metrosoft.co.kr의 메뉴 구조를 유지한 바로가기입니다.' : 'Quick links preserving the menu structure of metrosoft.co.kr.'}</p>
       <div class="legacy-sitemap-grid">
         ${groups.map((group) => `
@@ -1501,14 +1501,14 @@ const renderOCSModules = () => {
     <article class="ocs-modules-card">
       <h3>${isKo ? 'OCS 세부 업무영역' : 'OCS Functional Domains'}</h3>
       <p>${isKo
-        ? '레거시 OCS 상세 데이터(원무/보험·진료·진료지원)에서 실무 기능을 발췌해 제품 신뢰도를 보강했습니다.'
-        : 'Practical module details are extracted from legacy OCS data (admin/insurance, clinical, support).'}
+        ? 'OCS 상세 데이터(원무/보험·진료·진료지원)에서 실무 기능을 발췌해 제품 신뢰도를 보강했습니다.'
+        : 'Practical module details are extracted from OCS data (admin/insurance, clinical, support).'}
       </p>
       <div class="ocs-modules-grid">
         ${cards.map((card) => `
           <section class="ocs-module-item">
             <strong>${card.title}</strong>
-            <span>${card.description || (isKo ? '레거시 상세 설명 기반 요약' : 'Summary based on legacy details')}</span>
+            <span>${card.description || (isKo ? '상세 설명 기반 요약' : 'Summary based on detailed specs')}</span>
             <ul>${card.points.map((point) => `<li>${point}</li>`).join('')}</ul>
           </section>
         `).join('')}
@@ -1552,7 +1552,7 @@ const renderSupportContacts = () => {
   supportContacts.innerHTML = `
     <article class="support-contact-card">
       <h3>${isKo ? '고객지원 담당자' : 'Support Contacts'}</h3>
-      <p>${isKo ? '레거시 고객센터 데이터를 기반으로 부서별 연락처를 그대로 보강했습니다.' : 'Department contacts are expanded from legacy customer-center data.'}</p>
+      <p>${isKo ? '고객센터 데이터를 기반으로 부서별 연락처를 그대로 보강했습니다.' : 'Department contacts are expanded from customer-center data.'}</p>
       <div class="support-contact-quick">
         <a href="mailto:${headContact.email || 'customer@metrosoft.co.kr'}">
           <strong>${isKo ? '대표 메일' : 'Main Email'}</strong>
@@ -1793,7 +1793,7 @@ const buildLegacyCards = () => {
   if (his && (his.features || his.effects)) {
     out.business = [
       {
-        title: 'MetroHIS (Legacy JSON)',
+        title: 'MetroHIS 핵심 기능',
         description: '기존 MetroHIS 데이터 파일(src/database/Business/MetroHIS.json) 기반 내용입니다.',
         points: [...(his.features || []).slice(0, 4), ...(his.effects || []).slice(0, 2)]
       }
@@ -1823,7 +1823,7 @@ const buildLegacyCards = () => {
   out.business = out.business || [];
   out.business.push({
     title: '통신 부가서비스 (MetroSMS · 알림톡)',
-    description: '레거시 사이트의 고객 커뮤니케이션 영역(MetroSMS/HPS/알림톡) 핵심 문구를 반영했습니다.',
+    description: '고객 커뮤니케이션 영역(MetroSMS/HPS/알림톡)의 핵심 기능을 반영했습니다.',
     points: [
       '카카오 알림톡 발송 실패 시 SMS/LMS 자동 전환',
       'HPS 기반 문자 발송으로 비용 절감 및 대량 발송 지원',
@@ -1923,7 +1923,7 @@ const buildLegacyCards = () => {
       },
       {
         title: '회사소개',
-        description: '레거시 회사 기본정보(JSON) 기준으로 핵심 항목을 정리했습니다.',
+        description: '회사 기본정보 기준으로 핵심 항목을 정리했습니다.',
         points: [
           `법인명: ${company} / 대표: ${ceoName}`,
           `사업분야: ${init.area || '의료정보시스템 · 헬스케어 · 통신 부가서비스'}`,
@@ -1947,7 +1947,7 @@ const buildLegacyCards = () => {
   if (customer && customer.address) {
     out.customer = [
       {
-        title: '고객 문의 (Legacy JSON)',
+        title: '고객 문의 안내',
         description: 'src/database/Customer/index.json 기반 주요 연락처',
         points: customer.address.slice(1, 5).map((row) => (row.content || []).slice(0, 3).join(' / '))
       }
@@ -2003,8 +2003,8 @@ const render = () => {
 
   if (certifiedTitle) certifiedTitle.textContent = 'Certified Partnership';
   if (certifiedSub) certifiedSub.textContent = state.locale === 'ko'
-    ? '기존 프로젝트의 파트너 인증 자산을 기반으로 구성했습니다.'
-    : 'Built with legacy partner certification assets from the original project.';
+    ? '파트너 인증 및 협력 이력을 기반으로 구성했습니다.'
+    : 'Built on verified partner certifications and collaboration history.';
   renderCertified();
   renderCertifiedTimeline();
   renderCompanyFacts();

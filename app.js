@@ -275,42 +275,42 @@ function renderHome() {
         <div class="product-list-title-underline"></div>
       </div>
       <div class="home-products-row">
-        <div class="home-product-card-item">
+        <a class="home-product-card-item" href="#/product#EMR">
           <div class="home-product-icon-wrapper icon-emr">
             <i class="fa-solid fa-file-medical"></i>
           </div>
-          <a class="teal-btn" href="#/product#EMR">EMR</a>
-        </div>
-        <div class="home-product-card-item">
+          <span class="product-card-label">EMR</span>
+        </a>
+        <a class="home-product-card-item" href="#/product#iEMR">
           <div class="home-product-icon-wrapper icon-iemr">
             <i class="fa-solid fa-file-image"></i>
           </div>
-          <a class="teal-btn" href="#/product#iEMR">iEMR</a>
-        </div>
-        <div class="home-product-card-item">
+          <span class="product-card-label">iEMR</span>
+        </a>
+        <a class="home-product-card-item" href="#/product#OCS">
           <div class="home-product-icon-wrapper icon-ocs">
             <i class="fa-solid fa-stethoscope"></i>
           </div>
-          <a class="teal-btn" href="#/product#OCS">OCS</a>
-        </div>
-        <div class="home-product-card-item">
+          <span class="product-card-label">OCS</span>
+        </a>
+        <a class="home-product-card-item" href="#/product#T-BIZ 모바일 EMR">
           <div class="home-product-icon-wrapper icon-tbiz">
             <i class="fa-solid fa-tablet-screen-button"></i>
           </div>
-          <a class="teal-btn" href="#/product#T-BIZ 모바일 EMR">T-BIZ</a>
-        </div>
-        <div class="home-product-card-item">
+          <span class="product-card-label">T-BIZ</span>
+        </a>
+        <a class="home-product-card-item" href="#/product#ERP">
           <div class="home-product-icon-wrapper icon-erp">
             <i class="fa-solid fa-chart-pie"></i>
           </div>
-          <a class="teal-btn" href="#/product#ERP">ERP</a>
-        </div>
-        <div class="home-product-card-item">
+          <span class="product-card-label">ERP</span>
+        </a>
+        <a class="home-product-card-item" href="#/product#CRM">
           <div class="home-product-icon-wrapper icon-crm">
             <i class="fa-solid fa-users-gear"></i>
           </div>
-          <a class="teal-btn" href="#/product#CRM">CRM</a>
-        </div>
+          <span class="product-card-label">CRM</span>
+        </a>
       </div>
     </div>
 

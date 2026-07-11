@@ -512,12 +512,25 @@ p {
   flex-direction: column;
   align-items: center;
   gap: 15px;
+  text-decoration: none;
 }
 
 .home-product-card-item:hover {
   transform: translateY(-5px);
   border-color: var(--primary);
   box-shadow: 0 8px 25px rgba(22,155,155,0.15);
+}
+
+.product-card-label {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--text-main);
+  transition: var(--transition-normal);
+  margin-top: 5px;
+}
+
+.home-product-card-item:hover .product-card-label {
+  color: var(--primary);
 }
 
 .home-product-icon-wrapper {

@@ -143,6 +143,7 @@ p {
   font-size: 1.05rem;
   padding: 10px 0;
   color: var(--text-muted);
+  white-space: nowrap;
 }
 
 .nav-links a:hover,

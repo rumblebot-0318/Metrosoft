@@ -1544,14 +1544,14 @@ function renderCustomer() {
   supportSection.innerHTML += `
     <div class="glass-card" style="margin-top: 40px;">
       <h3 style="font-size: 1.5rem; margin-bottom: 10px; color: var(--primary);"><i class="fa-solid fa-address-book"></i> ${getNestedTranslation(activeTranslations, 'customer.support_title') || '부서별 담당 임직원 연락망'}</h3>
-      <p style="margin-bottom: 30px;">${getNestedTranslation(activeTranslations, 'customer.support_desc') || '병원 솔루션 구축 문의 및 유지 보수 관련하여 신속하게 답변해 드리겠습니다.'}</p>
+      <p style="margin-bottom: 30px;">${getNestedTranslation(activeTranslations, 'customer.support_subtitle') || '병원 솔루션 구축 문의 및 유지 보수 관련하여 신속하게 답변해 드리겠습니다.'}</p>
       <table class="support-directory-table">
         <thead>
           <tr>
-            <th>${getNestedTranslation(activeTranslations, 'customer.support_th_dept') || '부서'}</th>
-            <th>${getNestedTranslation(activeTranslations, 'customer.support_th_name') || '성명'}</th>
-            <th>${getNestedTranslation(activeTranslations, 'customer.support_th_pos') || '직위'}</th>
-            <th>${getNestedTranslation(activeTranslations, 'customer.support_th_contact') || '연락처 / 이메일'}</th>
+            <th>${getNestedTranslation(activeTranslations, 'customer.support_table_dept') || '부서'}</th>
+            <th>${getNestedTranslation(activeTranslations, 'customer.support_table_name') || '성명'}</th>
+            <th>${getNestedTranslation(activeTranslations, 'customer.support_table_pos') || '직위'}</th>
+            <th>${getNestedTranslation(activeTranslations, 'customer.support_table_contact') || '연락처 / 이메일'}</th>
           </tr>
         </thead>
         <tbody>
@@ -1572,22 +1572,22 @@ function renderCustomer() {
         <div class="remote-icon-badge">
           <i class="fa-solid fa-desktop"></i>
         </div>
-        <h3 data-i18n="customer.remote_card_title">원격 지원 서비스</h3>
-        <p data-i18n="customer.remote_card_desc" style="font-size: 0.98rem; line-height: 1.6; color: var(--text-muted); min-height: 75px;">원활한 장애 처리를 위해 엔지니어가 실시간으로 원격 지원을 연결합니다. 원격지원 요청 시 아래 전용 뷰어 프로그램을 다운로드하고 실행해 주시기 바랍니다.</p>
-        <a href="http://www.metrosoft.co.kr/remotesupport/metrosoft.exe" class="btn-download" target="_blank" data-i18n="customer.remote_btn_download">
-          <i class="fa-solid fa-download"></i> 원격지원 뷰어 다운로드
+        <h3>${getNestedTranslation(activeTranslations, 'customer.remote_card_title') || '원격 지원 서비스'}</h3>
+        <p style="font-size: 0.98rem; line-height: 1.6; color: var(--text-muted); min-height: 75px;">${getNestedTranslation(activeTranslations, 'customer.remote_card_desc') || '원활한 장애 처리를 위해 엔지니어가 실시간으로 원격 지원을 연결합니다. 원격지원 요청 시 아래 전용 뷰어 프로그램을 다운로드하고 실행해 주시기 바랍니다.'}</p>
+        <a href="http://www.metrosoft.co.kr/remotesupport/metrosoft.exe" class="btn-download" target="_blank">
+          <i class="fa-solid fa-download"></i> ${getNestedTranslation(activeTranslations, 'customer.remote_btn_download') || '원격지원 뷰어 다운로드'}
         </a>
       </div>
       <div class="remote-card-box">
         <div class="remote-icon-badge blue-dot">
           <i class="fa-solid fa-headset" style="color: var(--secondary);"></i>
         </div>
-        <h3 data-i18n="customer.remote_info_title">고객센터 기술 안내</h3>
-        <p data-i18n="customer.remote_info_desc" style="font-size: 0.98rem; line-height: 1.6; color: var(--text-muted); min-height: 75px;">전화 및 팩스 문의는 업무시간 내에 가능하며, 휴일에는 온라인 기술 요청 접수가 처리됩니다.</p>
+        <h3>${getNestedTranslation(activeTranslations, 'customer.remote_info_title') || '고객센터 기술 안내'}</h3>
+        <p style="font-size: 0.98rem; line-height: 1.6; color: var(--text-muted); min-height: 75px;">${getNestedTranslation(activeTranslations, 'customer.remote_info_desc') || '전화 및 팩스 문의는 업무시간 내에 가능하며, 휴일에는 온라인 기술 요청 접수가 처리됩니다.'}</p>
         <p style="text-align: left; font-size: 0.95rem; border-top: 1px solid var(--glass-border); padding-top: 20px; color: var(--text-muted); width: 100%;">
-          <strong><span data-i18n="customer.remote_tech_tel">기술문의</span>:</strong> 031-465-9971<br>
-          <strong><span data-i18n="customer.remote_tech_fax">FAX</span>:</strong> 031-465-9974<br>
-          <strong><span data-i18n="customer.remote_tech_email">이메일</span>:</strong> customer@metrosoft.co.kr
+          <strong><span>${getNestedTranslation(activeTranslations, 'customer.remote_tech_tel') || '기술문의'}</span>:</strong> 031-465-9971<br>
+          <strong><span>${getNestedTranslation(activeTranslations, 'customer.remote_tech_fax') || 'FAX'}</span>:</strong> 031-465-9974<br>
+          <strong><span>${getNestedTranslation(activeTranslations, 'customer.remote_tech_email') || '이메일'}</span>:</strong> customer@metrosoft.co.kr
         </p>
       </div>
     </div>

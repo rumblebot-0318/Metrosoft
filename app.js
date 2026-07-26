@@ -41,7 +41,7 @@ function getDbData(key, fallbackData) {
 // Fetch translation JSON and apply to static elements
 async function loadTranslations(lang) {
   try {
-    const res = await fetch(`/locales/${lang}.json`);
+    const res = await fetch(`locales/${lang}.json`);
     activeTranslations = await res.json();
     currentLang = lang;
     localStorage.setItem('lang', lang);
@@ -256,9 +256,9 @@ function renderHome() {
   
   // Image Slider setup
   const slides = [
-    '/Images/slide_img/Challenge.jpg',
-    '/Images/slide_img/Creative.jpg',
-    '/Images/slide_img/Credible.jpg'
+    'Images/slide_img/Challenge.jpg',
+    'Images/slide_img/Creative.jpg',
+    'Images/slide_img/Credible.jpg'
   ];
   
   // Render structure
@@ -321,9 +321,9 @@ function renderHome() {
         <div class="point-div-bar"></div>
       </div>
       <div class="certified-logos-row">
-        <div class="cert-logo-box"><img src="/Images/Certified/01.png" alt="MS Gold Partner"></div>
-        <div class="cert-logo-box"><img src="/Images/Certified/02.png" alt="HP Partner"></div>
-        <div class="cert-logo-box"><img src="/Images/Certified/03.png" alt="OCS Certified"></div>
+        <div class="cert-logo-box"><img src="Images/Certified/01.png" alt="MS Gold Partner"></div>
+        <div class="cert-logo-box"><img src="Images/Certified/02.png" alt="HP Partner"></div>
+        <div class="cert-logo-box"><img src="Images/Certified/03.png" alt="OCS Certified"></div>
       </div>
     </div>
 
@@ -409,14 +409,14 @@ function renderIntroduce() {
     <div class="glass-card" style="margin-top: 40px;">
       <div class="ceo-introduce-grid">
         <div class="ceo-image-wrapper">
-          <img src="/Images/ceo.jpeg" alt="CEO" onerror="this.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&fit=crop&q=60'">
+          <img src="Images/ceo.jpeg" alt="CEO" onerror="this.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&fit=crop&q=60'">
         </div>
         <div class="ceo-content">
           <h3>${activeCeoData.subtitle}</h3>
           ${paragraphsHtml}
           <div class="ceo-signature">
             <span>${activeCeoData.finish}</span>
-            <img src="/Images/sign.png" alt="Signature" onerror="this.style.display='none'">
+            <img src="Images/sign.png" alt="Signature" onerror="this.style.display='none'">
           </div>
         </div>
       </div>
@@ -431,7 +431,7 @@ function renderIntroduce() {
   orgSection.innerHTML += `
     <div class="glass-card" style="margin-top: 40px;">
       <div class="org-chart-wrapper">
-        <img src="/Images/organization.png" alt="Organization Chart" onerror="this.src='https://images.unsplash.com/photo-1531538606174-0f90ff5dce83?w=800&fit=crop&q=60'">
+        <img src="Images/organization.png" alt="Organization Chart" onerror="this.src='https://images.unsplash.com/photo-1531538606174-0f90ff5dce83?w=800&fit=crop&q=60'">
       </div>
     </div>
   `;
@@ -662,7 +662,7 @@ function renderBusiness() {
           <p>${getNestedTranslation(activeTranslations, 'business.his_intro') || '메트로소프트는 중/소 병원을 중심으로 MetroHIS(메트로 병원정보시스템)을 공급하고 있습니다.'}</p>
         </div>
         <div class="his-flowchart-wrapper" title="의료정보사업 사업내용">
-          <img src="/Images/businessContent.png" alt="사업 내용 구성도">
+          <img src="Images/businessContent.png" alt="사업 내용 구성도">
         </div>
       </div>
 
@@ -784,7 +784,7 @@ function renderBusiness() {
     healingGridHtml += `
       <div class="healing-card-item">
         <div class="healing-card-img-wrapper">
-          <img src="/Images/HealthCare${el.img}" alt="${el.title}">
+          <img src="Images/HealthCare${el.img}" alt="${el.title}">
         </div>
         <div class="healing-card-caption">
           <p>${el.title.replace('|', '<br>')}</p>
@@ -800,7 +800,7 @@ function renderBusiness() {
       <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); padding: 25px; border-radius: 12px; text-align: center; flex: 1; min-width: 250px;">
         <h5 style="color: var(--secondary); font-size: 1.1rem; margin-bottom: 15px;">${el.title}</h5>
         <div style="width: 100%; max-width: 280px; margin: 0 auto; border-radius: 8px; overflow: hidden; border: 1px solid var(--glass-border);">
-          <img src="/Images/HealthCare${el.img}" alt="${el.title}" style="width: 100%; height: auto; display: block;">
+          <img src="Images/HealthCare${el.img}" alt="${el.title}" style="width: 100%; height: auto; display: block;">
         </div>
       </div>
     `;
@@ -811,7 +811,7 @@ function renderBusiness() {
   activeHealthcareData.metal.content.forEach(img => {
     mentalDrHtml += `
       <div style="border-radius: 12px; overflow: hidden; border: 1px solid var(--glass-border); max-width: 320px;">
-        <img src="/Images/HealthCare${img}" alt="Mental Doctor" style="width: 100%; height: auto; display: block;">
+        <img src="Images/HealthCare${img}" alt="Mental Doctor" style="width: 100%; height: auto; display: block;">
       </div>
     `;
   });
@@ -939,7 +939,7 @@ function renderBusiness() {
         <h5 style="color: var(--secondary); font-size: 1.1rem; margin-bottom: 8px;">${step.title}</h5>
         <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">${step.contents}</p>
         <div style="border-radius: 8px; overflow: hidden; border: 1px solid var(--glass-border); max-width: 260px; margin: 0 auto;">
-          <img src="/Images/MetroSMS${step.img}" alt="${step.title}" style="width:100%; display:block;">
+          <img src="Images/MetroSMS${step.img}" alt="${step.title}" style="width:100%; display:block;">
         </div>
       </div>
     `;
@@ -951,7 +951,7 @@ function renderBusiness() {
       <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); padding: 25px; border-radius: 12px; text-align: center; flex: 1; min-width: 250px;">
         <h5 style="color: var(--primary); font-size: 1.05rem; margin-bottom: 15px;">${el.title}</h5>
         <div style="border-radius: 8px; overflow: hidden; border: 1px solid var(--glass-border); max-width: 240px; margin: 0 auto;">
-          <img src="/Images/MetroSMS${el.img}" alt="${el.title}" style="width:100%; display:block;">
+          <img src="Images/MetroSMS${el.img}" alt="${el.title}" style="width:100%; display:block;">
         </div>
       </div>
     `;
@@ -1028,7 +1028,7 @@ function renderBusiness() {
         </div>
         <div style="flex: 0.8; min-width: 250px; display: flex; justify-content: center;">
           <div style="border-radius: 12px; overflow: hidden; border: 1px solid var(--glass-border); max-width: 280px;">
-            <img src="/Images/Alarm${activeAlarmData.comp.img}" alt="System Diagram" style="width:100%; display:block;">
+            <img src="Images/Alarm${activeAlarmData.comp.img}" alt="System Diagram" style="width:100%; display:block;">
           </div>
         </div>
       </div>
@@ -1041,7 +1041,7 @@ function renderBusiness() {
         </div>
         <div style="display: flex; justify-content: center;">
           <div style="border-radius: 12px; overflow: hidden; border: 1px solid var(--glass-border); max-width: 280px;">
-            <img src="/Images/Alarm${activeAlarmData.features.img}" alt="Alimtalk Feature Card" style="width:100%; display:block;">
+            <img src="Images/Alarm${activeAlarmData.features.img}" alt="Alimtalk Feature Card" style="width:100%; display:block;">
           </div>
         </div>
       </div>
@@ -1058,7 +1058,7 @@ function renderBusiness() {
   hospitalData.content.forEach(client => {
     clientsHtml += `
       <div class="modern-client-card" onclick="window.open('${client.url}', '_blank')" title="${client.title}">
-        <img src="/Images/Hospital_icon${client.img}" alt="${client.title}" onerror="this.outerHTML='<strong class=&quot;fallback-text&quot;>${client.title}</strong>'">
+        <img src="Images/Hospital_icon${client.img}" alt="${client.title}" onerror="this.outerHTML='<strong class=&quot;fallback-text&quot;>${client.title}</strong>'">
       </div>
     `;
   });
@@ -1302,7 +1302,7 @@ function renderProduct() {
       <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); padding: 25px; border-radius: 12px; text-align: center; flex: 1; min-width: 250px;">
         <h5 style="color: var(--secondary); font-size: 1.1rem; margin-bottom: 15px;">${ex.title}</h5>
         <div style="border-radius: 8px; overflow: hidden; border: 1px solid var(--glass-border); max-width: 240px; margin: 0 auto; background: #000;">
-          <img src="/Images/T_Biz${ex.img}" alt="${ex.title}" style="width:100%; display:block;">
+          <img src="Images/T_Biz${ex.img}" alt="${ex.title}" style="width:100%; display:block;">
         </div>
       </div>
     `;
@@ -1319,7 +1319,7 @@ function renderProduct() {
         <h5 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 10px;">${eff.title}</h5>
         ${descHtml}
         <div style="border-radius: 8px; overflow: hidden; border: 1px solid var(--glass-border); max-width: 240px; margin: 0 auto;">
-          <img src="/Images/T_Biz${eff.img}" alt="${eff.title}" style="width:100%; display:block;">
+          <img src="Images/T_Biz${eff.img}" alt="${eff.title}" style="width:100%; display:block;">
         </div>
       </div>
     `;
@@ -1330,7 +1330,7 @@ function renderProduct() {
       <!-- Title Showcase -->
       <div style="display: flex; gap: 40px; align-items: start; margin-bottom: 50px; flex-wrap: wrap;">
         <div style="flex: 0.8; min-width: 220px; display: flex; justify-content: center;">
-          <img src="/Images/TBiz.png" alt="T-BIZ Tablet" style="max-width: 240px; border-radius: 12px; border: 1px solid var(--glass-border); box-shadow: 0 8px 30px rgba(0,0,0,0.3);">
+          <img src="Images/TBiz.png" alt="T-BIZ Tablet" style="max-width: 240px; border-radius: 12px; border: 1px solid var(--glass-border); box-shadow: 0 8px 30px rgba(0,0,0,0.3);">
         </div>
         <div style="flex: 1.2; min-width: 280px;">
           <h3 style="font-size: 1.8rem; color: var(--primary); margin-bottom: 5px;">${activeTbizData.TBIZ.title}</h3>
@@ -1379,14 +1379,14 @@ function renderProduct() {
           <h4 style="color: var(--primary); font-size: 1.25rem; margin-bottom: 15px;"><i class="fa-solid fa-shield-halved"></i> ${activeTbizData.security.title}</h4>
           <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px; line-height:1.6;">${activeTbizData.security.description}</p>
           <div style="border-radius: 8px; overflow: hidden; border: 1px solid var(--glass-border); max-width: 240px; margin: 0 auto;">
-            <img src="/Images/T_Biz${activeTbizData.security.img}" alt="Security Diagram" style="width:100%;">
+            <img src="Images/T_Biz${activeTbizData.security.img}" alt="Security Diagram" style="width:100%;">
           </div>
         </div>
         <div class="business-detail-card" style="padding: 25px; text-align: center;">
           <h4 style="color: var(--primary); font-size: 1.25rem; margin-bottom: 15px;"><i class="fa-solid fa-tablet-screen-button"></i> ${activeTbizData.Device.title}</h4>
           <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px; line-height:1.6;">${activeTbizData.Device.description.replace(/\|/g, '<br>')}</p>
           <div style="border-radius: 8px; overflow: hidden; border: 1px solid var(--glass-border); max-width: 240px; margin: 0 auto;">
-            <img src="/Images/T_Biz${activeTbizData.Device.img}" alt="Devices" style="width:100%;">
+            <img src="Images/T_Biz${activeTbizData.Device.img}" alt="Devices" style="width:100%;">
           </div>
         </div>
       </div>

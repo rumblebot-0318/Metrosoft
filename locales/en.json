@@ -1,0 +1,921 @@
+{
+  "nav": {
+    "introduce": "About Us",
+    "business": "Business Areas",
+    "product": "Products",
+    "customer": "Customer Center",
+    "sitemap": "Sitemap",
+    "footer_copyright": "COPYRIGHT © METROSOFT CO., LTD. ALL RIGHTS RESERVED.",
+    "footer_company": "Company: Metrosoft Co., Ltd.",
+    "footer_biz_no": "Business License: 105-86-28613",
+    "footer_tel_biz": "Value Added Telecom License: No. 111068",
+    "footer_address": "Room 606, Anyang IT Valley, 1027 Hogye-dong, Dongan-gu, Anyang-si, Gyeonggi-do, Korea",
+    "footer_tel": "TEL: +82-31-465-9971",
+    "footer_fax": "FAX: +82-31-465-9974"
+  },
+  "home": {
+    "slider_title": "METROSOFT",
+    "slider_subtitle": "We will guide the way of medical informatization",
+    "product_section_title": "Utilize Metrosoft's Products",
+    "hotline_title": "Customer Guide",
+    "hotline_weekday": "Weekdays",
+    "hotline_weekday_time": "09:00 ~ 18:00",
+    "hotline_weekend": "Weekends",
+    "hotline_weekend_time": "09:00 ~ 12:00",
+    "hotline_tel": "Main Phone",
+    "hotline_tel_num": "+82-31-465-9971",
+    "hotline_btn": "Inquire"
+  },
+  "introduce": {
+    "anchors": ["CEO Greeting", "Organization", "Overview", "History", "Directions"],
+    "ceo_title": "CEO Greeting",
+    "ceo_subtitle": "Thank you for visiting Metrosoft Co., Ltd.",
+    "ceo_finish": "Sincerely, CEO Bum-ho Song.",
+    "org_title": "Organization Chart",
+    "summary_title": "Company Summary",
+    "summary_company": "Company Name",
+    "summary_ceo": "CEO",
+    "summary_area": "Business Areas",
+    "summary_birth": "Establishment",
+    "summary_contact": "Contact Info",
+    "summary_address": "Address",
+    "summary_tel": "TEL",
+    "summary_homepage": "Homepage",
+    "timeline_title": "History",
+    "map_title": "Directions",
+    "map_bus": "By Bus",
+    "map_bus_desc": "Subway Line 4 Beomgye Station Exit 6-2 -> take shuttle bus, get off at LS Tower. Subway Line 1 Myeonghak Station -> take Bus 65, get off at LS Tower.",
+    "map_train": "By Subway",
+    "map_train_desc": "Get off at Geumjeong Station (Line 1/4) Exit 2, go straight towards LS Tower (200m)."
+  },
+  "business": {
+    "anchors": ["HIS Business", "Metro-cERP", "Healthcare Services", "VoIP Business", "MetroSMS", "AlimTalk", "Major Clients"],
+    "his_title": "Medical Information Business (Medical Health Care Solution)",
+    "his_intro": "Metrosoft supplies MetroHIS (Metro Hospital Information System) mainly focused on small and medium-sized hospitals. MetroHIS provides customized package medical information functions that fit hospital realities with a variety of product lines such as OCS, EMR, HealthCare, CRM, EIS, and mPocs.",
+    "his_content_title": "Business Content",
+    "his_compo_title": "HIS Architecture Composition",
+    "his_features_title": "Features",
+    "his_effects_title": "Key Benefits",
+    "cloud_title": "Metro-cERP Core Values",
+    "cloud_module_title": "Module Benefits",
+    "healthcare_intro_title": "Healthcare Services Overview",
+    "healthcare_model_title": "Business Model",
+    "healthcare_healing_title": "Healing Zone Composition",
+    "healthcare_core_title": "Core Exercise Center",
+    "healthcare_mental_title": "Mental Doctor",
+    "voip_security_title": "Stability & Value",
+    "voip_effect_title": "VoIP Benefits",
+    "sms_feature_title": "Service Features",
+    "sms_flow_title": "SMS Program Flow",
+    "sms_hps_title": "HPS SMS Transmission",
+    "alarm_intro_title": "Kakao AlimTalk Service",
+    "alarm_sys_title": "System Architecture",
+    "alarm_feature_title": "Key Benefits",
+    "clients_title": "Major Clients",
+    "clients_desc": "Major hospitals nationwide are running Metrosoft's solutions. Click a logo to visit their homepage."
+  },
+  "product": {
+    "anchors": ["EMR", "iEMR", "OCS", "T-BIZ Mobile EMR", "ERP", "CRM"],
+    "emr_title": "EMR",
+    "emr_subtitle": "Electronic Medical Record",
+    "emr_treatment_title": "Medical Treatment Division",
+    "emr_nurse_title": "Nursing Care Division",
+    "emr_security_title": "EMR Security Architecture",
+    "iemr_title": "iEMR",
+    "iemr_subtitle": "Image EMR System",
+    "iemr_features_title": "Core Features",
+    "ocs_title": "OCS",
+    "ocs_subtitle": "Order Communication System",
+    "ocs_compo_title": "System Composition & Integration Range",
+    "ocs_detail_title": "Submodules & Detailed Specifications",
+    "tbiz_title": "T-BIZ Mobile EMR",
+    "tbiz_subtitle": "(Mobile EMR)",
+    "tbiz_features_title": "Features",
+    "tbiz_funcs_title": "Key Functions",
+    "tbiz_examples_title": "Execution Screen Examples",
+    "tbiz_security_title": "Enhanced Security",
+    "tbiz_device_title": "Supported Devices",
+    "tbiz_effects_title": "Expected Effects & Value",
+    "erp_title": "ERP",
+    "erp_subtitle": "Enterprise Resource Planning",
+    "crm_title": "CRM",
+    "crm_subtitle": "Hospital CRM System",
+    "crm_effect_title": "Patient Relationship Management Benefits"
+  },
+  "customer": {
+    "anchors": ["Customer Support", "Remote Support"],
+    "support_title": "Department Contacts",
+    "support_subtitle": "We will respond quickly to your inquiries about hospital solution building and maintenance.",
+    "support_table_dept": "Department",
+    "support_table_name": "Name",
+    "support_table_pos": "Position",
+    "support_table_contact": "Contact / Email",
+    "remote_title": "Remote Support",
+    "remote_card_title": "Remote Support Service",
+    "remote_card_desc": "An engineer will connect remote support in real time for smooth troubleshooting. Please download and run the dedicated viewer program below.",
+    "remote_btn_download": "Download Remote Support Viewer",
+    "remote_info_title": "Customer Center Technical Support",
+    "remote_info_desc": "Telephone and Fax inquiries are available during business hours, and online technical requests are processed on holidays.",
+    "remote_tech_tel": "Technical Inquiry",
+    "remote_tech_fax": "FAX",
+    "remote_tech_email": "Email"
+  },
+  "db": {
+    "ceoData": {
+      "title": "CEO Greeting",
+      "subtitle": "Thank you for visiting Metrosoft Co., Ltd.",
+      "content": [
+        "Based on the spirits of creativity, challenge, and trust, all members of Metrosoft Co., Ltd. have prioritized developing S/W solutions that reflect the latest IT trends and providing related services to grow together with our customers.",
+        "In the small & medium hospital market, our products including the Metro-HIS system, Metro-EMR, Metro-ERP, Metro-SMS, and Metro-CRM are highly recognized for their excellent quality. We are also accumulating technology through continuous R&D in healthcare content, Cloud computing, and medical AI.",
+        "Metrosoft Co., Ltd. is doing its best to improve services for End Users, and focuses on growing together with strategic partners striving to develop markets. In addition, we will continue to develop our own solutions for better services.",
+        "As a S/W solution development and service specialist company, Metrosoft Co., Ltd. aims to pursue sustainable development, inspire customers, and contribute to the nation and society."
+      ],
+      "finish": "January 2018, Sincerely, CEO Bum-ho Song."
+    },
+    "timelineData": {
+      "init": {
+        "company": "Metrosoft Co., Ltd.",
+        "ceo": "Bum-ho Song",
+        "area": "Internet telephony, Outdoor advertising system management outsourcing, Comprehensive medical information system development, Package development for small/medium hospitals, Consulting",
+        "address": "Room 606, Anyang IT Valley, 1027 Hogye-dong, Dongan-gu, Anyang-si, Gyeonggi-do, Korea",
+        "tel": "TEL : +82-31-465-9971~3, FAX: +82-31-465-9974",
+        "birth": "July 2001",
+        "homepage": "www.metrosoft.co.kr"
+      },
+      "content": [
+        { "year": "2001", "content": ["Founding of Metrosoft", "Established Medical Information System Research Institute", "Commenced development of Metro-HIS solution"] },
+        { "year": "2002", "content": ["Selected as official EHK OCS supplier", "Certified as Microsoft Solution Partner (Medical Division)"] },
+        { "year": "2003", "content": ["Selected as investment cooperation partner by Woori Bank (Seoul Sahmyook Hospital)", "Selected as leading technology supplier by Ministry of Information and Communication"] },
+        { "year": "2004", "content": ["Signed medical system business cooperation with Samsung SDS", "Certified as Venture Business", "Selected as wireless internet R&D contractor by Gyeonggi Small & Medium Business Support Center", "Won Grand Prize at the 4th Digital Innovation Awards (S/W Division)"] },
+        { "year": "2005", "content": ["Acquired Microsoft ISV Partnership", "Developed traveler tracking and mass patient management system for Korea Centers for Disease Control and Prevention (KCDC)", "Signed industry-academia cooperation agreement with Sahmyook Health University College"] },
+        { "year": "2006", "content": ["Venture Business Certification renewed", "Won continuous contract for traveler tracking management system from KCDC"] },
+        { "year": "2007", "content": ["Certified as HP e-Korea Partner", "Signed contract for Gyeonggi Province U-Health remote telemedicine service supply"] },
+        { "year": "2008", "content": ["Certified as INNO-BIZ (technology-innovative small/medium business)"] },
+        { "year": "2009", "content": ["Selected as supplier for National Mental Hospital Information Business Service by Ministry of Health and Welfare", "Registered as telecommunications operator at Seoul Radio Management Office"] },
+        { "year": "2010", "content": ["Developed and supplied KT MVNO solutions"] },
+        { "year": "2011~2015", "content": ["Metro-HIS solution hospital installations & certifications - Incheon Naeun Hospital, Himchan Hospital (Bupyeong, Gangbuk, Mokdong, Changwon, Busan), Hyundai Uvis Hospital, Daegu Bogwang Hospital, Seoul Chuk Hospital, Barun Hospital, Godoil Hospital, Cheongju Hyosung Hospital, Yeson Hospital"] },
+        { "year": "2013", "content": ["Supplied Mobile EMR system to SK Telecom (Tbiz Mobile EMR for small/medium hospitals)"] },
+        { "year": "2015", "content": ["Designated as Military Service Exemption Company", "Ajou University Family Company"] },
+        { "year": "2016", "content": ["Designated as Work-Learning Dual System Company (Software Industry Association)", "Established Healthcare Content Business Division (Cooperation with Daewoong Pharmaceutical)"] },
+        { "year": "2017", "content": ["School-Industry Apprenticeship Cooperation Company", "Established Cloud Business Division", "Signed Cloud SaaS ERP partnership agreement with Douzone/Younglimwon"] }
+      ]
+    },
+    "cloudData": {
+      "Title": {
+        "title": "Cloud ERP",
+        "content": "Cloud world without limitations of time and space, the world with Metro-cERP"
+      },
+      "features": [
+        {
+          "title": "Advanced Management by Business Level",
+          "contents": "We provide customized ERP that allows step-by-step introduction according to the level of hospital management and gradual advancement as the hospital grows. Also, best practices are applied to quickly adopt and implement advanced processes.",
+          "image": "/01.png"
+        },
+        {
+          "title": "Completion of Plan-Do-See Management System",
+          "contents": "It enables maintaining optimal inventory, and resources can be used efficiently through process integration and department/monthly plan execution. Feedback on performance increases planning accuracy, making management predictable.",
+          "image": "/02.png"
+        },
+        {
+          "title": "Speed Management by Shortening Settlement Period",
+          "contents": "Late data entry reduces reliability. Metro-cERP supports prompt work through mobile, alarms, and progress management, and shortens the settlement period by integrating departmental data. Cost settlement and profit information are provided timely.",
+          "image": "/03.png"
+        },
+        {
+          "title": "Profit Growth through Cost Analysis by Objective",
+          "contents": "It provides accurate cost information through a rational cost analysis model, and cost reduction execution through cost analysis by element, maximizing profit through cost analysis by management objective.",
+          "image": "/04.png"
+        }
+      ],
+      "effects": [
+        {
+          "title": "Accounting",
+          "contents": [
+            "Provides financial analysis information like comparative financial statements, budget vs. actual, and profit/loss by organization",
+            "Promptly applies updated laws, allowing users to easily file VAT returns",
+            "Provides various information for settlement activities",
+            "Provides information for funding activities like establishing funding plans",
+            "Easy recording of finance activities like fund operation and bank integration"
+          ]
+        },
+        {
+          "title": "HR & Payroll",
+          "contents": [
+            "Right person in the right place activity of human resources",
+            "Various payment and deduction processing methods",
+            "Fast and accurate settlement management",
+            "Personal information management for smooth organization operation"
+          ]
+        },
+        {
+          "title": "Cost Management",
+          "contents": [
+            "Easy cost calculation by establishing cost models by industry",
+            "Cost reduction and decision support through various cost analyses",
+            "Securing/operating management resources and preventing derailment"
+          ]
+        },
+        {
+          "title": "Logistics",
+          "contents": [
+            "Appropriate inventory management by setting actual, available, and asset inventory by warehouse",
+            "Supports accurate warehousing/issuing management, closing management, and inventory data tracking",
+            "Enables analyzing inventory trends by item/period and causes of inventory changes"
+          ]
+        },
+        {
+          "title": "Purchase Management",
+          "contents": [
+            "Supports rational purchase activities for appropriate inventory management",
+            "Rational purchase information management for purchasing at the right place, time, quantity, and price",
+            "Supports purchase evaluation management for cost reduction and analysis of purchase evaluation indicators"
+          ]
+        }
+      ]
+    },
+    "metrohisData": {
+      "features": [
+        "Designed to include all areas of the hospital system",
+        "Designed focusing on the patient's medical information",
+        "Integrated doctor's prescriptions and medical records (charts)",
+        "Proven in the field for many years by all user groups including doctors, nurses, and technicians",
+        "Maximizes user convenience by ensuring integration with various medical equipment",
+        "Reduces paperwork across the hospital due to the introduction of EMR services."
+      ],
+      "effects": [
+        "Dramatically improved patient service",
+        "Increased hospital revenue and reduced costs",
+        "Provides evaluation indicators for rational competition evaluation",
+        "Improved work productivity",
+        "Increased accuracy, speed, and efficiency of human resource operation",
+        "Systematic management of medical research information"
+      ]
+    },
+    "voipData": {
+      "intro": "To reduce the burden of communication costs through landlines, our VoIP service utilizes existing or new internet lines to support affordable communication costs and dual-path communication between PSTN and PSDN for a more stable service.",
+      "features": [
+        {
+          "title": "Stability",
+          "contents": [
+            { "title": "Safe even if internet or electricity is cut off." },
+            { "title": "If there is an issue with the internet or power, it automatically switches to KT landlines for safety." }
+          ]
+        },
+        {
+          "title": "Convenience",
+          "contents": [
+            { "title": "Keep your existing phone numbers." },
+            { "title": "With the RID (number change) service, you can keep using your existing phone numbers and devices." }
+          ]
+        },
+        {
+          "title": "Quality",
+          "contents": [
+            { "title": "No dropouts or noise." },
+            { "title": "Prioritizing call quality, we adopt high-end uncompressed codec systems to guarantee the highest call quality." }
+          ]
+        },
+        {
+          "title": "Affordability",
+          "contents": [
+            { "title": "Local rates apply even for out-of-town calls." },
+            { "title": "Enjoy calls at the lowest rates, regardless of internal or external destinations." }
+          ]
+        },
+        {
+          "title": "Flexibility",
+          "contents": [
+            { "title": "Same low rates even when calling special numbers." },
+            { "title": "Unlike other services where special numbers cannot be used or incur extra charges, you can call them at local rates." }
+          ]
+        },
+        {
+          "title": "Free Branch Calls",
+          "contents": [
+            { "title": "Free calls between headquarters and branches." },
+            { "title": "Calls between headquarters and branches are free, and it is also free to your key clients if they also use our service." }
+          ]
+        }
+      ],
+      "effects": [
+        "Cost reduction: Reduces costs by up to 75% for out-of-town, 15%-24% for mobile, and 80% for international calls.",
+        "No device purchase costs by utilizing existing networks.",
+        "Various additional services are available in line with next-generation network architectures.",
+        "Local rates apply to out-of-town calls regardless of distance.",
+        "Extremely low probability of busy signals or dropouts by prioritizing call quality."
+      ]
+    },
+    "crmData": {
+      "Title": {
+        "title": "Metro-CRM",
+        "subtitle": "(Customer Relationship Management)",
+        "content": "Metro-CRM is a customized clinic CRM solution that supports patient recall care, vaccination notices, and guidance message dispatch via SMS/KakaoTalk to maintain continuous customer care after visits."
+      },
+      "features": [
+        "Customer-centric friendly service delivery",
+        "Reduces waiting time by lowering appointment no-show rates",
+        "Builds a solid foundation to maximize clinical efficiency",
+        "Increases customer satisfaction and return-visit rates",
+        "Provides a consultation management system supporting counselors"
+      ]
+    },
+    "emrData": {
+      "intro": {
+        "title": "Metro-EMR",
+        "subtitle": "(Electronic Medical Record)",
+        "content": "A next-generation electronic medical record system developed to digitalize paper chart records / enhance medical information utilization by sharing charts across doctors and support departments / and improve clinical efficiency by eliminating manual storage and retrieval."
+      },
+      "treatment": [
+        "Stores all medical records as coded database entries",
+        "Provides diverse layouts and utilities customized by doctor and department",
+        "Seamless integration with OCS and PACS systems",
+        "Realizes a paperless hospital environment through non-charting",
+        "Provides templates reflecting specific clinical department characteristics",
+        "Integrated chart viewer to query old scanned paper chart images",
+        "Builds the foundation for future EHR (Electronic Health Records) and DW",
+        "Reduces chart management costs and redistributes time/human resources efficiently",
+        "Supports efficient clinical research utilizing integration with Data Warehouse (DW)"
+      ],
+      "nurse": [
+        "Integrated recording of nursing notes and prescription execution logs",
+        "Standardizes nursing record forms by task",
+        "Supports nursing history and nursing diagnosis records",
+        "Supports discharge summary, patient severity logging, and specialized ward (ICU, NICU, Delivery Room) logs",
+        "Supports surgery/anesthesia logs and various medical survey forms"
+      ],
+      "security": [
+        {
+          "title": "To prevent patient data leaks expected upon EMR adoption, our system protects database records from unauthorized access while allowing authorized staff to quickly search records, ensuring the confidentiality, integrity, availability, and privacy of clinical data."
+        },
+        {
+          "content": [
+            "Electronic Authentication - Secure login systems using national public certificates",
+            "Electronic Signature - Stores original files + signatures according to regulations, restricting access",
+            "Permission Settings - Detailed permission mapping based on job type, rank, department, and patient category"
+          ]
+        }
+      ]
+    },
+    "iemrData": {
+      "Title": {
+        "title": "Metro-iEMR",
+        "subtitle": "(Image Electronic Medical Record)",
+        "content": "For clinics without a full EMR system, this system scans existing paper charts and indexes them systematically / to integrate with the OCS system, maintaining the current workflow while enhancing coordination and sharing / with support departments. It is an image EMR system that eliminates manual chart storage and retrieval, saving space and costs."
+      },
+      "features": [
+        "Integration with OCS, EMR, and PACS systems",
+        "Concurrent chart-sharing features for departments needing the same chart simultaneously",
+        "Enhanced information utilization through file attachments",
+        "Increased data accessibility and value via digital format transition"
+      ]
+    },
+    "ocsData": {
+      "title": {
+        "title": "Metro-OCS",
+        "subtitle": "(Order Communication System)",
+        "content": "Metro-OCS is an integrated medical information system developed to maximize clinical productivity and improve patient service by managing and delivering all hospital data (registration, treatment, billing, claims) and automating administration. It is applicable from small/medium clinics to university hospitals and builds a solid foundation for EMR transition."
+      },
+      "composition": [
+        [
+          "Fast and transparent reception & billing management",
+          "Omission prevention & reduction rate decrease via concurrent review",
+          "Integrated management of billing and outstanding accounts",
+          "On-screen review of insurance claims",
+          "EDI billing integration"
+        ],
+        [
+          "Multi-functional easy prescription ordering",
+          "Automated nursing care based on prescriptions",
+          "Automated medical supplies consumption logging",
+          "Integrated query of lab results & trends"
+        ],
+        [
+          "Administrative system supporting productivity",
+          "EIS cost analysis baseline data integrated with OCS",
+          "Logistics supporting multiple warehouse locations"
+        ],
+        [
+          "Prescription-driven test booking management",
+          "Interface with testing devices (avoids errors & transmission delays)",
+          "QC management of clinical pathology tests",
+          "Supplies management and billing via OCS"
+        ]
+      ],
+      "Lists": [
+        {
+          "title": "1. Reception / Insurance",
+          "description": "Developed to increase hospital revenue and patient service quality by computerizing reception and billing linked to clinical systems, enabling accurate calculations, and accelerating insurance claims.",
+          "contents": [
+            {
+              "title": "Reception & Billing",
+              "contents": [
+                {
+                  "title": "Fast Reception",
+                  "contents": [
+                    { "title": "View patient details, insurance status, schedule, and department capacity on a single screen" },
+                    { "title": "Accept complex transfer cases (medical referral forms, etc.)" }
+                  ]
+                },
+                {
+                  "title": "Fast Billing",
+                  "contents": [
+                    { "title": "Automated billing calculations driven by prescription ordering" },
+                    { "title": "Flexible support for prescription cancelation (D/C) and refunds" },
+                    { "title": "Supports partial payment and balance payment options" }
+                  ]
+                },
+                {
+                  "title": "Quality Improvement"
+                },
+                {
+                  "title": "Single-payment scheduling for outpatient, therapy, and injection departments"
+                },
+                {
+                  "title": "No Slip System"
+                }
+              ]
+            },
+            {
+              "title": "Insurance Claims",
+              "contents": [
+                {
+                  "title": "Avoid claim omissions / lower reduction rates (reduction analytics, appeal logging, preset fee management)"
+                },
+                {
+                  "title": "Integrated management of billing and outstanding accounts"
+                },
+                {
+                  "title": "Shorten insurance claims period (daily review and outpatient auto-approval)"
+                },
+                {
+                  "title": "Supports paper claims and internet-based EDI claims"
+                },
+                {
+                  "title": "Fast compliance updates on legal policy changes"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "2. Clinical Department",
+          "description": "Developed to enhance medical staff efficiency and patient care quality by computerizing order entry and implementing fast, accurate prescription delivery to billing and support departments.",
+          "contents": [
+            {
+              "title": "Outpatient & Inpatient care",
+              "contents": [
+                {
+                  "title": "Supports various medical certificate templates"
+                },
+                {
+                  "title": "Integration with PACS and EMR"
+                },
+                {
+                  "title": "Integration with patient waiting room displays"
+                },
+                {
+                  "title": "Computerized entry for all prescription types",
+                  "contents": [
+                    { "title": "Diverse entry options (daily, standard sets, repeating, continuous orders)" },
+                    { "title": "Easy, multi-criteria search of diagnosis codes and prescriptions" },
+                    { "title": "User messages attached to specific patients and prescriptions" }
+                  ]
+                },
+                {
+                  "title": "Perfect integration between clinical, nursing, support, and billing systems",
+                  "contents": [
+                    { "title": "Real-time updates on clinical info, prescription receipt, execution, results, and billing status" }
+                  ]
+                },
+                {
+                  "title": "Comprehensive lab results query",
+                  "contents": [
+                    { "title": "Easy retrieval of test results directly from the clinical view" },
+                    { "title": "For pathology tests, queries text results, numerical trends, historical statistics, and graphs" }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Nursing",
+              "contents": [
+                {
+                  "title": "Automated nursing tasks driven by prescription orders"
+                },
+                {
+                  "title": "Supports various worksheets (admission logs, surgery/anesthesia records, TPR, I/O, etc.)"
+                },
+                {
+                  "title": "Simple outpatient reservation scheduling"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "3. Medical Support Departments",
+          "description": "Developed to prevent workflow gaps and realize perfect result follow-up by computerizing major medical support and special departments.",
+          "contents": [
+            {
+              "title": "Medical Records",
+              "contents": [
+                {
+                  "title": "Cancer patient analytics"
+                },
+                {
+                  "title": "Custom statistics tailored to user requests"
+                }
+              ]
+            },
+            {
+              "title": "Pharmacy",
+              "contents": [
+                {
+                  "title": "Fast, accurate prescription delivery linked with doctors and nursing ward"
+                },
+                {
+                  "title": "Automatic printing of ward drug orders"
+                },
+                {
+                  "title": "Interface with automatic drug dispensing machines (ATC) and status display boards"
+                }
+              ]
+            },
+            {
+              "title": "Comprehensive Checkup",
+              "contents": [
+                {
+                  "title": "Group set order prescriptions (supports additional custom orders)"
+                },
+                {
+                  "title": "One-click diagnosis comments entry"
+                },
+                {
+                  "title": "Automated comprehensive checkup diagnosis generation"
+                }
+              ]
+            },
+            {
+              "title": "General Health Checkup",
+              "contents": [
+                {
+                  "title": "Real-time National Health Insurance verification and auto-population"
+                },
+                {
+                  "title": "Interface with National Health Insurance software for eligibility check and results submission"
+                }
+              ]
+            },
+            {
+              "title": "Radiology",
+              "contents": [
+                {
+                  "title": "Real-time alerts on outpatient test ordering and payment completion"
+                },
+                {
+                  "title": "PACS integration"
+                },
+                {
+                  "title": "Real-time delivery of diagnostic results"
+                }
+              ]
+            },
+            {
+              "title": "Functional Testing",
+              "contents": [
+                {
+                  "title": "PACS integration for testing machines"
+                }
+              ]
+            },
+            {
+              "title": "Nuclear Medicine",
+              "contents": [
+                {
+                  "title": "PACS integration and radiopharmaceutical inventory control"
+                }
+              ]
+            },
+            {
+              "title": "Nutrition & Dietary",
+              "contents": [
+                {
+                  "title": "Accurate patient diet delivery linked with inpatient wards"
+                },
+                {
+                  "title": "Nutritionist prescription management"
+                },
+                {
+                  "title": "Provides diverse statistics (meal counts, category counts, cost breakdowns)"
+                }
+              ]
+            },
+            {
+              "title": "Physical & Rehabilitation Therapy",
+              "contents": [
+                {
+                  "title": "Detailed therapist prescription entry matching doctor orders"
+                },
+                {
+                  "title": "Custom statistics mapping therapist workloads"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "erpData": {
+      "MetroERP": {
+        "title": "Metro-ERP",
+        "subtitle": "(Enterprise Resource Planning)",
+        "content": "A hospital-optimized ERP solution designed to automate HR, accounting, and supply logistics / integrated with EMR/OCS systems to manage asset depreciation, payroll calculation, and cost accounting / delivering timely financial closing and cost-benefit reports to administrative management."
+      },
+      "management": [
+        "Personnel basic files and HR career history tracking",
+        "Flexible payroll processing rules and statutory tax adjustments",
+        "Retirement pay accounting and annual leave balance tracking"
+      ],
+      "accounting": [
+        "Integrated general ledger linked with billing and drug purchase orders",
+        "Automated VAT reporting preparation and tax invoices reconciliation",
+        "Budget-to-actual variance reporting and department-level profit centers"
+      ],
+      "stock": [
+        "Multi-warehouse inventory management for drugs and medical supplies",
+        "Automatic drug inventory depletion upon inpatient consumption",
+        "Real-time expiration date checking and reorder alerts"
+      ]
+    },
+    "mpocData": {
+      "features": [
+        "Mobile point-of-care vital sign entry app",
+        "Nurses' medication administration confirmation on tablet",
+        "Instant photo upload of wound recovery to EMR chart"
+      ]
+    },
+    "customerData": {
+      "address": [
+        {
+          "title": "Department",
+          "content": ["General Enquiry", "Customer Support", "", "customer@metrosoft.co.kr/031-465-9971~3"]
+        },
+        {
+          "title": "Name",
+          "content": ["HIS Department", "Yong-gu Lee", "Director", "yglee@metrosoft.co.kr/010-8877-2676"]
+        },
+        {
+          "title": "Position",
+          "content": ["ERP Department", "Byung-min Song", "General Manager", "bmsong@metrosoft.co.kr/010-3465-5448"]
+        },
+        {
+          "title": "Email Address",
+          "content": ["Healthcare Content", "Gi-ho Yuk", "Vice President", "/010-2839-4920"]
+        },
+        {
+          "content": ["VAS Telecommunications", "Kwang-hee Lee", "Team Leader", "taesan-3@metrosoft.co.kr/010-9038-8613"]
+        }
+      ]
+    },
+    "healthcareData": {
+      "Title": {
+        "title": "Healthcare Services",
+        "description": "A comprehensive on/offline healthcare service proposed by Metrosoft Co., Ltd., a leading total healthcare company, for customized consulting and operation of corporate health management. It provides a total solution that can prevent health issues in advance and provide post-management as well as health checkups."
+      },
+      "Model": {
+        "title": "Business Model",
+        "content": [
+          {
+            "title": "Prevention",
+            "content": [
+              { "title": "Corporate Consulting" },
+              { "title": "Healing Room Construction" },
+              { "title": "Core Programs" }
+            ]
+          },
+          {
+            "title": "Health Checkup",
+            "content": [
+              { "title": "Group Checkup Agency" },
+              {
+                "title": "Specialized Solutions",
+                "content": [
+                  "Disease Prediction",
+                  "Biological Age Test",
+                  "Genetic Testing"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Post-Management",
+            "content": [
+              { "title": "Healthcare App" },
+              {
+                "title": "Mental Health",
+                "content": ["Mental Doctor"]
+              },
+              {
+                "title": "Medi-Food"
+              }
+            ]
+          }
+        ]
+      },
+      "composition": {
+        "title": "Healing Zone Layout",
+        "content": [
+          "Inspection (Stress Measurer)",
+          "Physical Healing Process (Yoga therapy equipment: Suntech 1, 2, 3)",
+          "Deep Psychological Purification Process (Headgear - sound meditation: bell, wave, bird, rain sounds, etc.)",
+          "Concentration & Self-Development Process 1 (Headphones or Mental Doctor / Positive autosuggestion)",
+          "Concentration & Self-Development Process 2 (Breathing trainer - optional)",
+          "Final Step 1: Mirror Gazing (Suggestion imprint effect through dialogue with oneself)",
+          "Final Step 2: Consultation Interview"
+        ]
+      },
+      "table": [
+        { "title": "1. Stress Measurement", "img": "/01.png" },
+        { "title": "2. Physical Healing (1)", "img": "/02.png" },
+        { "title": "3. Physical Healing (2)", "img": "/03.png" },
+        { "title": "4. Physical Healing (3)", "img": "/04.png" },
+        { "title": "5. Heart Healing (Emotional + Unconscious)", "img": "/05.png" },
+        { "title": "6. Inner Psychological Healing (Positive emotion promotion & unconscious purification)", "img": "/06.png" },
+        { "title": "7. Concentration Development", "img": "/07.png" },
+        { "title": "8. Concentration Development 2 (Optional)", "img": "/08.png" }
+      ],
+      "core": {
+        "title": "Core Exercise Center",
+        "description": "Providing scientifically proven exercise programs. A team of rehabilitation physical therapists and exercise prescribers sets goals to meet customer needs, improving exercise programs and lifestyle habits.",
+        "content": [
+          { "title": "System Concept Map", "img": "/core_01.png" },
+          { "title": "Exercise Rehabilitation ZONE", "img": "/core_02.png" },
+          { "title": "Measurement Evaluation Room", "img": "/core_03.png" }
+        ]
+      },
+      "metal": {
+        "title": "Mental Doctor",
+        "description": "Best Design, Best Quality, Best Simplicity",
+        "content": [
+          "/metal_01.png",
+          "/metal_02.png"
+        ]
+      }
+    },
+    "smsData": {
+      "progress": [
+        {
+          "title": "User-Friendly UI Provided",
+          "contents": "Authentication screen for entering main view (Login execution with assigned ID and password)",
+          "img": "/01.png"
+        },
+        {
+          "title": "SMS, LMS, MMS, HPS",
+          "contents": "Enables sending various types of messages considering the operator's convenience",
+          "img": "/02.png"
+        },
+        {
+          "title": "Group Management",
+          "contents": "Provides functions to create or manage groups and upload contacts from Excel files",
+          "img": "/03.png"
+        },
+        {
+          "title": "Statistics",
+          "contents": "Provides statistics and fee confirmation functions for period and transmission volume",
+          "img": "/04.png"
+        }
+      ],
+      "HPS": {
+        "title": "HPS SMS Transmission",
+        "description": "Sends messages using smartphone carrier linkage | (※ Costs saved by using MetroSMS HPS transmission instead of standard SMS/LMS/MMS services)",
+        "contents": [
+          { "title": "HPS SMS Transmission (Same method)", "img": "/05.png" },
+          { "title": "Click and run Android message application", "img": "/06.png" },
+          { "title": "Start sending after confirming count and contents", "img": "/07.png" }
+        ]
+      },
+      "features": [
+        {
+          "title": "User Management by Security Level",
+          "contents": ["User ID and password management", "User management by security level"]
+        },
+        {
+          "title": "Group Management Features",
+          "contents": ["Public and personal data classification", "Target extraction by conditional search after data integration"]
+        },
+        {
+          "title": "080 Opt-out Automatic Insertion",
+          "contents": ["Automatic insertion of free opt-out text when sending messages"]
+        },
+        {
+          "title": "Refund for Failed Transmissions",
+          "contents": ["Recharging billing process according to failed counts"]
+        },
+        {
+          "title": "Cost Savings via HPS Transmissions",
+          "contents": ["Supports message transmission via mobile smartphone app linkage"]
+        }
+      ]
+    },
+    "alarmData": {
+      "intro": {
+        "title": "Introduction",
+        "contents": [
+          "Information business messaging API product that directly sends informative messages to customers via KakaoTalk based on phone numbers, without adding friends",
+          "If it is information that needs to be delivered to customers, such as hospital booking/reception guides, you can send PUSH messages via KakaoTalk using the Kakao AlimTalk API. (However, marketing messages cannot be sent.)"
+        ]
+      },
+      "comp": {
+        "title": "System Architecture",
+        "contents": [
+          "Provides dedicated AlimTalk Agent, and supports integration of failed messages switching automatically to SMS/LMS",
+          "Kakao AlimTalk and fallback SMS/LMS can be used simultaneously.",
+          "Improves success rate by sending SMS/LMS as secondary backup when AlimTalk fails."
+        ],
+        "img": "/A_01.png"
+      },
+      "features": {
+        "title": "Features",
+        "contents": [
+          {
+            "title": "Low Cost",
+            "contents": ["Enables sending up to 1,000 characters at a lower cost than traditional SMS", "Differentiated from standard messages via Kakao verification badge / footer link button"]
+          },
+          {
+            "title": "Marketing Channel",
+            "contents": ["Yellow ID", "Enables mobile customer communication based on Plus Friend"]
+          },
+          {
+            "title": "Messaging System",
+            "contents": ["Implements messaging system optimized for customer care", "API system integration supports automated ticketing and sending", "Real-time message statistics check available"]
+          }
+        ],
+        "img": "/A_02.png"
+      }
+    },
+    "tbizData": {
+      "TBIZ": {
+        "title": "T-BIZ Mobile EMR",
+        "subtitle": "(Mobile EMR)",
+        "content": "An application that digitalizes medical record charts needed for patient services in medical institutions, increasing utilization of medical information through chart sharing in doctor and support departments, allowing medical staff to check patient status and treatment situations anytime without the hassle of chart storage and retrieval."
+      },
+      "features": [
+        "Field-centric Point of Care (POC)",
+        "Enhanced user convenience (Portability)",
+        "Integrated system linked with OCS/EMR",
+        "Medical information provision expanded from medical staff to patients",
+        "One-Stop service for patient information checks",
+        "Nursing work productivity improvement"
+      ],
+      "functions": {
+        "title": ["Screen", "Key Functions"],
+        "content": [
+          { "content": ["Inpatient Search", "Searches all patients currently hospitalized."] },
+          { "content": ["Prescription Search", "Queries patient prescription history."] },
+          { "content": ["Record Search", "Queries doctor's recorded notes."] },
+          { "content": ["Medication Search", "Queries nurse's medication administration logging."] },
+          { "content": ["Diagnostic Imaging Search", "Queries diagnostic radiology reading opinions."] },
+          { "content": ["Lab Test Search", "Queries clinical laboratory diagnostics results."] },
+          { "content": ["Other Form Search", "Queries scanned image record charts list."] },
+          { "content": ["Other Form Details", "Queries contents of the selected image chart."] },
+          { "content": ["TPR Chart Search", "Queries TPR in graphical format."] },
+          { "content": ["TPR Entry", "Registers patient's TPR values."] },
+          { "content": ["Admission History", "Queries admission, outpatient, emergency department history."] }
+        ]
+      },
+      "examples": [
+        { "title": "Inpatient Search", "img": "/01.png" },
+        { "title": "Prescription Search", "img": "/02.png" },
+        { "title": "Medication Search", "img": "/03.png" },
+        { "title": "Other Form Search", "img": "/04.png" },
+        { "title": "TPR Search", "img": "/05.png" }
+      ],
+      "security": {
+        "title": "Enhanced Security",
+        "description": "Hospitals using T BIZ Mobile EMR run an integrated security system including user authentication, content security, and lost device protection.",
+        "img": "/11.png"
+      },
+      "Device": {
+        "title": "Supported Devices",
+        "description": "Android OS 3.1 or higher | Display size 10.1 inches (Galaxy Tab criteria)",
+        "img": "/06.png"
+      },
+      "Effects": [
+        {
+          "title": "Smart Work Environment",
+          "description": "T BIZ Mobile EMR enables quick and easy access to EMR/OCS information anytime, anywhere, implementing a Smart Work environment in the medical field and enhancing work efficiency.",
+          "img": "/08.png"
+        },
+        {
+          "title": "Interactive Consultation Material",
+          "description": "Explains patient status with visual effects using T BIZ Mobile EMR during patient consultation (rounds, pre-op, post-op), improving quality of medical service, patient trust, and hospital image.",
+          "img": "/09.png"
+        },
+        {
+          "title": "Key Benefits",
+          "img": "/10.png"
+        }
+      ]
+    }
+  }
+}
